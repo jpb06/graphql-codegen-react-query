@@ -1,0 +1,35 @@
+/* eslint-disable no-console */
+import chalk from 'chalk';
+
+import { GenerateFromUrlResult } from '../../../workflows/generate-from-url';
+
+export const displaySuccess = (
+  outPath: string,
+  { typesCount }: GenerateFromUrlResult,
+): void => {
+  const summary = `${chalk.greenBright(typesCount)} types generated`;
+  console.info(
+    `${chalk.cyanBright(
+      'graphql-codegen-react-query',
+    )} 🚀 - ${chalk.greenBright(
+      'Types generated and saved in',
+    )} ${chalk.underline.cyanBright(outPath)} (${summary})`,
+  );
+};
+
+export const displayError = (err: unknown): void => {
+  console.error(
+    `${chalk.cyanBright('graphql-codegen-react-query')} ❌ - ${chalk.redBright(
+      (err as { stack: string }).stack,
+    )}`,
+  );
+};
+
+export const displayWarning = (text: string, id?: string): void => {
+  const optionalId = id ? ` ${chalk.magentaBright(id)}:` : '';
+  console.error(
+    `${chalk.cyanBright(
+      'graphql-codegen-react-query',
+    )} 🚨 -${optionalId} ${chalk.redBright(text)}`,
+  );
+};

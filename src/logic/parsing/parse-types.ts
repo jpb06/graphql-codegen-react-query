@@ -1,29 +1,44 @@
 import { GqlType } from '../../types/introspection-query-response.type';
 import { handleObjectFields } from './handle-object-field';
 
-export const parseTypes = (types: Array<GqlType>): string => {
-  let output = '';
+type ParseTypesResult = {
+  output: string;
+  typesCount: number;
+};
 
-  for (const type of types) {
-    if (type.name.startsWith('__')) {
-      continue;
-    }
+export const parseTypes = (types: Array<GqlType>): ParseTypesResult => {
+  let count = 0;
 
-    if (type.kind === 'OBJECT' || type.kind === 'INPUT_OBJECT') {
-      let typeOutput = `export interface ${type.name} { `;
+  const output = types.reduce(
+    (out, { kind, name, fields, inputFields, enumValues }) => {
+      if (name.startsWith('__')) {
+        return out;
+      }
 
-      typeOutput += handleObjectFields(type.fields);
-      typeOutput += handleObjectFields(type.inputFields);
+      if (kind === 'OBJECT' || kind === 'INPUT_OBJECT') {
+        let typeOutput = `export interface ${name} { `;
 
-      output += `${typeOutput} }\n`;
-    } else if (type.kind === 'ENUM') {
-      const typeOutput = `export type ${type.name} = ${type.enumValues
-        ?.map((v) => `'${v.name}'`)
-        .join(' | ')}`;
+        typeOutput += handleObjectFields(fields);
+        typeOutput += handleObjectFields(inputFields);
 
-      output += `${typeOutput};\n`;
-    }
-  }
+        out += `${typeOutput} }\n`;
+        count++;
+      } else if (kind === 'ENUM') {
+        const typeOutput = `export type ${name} = ${enumValues
+          ?.map((v) => `'${v.name}'`)
+          .join(' | ')}`;
 
-  return output;
+        out += `${typeOutput};\n`;
+        count++;
+      }
+
+      return out;
+    },
+    '',
+  );
+
+  return {
+    output: `/* eslint-disable */\n/* tslint:disable */\n\n${output}`,
+    typesCount: count,
+  };
 };

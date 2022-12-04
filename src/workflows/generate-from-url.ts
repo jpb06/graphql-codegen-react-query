@@ -9,13 +9,19 @@ export type GenerateFromUrlArguments = {
   importsNotUsedAsValues: boolean;
 };
 
+export type GenerateFromUrlResult = {
+  typesCount: number;
+};
+
 export const generateFromUrl = async ({
   schemaUrl,
   outputPath,
-}: GenerateFromUrlArguments): Promise<void> => {
+}: GenerateFromUrlArguments): Promise<GenerateFromUrlResult> => {
   const schemaTypes = await fetchGraphqlSchema(schemaUrl);
-  const parsedTypes = parseTypes(schemaTypes);
+  const { output, typesCount } = parseTypes(schemaTypes);
 
   await ensureDir(outputPath);
-  await writeFile(`${outputPath}/types.ts`, parsedTypes);
+  await writeFile(`${outputPath}/types.ts`, output);
+
+  return { typesCount };
 };

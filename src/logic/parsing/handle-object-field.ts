@@ -74,23 +74,23 @@ const getField = (field: GqlField, isFunction: boolean): string | undefined => {
 };
 
 export const handleObjectFields = (fields: GqlField[] | null): string => {
-  let output = '';
-
-  if (fields) {
-    for (const field of fields) {
-      if (field.args && field.args.length > 0) {
-        const outputType = getField(field, true);
-
-        const functionDefinition = `${field.name}: (${field.args
-          .map((arg) => `${arg.name}: ${getField(arg, true)}`)
-          .join(', ')}) => ${outputType}`;
-
-        output += `${functionDefinition}; `;
-      } else {
-        output += getField(field, false);
-      }
-    }
+  if (!fields) {
+    return '';
   }
 
-  return output;
+  return fields.reduce((out, field): string => {
+    if (field.args && field.args.length > 0) {
+      const outputType = getField(field, true);
+
+      const functionDefinition = `${field.name}: (${field.args
+        .map((arg) => `${arg.name}: ${getField(arg, true)}`)
+        .join(', ')}) => ${outputType}`;
+
+      out += `${functionDefinition}; `;
+    } else {
+      out += getField(field, false);
+    }
+
+    return out;
+  }, '');
 };
