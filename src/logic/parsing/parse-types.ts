@@ -1,5 +1,5 @@
 import { GqlType } from '../../types/introspection-query-response.type';
-import { handleObjectFields } from './handle-object-field';
+import { getObjectFields } from './get-object-fields';
 
 type ParseTypesResult = {
   output: string;
@@ -18,10 +18,10 @@ export const parseTypes = (types: Array<GqlType>): ParseTypesResult => {
       if (kind === 'OBJECT' || kind === 'INPUT_OBJECT') {
         let typeOutput = `export interface ${name} { `;
 
-        typeOutput += handleObjectFields(fields);
-        typeOutput += handleObjectFields(inputFields);
+        typeOutput += getObjectFields(fields);
+        typeOutput += getObjectFields(inputFields);
 
-        out += `${typeOutput} }\n`;
+        out += `${typeOutput}}\n`;
         count++;
       } else if (kind === 'ENUM') {
         const typeOutput = `export type ${name} = ${enumValues
