@@ -22,9 +22,11 @@ module.exports = {
     "!<rootDir>/dist/",
     "!<rootDir>/src/index.ts",
     "!<rootDir>/src/types/**",
-    "!<rootDir>/src/cli/generate-types-from-url.cli.ts",
+    "!<rootDir>/src/cli/generate-from-url.cli.ts",
     "!<rootDir>/src/workflows/**",
-    "!<rootDir>/src/tests-related/**"
+    "!<rootDir>/src/tests-related/**",
+    "!<rootDir>/src/logic/graphql/**",
+    "!<rootDir>/src/specs/**"
   ],
   modulePathIgnorePatterns: ['<rootDir>/dist']
 };
