@@ -26,7 +26,7 @@ export const validateArguments = (): GenerateFromUrlArguments => {
       const urlRegex = /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/;
       if (!urlRegex.test(args.s as string)) {
         throw new Error(
-          chalk.bold.redBright('Errors:\n-u\t\tExpecting an url\n'),
+          chalk.bold.redBright('Errors:\n-s\t\tExpecting an url\n'),
         );
       }
 

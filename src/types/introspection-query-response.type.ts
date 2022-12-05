@@ -16,8 +16,10 @@ export type GqlField = {
   name: string;
   description: string | null;
   type: GqlFieldType;
-  defaultValue: unknown;
-  args: Array<GqlField> | null;
+  defaultValue?: unknown;
+  args?: Array<GqlField> | null;
+  isDeprecated?: boolean;
+  deprecationReason?: string | null;
 };
 
 export type GqlEnum = {
@@ -32,7 +34,7 @@ export type GqlType = {
   name: string;
   description: string | null;
   fields: Array<GqlField> | null;
-  inputFields: Array<GqlField>;
+  inputFields: Array<GqlField> | null;
   interfaces: unknown | null;
   enumValues: Array<GqlEnum> | null;
   possibleTypes: unknown | null;

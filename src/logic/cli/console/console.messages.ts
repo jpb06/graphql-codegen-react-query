@@ -27,9 +27,9 @@ export const displayError = (err: unknown): void => {
 
 export const displayWarning = (text: string, id?: string): void => {
   const optionalId = id ? ` ${chalk.magentaBright(id)}:` : '';
-  console.error(
+  console.info(
     `${chalk.cyanBright(
       'graphql-codegen-react-query',
-    )} 🚨 -${optionalId} ${chalk.redBright(text)}`,
+    )} 🚨 -${optionalId} ${chalk.yellowBright(text)}`,
   );
 };
