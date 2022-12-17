@@ -4,16 +4,27 @@ import yargs from 'yargs/yargs';
 
 import { GenerateFromUrlArguments } from '../../workflows/generate-from-url';
 
-type Argv = { s: string; o: string; t: boolean };
+type Argv = { s: string; o: string; t: boolean; f: string };
 
 export const validateArguments = (): GenerateFromUrlArguments => {
   const argv = yargs(hideBin(process.argv))
     .scriptName('generateFromUrl')
-    .usage(chalk.blueBright('$0 -s [schemaUrl] -o [outputPath]'))
+    .usage(
+      chalk.blueBright(
+        '$0 -s [schemaUrl] -f [fetcherHookPath] -o [outputPath]',
+      ),
+    )
     .epilogue('Generates types and react-query hooks from a graphql schema')
-    .example('$0 -s http://localhost:3333/graphql -o ./src/api', '')
+    .example(
+      '$0 -s http://localhost:3333/graphql -o ./src/api -f ./useFetcher#useFetcher',
+      '',
+    )
     .describe('s', chalk.cyanBright('Graphql schema json url'))
     .describe('o', chalk.cyanBright('Where to write the generated artifacts'))
+    .describe(
+      'f',
+      chalk.cyanBright('Fetcher hook path and name (<path>#<hookName>)'),
+    )
     .describe(
       't',
       chalk.cyanBright(
@@ -32,11 +43,12 @@ export const validateArguments = (): GenerateFromUrlArguments => {
 
       return true;
     })
-    .demandOption(['s', 'o']).argv as Argv;
+    .demandOption(['s', 'o', 'f']).argv as Argv;
 
   return {
     schemaUrl: argv.s,
     outputPath: argv.o,
+    fetcherPath: argv.f,
     importsNotUsedAsValues: argv.t,
   };
 };
