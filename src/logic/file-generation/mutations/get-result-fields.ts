@@ -1,5 +1,4 @@
 import { displayWarning } from '../../cli/console/console.messages';
-import { getAllMatchingGroups } from '../../util/get-all-matching-groups';
 
 export const getResultFields = (type: string, types: string): string => {
   const fields = new RegExp(`^export interface ${type} { (.*) }$`, 'm').exec(
@@ -11,5 +10,9 @@ export const getResultFields = (type: string, types: string): string => {
     return '';
   }
 
-  return getAllMatchingGroups(/ ?(.+?):.+?;/g, fields).join('\n');
+  return fields
+    .split(';')
+    .slice(0, -1)
+    .map((field) => field.split(':')[0].trim())
+    .join('\n');
 };
