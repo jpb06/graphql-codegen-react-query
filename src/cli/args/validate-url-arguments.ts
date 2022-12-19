@@ -4,11 +4,11 @@ import yargs from 'yargs/yargs';
 
 import { GenerateFromUrlArguments } from '../../workflows/generate-from-url';
 
-type Argv = { s: string; o: string; t: boolean; f: string };
+type Argv = { s: string; o: string; f: string };
 
 export const validateArguments = (): GenerateFromUrlArguments => {
   const argv = yargs(hideBin(process.argv))
-    .scriptName('generateFromUrl')
+    .scriptName('generate-from-url')
     .usage(
       chalk.blueBright(
         '$0 -s [schemaUrl] -f [fetcherHookPath] -o [outputPath]',
@@ -19,20 +19,12 @@ export const validateArguments = (): GenerateFromUrlArguments => {
       '$0 -s http://localhost:3333/graphql -o ./src/api -f ./useFetcher#useFetcher',
       '',
     )
-    .describe('s', chalk.cyanBright('Graphql schema json url'))
-    .describe('o', chalk.cyanBright('Where to write the generated artifacts'))
+    .describe('s', chalk.cyanBright('Graphql schema url'))
+    .describe('o', chalk.cyanBright('Generated code output path'))
     .describe(
       'f',
       chalk.cyanBright('Fetcher hook path and name (<path>#<hookName>)'),
     )
-    .describe(
-      't',
-      chalk.cyanBright(
-        'Whether types should be exported with the `export type ...` syntax (importsNotUsedAsValues option)',
-      ),
-    )
-    .default('t', false)
-    .boolean('t')
     .check((args) => {
       const urlRegex = /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/;
       if (!urlRegex.test(args.s as string)) {
@@ -49,6 +41,5 @@ export const validateArguments = (): GenerateFromUrlArguments => {
     schemaUrl: argv.s,
     outputPath: argv.o,
     fetcherPath: argv.f,
-    importsNotUsedAsValues: argv.t,
   };
 };

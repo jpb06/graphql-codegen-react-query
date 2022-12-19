@@ -6,7 +6,7 @@ describe('validateUrlArguments function', () => {
   const validateArgumentsPath = './../cli/args/validate-url-arguments';
   const url = 'https://cool.org';
   const outputPath = './src/api';
-  const fetcherPath="./../../useFetchData#useFetchData"
+  const fetcherPath = './../../useFetchData#useFetchData';
   global.console = { error: jest.fn() } as unknown as Console;
   const mockExit = jest
     .spyOn(process, 'exit')
@@ -42,7 +42,15 @@ describe('validateUrlArguments function', () => {
   });
 
   it('should display an error when -s option value is not an url', async () => {
-    runCommand(validateArgumentsPath, '-s', 'yolo', '-o', outputPath, '-f', fetcherPath);
+    runCommand(
+      validateArgumentsPath,
+      '-s',
+      'yolo',
+      '-o',
+      outputPath,
+      '-f',
+      fetcherPath,
+    );
 
     expect(mockExit).toHaveBeenCalled();
 
@@ -52,13 +60,20 @@ describe('validateUrlArguments function', () => {
   });
 
   it('should return args and default values', async () => {
-    const args = runCommand(validateArgumentsPath, '-s', url, '-o', outputPath, '-f', fetcherPath);
+    const args = runCommand(
+      validateArgumentsPath,
+      '-s',
+      url,
+      '-o',
+      outputPath,
+      '-f',
+      fetcherPath,
+    );
 
     expect(args).toStrictEqual({
       schemaUrl: url,
       outputPath,
-      importsNotUsedAsValues: false,
-      "fetcherPath": "./../../useFetchData#useFetchData"
+      fetcherPath: './../../useFetchData#useFetchData',
     });
   });
 
@@ -70,31 +85,8 @@ describe('validateUrlArguments function', () => {
       url,
       '-o',
       outputPath,
-      '-t',
     );
 
-    expect(args).toEqual(
-      expect.objectContaining({
-        importsNotUsedAsValues: true,
-      }),
-    );
-  });
-
-  it('should return true when giving an arbitrary valut to -t option', async () => {
-    const args = runCommand(
-      validateArgumentsPath,
-      '-s',
-      url,
-      '-o',
-      outputPath,
-      '-t',
-      'yolo',
-    );
-
-    expect(args).toEqual(
-      expect.objectContaining({
-        importsNotUsedAsValues: true,
-      }),
-    );
+    expect(args).toEqual(expect.objectContaining({}));
   });
 });
