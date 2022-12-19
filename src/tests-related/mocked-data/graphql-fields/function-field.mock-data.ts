@@ -19,6 +19,38 @@ export const functionFieldMockData: GqlField = {
       defaultValue: null,
     },
     {
+      name: 'nullable',
+      description: null,
+      type: {
+        kind: 'INPUT_OBJECT',
+        name: 'GqlNullable',
+        ofType: null,
+      },
+      defaultValue: null,
+    },
+    {
+      name: 'array',
+      description: null,
+      type: {
+        kind: 'NON_NULL',
+        name: null,
+        ofType: {
+          kind: 'LIST',
+          name: null,
+          ofType: {
+            kind: 'NON_NULL',
+            name: null,
+            ofType: {
+              kind: 'OBJECT',
+              name: 'GqlProductWithCategory',
+              ofType: null,
+            },
+          },
+        },
+      },
+      defaultValue: null,
+    },
+    {
       name: 'filters',
       description: null,
       type: {

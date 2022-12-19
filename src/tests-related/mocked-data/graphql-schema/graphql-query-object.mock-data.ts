@@ -1,6 +1,6 @@
 import { GqlType } from '../../../types/introspection-query-response.type';
 
-export const graphqlProductsByPageMockedData: GqlType = {
+export const graphqlQueryObjectMockedData: GqlType = {
   kind: 'OBJECT',
   name: 'Query',
   description: null,
