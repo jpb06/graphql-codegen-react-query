@@ -17,7 +17,15 @@ export const displaySuccess = (
   );
 };
 
-export const displayError = (err: unknown): void => {
+export const displayError = (message: string): void => {
+  console.error(
+    `${chalk.cyanBright('graphql-codegen-react-query')} ❌ - ${chalk.redBright(
+      message,
+    )}`,
+  );
+};
+
+export const displayException = (err: unknown): void => {
   console.error(
     `${chalk.cyanBright('graphql-codegen-react-query')} ❌ - ${chalk.redBright(
       (err as { stack: string }).stack,
