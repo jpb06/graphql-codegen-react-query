@@ -11,5 +11,5 @@ export const getResultFields = (type: string, types: string): string => {
     return '';
   }
 
-  return getAllMatchingGroups(/ ?(.*?):.*?;/g, fields).join('\n');
+  return getAllMatchingGroups(/ ?(.+?):.+?;/g, fields).join('\n');
 };
