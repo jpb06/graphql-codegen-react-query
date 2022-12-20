@@ -18,7 +18,7 @@ export const generateQuerySelector = (
             types,
             objectsName,
             booleanize,
-          ) + '\n';
+          ) + `${booleanize ? '' : '[]'}\n`;
       } else if (type.ofType?.kind === 'OBJECT') {
         typeOutput +=
           booleanizeTypes(

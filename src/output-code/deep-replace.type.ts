@@ -4,14 +4,16 @@ export type DeepReplace<Input, Target> = Input extends object
       ? {
           [Key in keyof Input]: Key extends keyof O
             ? DeepReplace<Input[Key], O[Key]>
-            : DeepReplace<Input[Key], O>;
-        }
+            : never;
+        }[]
       : O
     : Target extends object
     ? {
         [Key in keyof Input]: Key extends keyof Target
           ? DeepReplace<Input[Key], Target[Key]>
-          : Target;
+          : never;
       }
-    : Target
-  : Target;
+    : // scalar
+      Target
+  : //scalar
+    Target;

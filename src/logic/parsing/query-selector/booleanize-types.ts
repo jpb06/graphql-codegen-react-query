@@ -29,6 +29,7 @@ export const booleanizeTypes = (
 
   const output = properties.reduce((acc, property) => {
     const [name, type] = property.split(':');
+    const array = !booleanize && type.startsWith('Array<') ? '[]' : '';
     const rawType = stripArrayRegex.exec(type)?.[1] ?? type;
     if (objectsName.includes(rawType)) {
       if (depth < 9) {
@@ -36,6 +37,7 @@ export const booleanizeTypes = (
           acc +
           (`${name}${booleanize && !name.endsWith('?') ? '?' : ''}: ` +
             booleanizeTypes(rawType, types, objectsName, booleanize, ++depth) +
+            array +
             ';')
         );
       }
@@ -49,7 +51,7 @@ export const booleanizeTypes = (
       acc +
       property.replace(
         propertyTypeRegex,
-        booleanize ? '?: boolean; ' : `: ${type}; `,
+        booleanize ? '?: boolean; ' : `: ${type}${array}; `,
       )
     );
   }, '');
