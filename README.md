@@ -27,10 +27,112 @@ Generating types and react-query hooks from a graphql schema.
 
 ## ⚡ Purpose
 
-This is kind of a prood of concept.
-Graphql codegen is a nice tool. zeus-graphql is a nice lib. But they both have drawbacks. I wanted something like zeus (being able to dynamically perform selection on result) and to get properly generated types from schema as well.
+Graphql codegen is a great tool; zeus-graphql is a neat lib. But they don't exactly fit what I want 😿. I want something like zeus (being able to dynamically perform selection on result), I want to get clean types from schema, I want clean generated code, I want imports that make sense 😼.
 
-## ⚡ Installation
+So here we go, I just figured I'd do something for giggles.
+
+## ⚡ Expectations
+
+### 🔶 Clean types
+
+From a schema like this...
+
+```graphql
+enum GqlOrderedItemStatus {
+  preparing
+  readyToBeSent
+  shippingInProgress
+  shipped
+}
+type GqlOrderedItem {
+  id: ID!
+  quantity: Int!
+  name: String!
+  image: String
+  price: Float!
+  status: GqlOrderedItemStatus!
+}
+type GqlOrder {
+  id: ID!
+  idUser: ID!
+  idCreditCard: ID!
+  createdAt: DateTime!
+  creditCardNumber: String!
+  items: [GqlOrderedItem!]!
+}
+```
+
+I expect to get this:
+
+```typescript
+export type GqlOrderedItemStatus = 'preparing' | 'readyToBeSent' | 'shippingInProgress' | 'shipped'
+
+export interface GqlOrderedItem {
+  id: string;
+  quantity: number;
+  name: string;
+  image?: string;
+  price: number;
+  status: GqlOrderedItemStatus
+}
+export interface GqlOrder {
+  id: string;
+  idUser: string;
+  idCreditCard: string;
+  createdAt: Date;
+  creditCardNumber: string;
+  items: Array<GqlOrderedItem>;
+}
+```
+
+### 🔶 Dynamic selection and result type inference
+
+I want to be able to pick exactly what I need as result for a query. For example, for a schema like this, I should have a named query hook with type inference:
+
+```graphql
+type GqlProduct {
+  id: ID!
+  idCategory: ID!
+  name: String!
+  description: String!
+  image: String!
+  price: Float!
+  stock: Int!
+}
+
+type GqlCategoryWithProducts {
+  id: ID!
+  name: String!
+  products: [GqlProduct!]
+}
+
+
+type Query {
+  categories: [GqlCategoryWithProducts!]!
+}
+```
+
+![dynamic selection](./assets/dynamic-selection.gif)
+
+### 🔶 Dynamic queries
+
+I want to be able to get the results from several queries by calling only one query hook:
+
+![dynamic selection](./assets/dynamic-query.gif)
+
+### 🔶 Queries/Mutations variables type support
+
+I want to get strong types for mutations args and result:
+
+![dynamic selection](./assets/mutation-args-result.gif)
+
+### 🔶 Queries/Mutations options
+
+I want to be able to pass options to react-query hooks:
+
+![dynamic selection](./assets/query-args-options.gif)
+
+## ⚡ Get started
 
 To install, use either pnpm, yarn or npm:
 
@@ -38,9 +140,9 @@ To install, use either pnpm, yarn or npm:
 yarn add -D graphql-codegen-react-query
 ```
 
-## ⚡ Typical use : cli
+## ⚡ cli
 
-### 🔶 From an url
+### 🔶 From a graphql schema url
 
 Generating types from a graphql schema is easy enough using cli. Usage is as follows:
 
@@ -56,7 +158,7 @@ Examples:
   generate-from-url -s http://localhost:3333/graphql -o ./src/api -f ./useFetcher#useFetcher
 ```
 
-We can add a script to our package.json:
+With that in mind, we can add a script to our package.json:
 
 ```json
 {
@@ -70,9 +172,9 @@ We can add a script to our package.json:
 
 In this example:
 
-- we will extract information from a graphql schema exposed on `http://localhost:3333`
-- we will be using a hook named `useFetchData` exported in `./src/api/useFetchData.ts`
-- the code generated will be saved in `./src/api/specs`.
+- we will extract information from a graphql schema exposed on `http://localhost:3333`.
+- we will be using a hook named `useFetchData` exported in `./src/api/useFetchData.ts`.
+- Generated code will be saved in `./src/api/specs`.
 
 ## ⚡ Generated files
 
