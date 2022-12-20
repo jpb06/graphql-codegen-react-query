@@ -204,7 +204,7 @@ type Query {
 
 ### 🔶 Dynamic queries
 
-It would be near if I could get the results from several graphql queries by calling one single react hook 🤔
+It would be neat if I could get the results from several graphql queries by calling one single react hook 🤔
 
 Let's use the `useGqlQuery` hook that does just that:
 
