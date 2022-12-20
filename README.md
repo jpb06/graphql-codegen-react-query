@@ -173,7 +173,7 @@ export interface GqlOrder {
 
 ### 🔶 Dynamic selection and result type inference
 
-It would be great if I could use named query hooks (on react hook by graphql query) but still be able to select what I want in the result 🤔
+It would be great if I could use named query hooks (one react hook by graphql query) but still be able to select what I want in the result 🤔
 
 For example, for a schema like this, I should have a named query hook `useCategoriesQuery` with type inference:
 
