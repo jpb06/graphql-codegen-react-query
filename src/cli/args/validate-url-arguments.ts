@@ -4,24 +4,27 @@ import yargs from 'yargs/yargs';
 
 import { GenerateFromUrlArguments } from '../../workflows/generate-from-url';
 
-type Argv = { s: string; o: string; t: boolean };
+type Argv = { s: string; o: string; f: string };
 
 export const validateArguments = (): GenerateFromUrlArguments => {
   const argv = yargs(hideBin(process.argv))
-    .scriptName('generateFromUrl')
-    .usage(chalk.blueBright('$0 -s [schemaUrl] -o [outputPath]'))
-    .epilogue('Generates types and react-query hooks from a graphql schema')
-    .example('$0 -s http://localhost:3333/graphql -o ./src/api', '')
-    .describe('s', chalk.cyanBright('Graphql schema json url'))
-    .describe('o', chalk.cyanBright('Where to write the generated artifacts'))
-    .describe(
-      't',
-      chalk.cyanBright(
-        'Whether types should be exported with the `export type ...` syntax (importsNotUsedAsValues option)',
+    .scriptName('gqlCodegen')
+    .usage(
+      chalk.blueBright(
+        '$0 -s [schemaUrl] -f [fetcherHookPath] -o [outputPath]',
       ),
     )
-    .default('t', false)
-    .boolean('t')
+    .epilogue('Generates types and react-query hooks from a graphql schema')
+    .example(
+      '$0 -s http://localhost:3333/graphql -o ./src/api -f ./useFetcher#useFetcher',
+      '',
+    )
+    .describe('s', chalk.cyanBright('Graphql schema url'))
+    .describe('o', chalk.cyanBright('Generated code output path'))
+    .describe(
+      'f',
+      chalk.cyanBright('Fetcher hook path and name (<path>#<hookName>)'),
+    )
     .check((args) => {
       const urlRegex = /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/;
       if (!urlRegex.test(args.s as string)) {
@@ -32,11 +35,11 @@ export const validateArguments = (): GenerateFromUrlArguments => {
 
       return true;
     })
-    .demandOption(['s', 'o']).argv as Argv;
+    .demandOption(['s', 'o', 'f']).argv as Argv;
 
   return {
     schemaUrl: argv.s,
     outputPath: argv.o,
-    importsNotUsedAsValues: argv.t,
+    fetcherPath: argv.f,
   };
 };

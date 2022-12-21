@@ -2,6 +2,7 @@ import chalk from 'chalk';
 
 import {
   displayError,
+  displayException,
   displaySuccess,
   displayWarning,
 } from './console.messages';
@@ -63,17 +64,17 @@ describe('displaySuccess function', () => {
   });
 });
 
-describe('displayError function', () => {
+describe('displayException function', () => {
   const errorMessage = 'oh no!';
 
   it('should call console.error', () => {
-    displayError({ stack: errorMessage });
+    displayException({ stack: errorMessage });
 
     expect(console.error).toHaveBeenCalledTimes(1);
   });
 
   it('should display the package name in cyan', () => {
-    displayError({ stack: errorMessage });
+    displayException({ stack: errorMessage });
 
     expect(chalk.cyanBright).toHaveBeenCalledWith(
       'graphql-codegen-react-query',
@@ -81,7 +82,7 @@ describe('displayError function', () => {
   });
 
   it('should display the error message in red', () => {
-    displayError({ stack: errorMessage });
+    displayException({ stack: errorMessage });
 
     expect(chalk.redBright).toHaveBeenCalledWith(errorMessage);
   });
@@ -113,5 +114,34 @@ describe('displayWarning function', () => {
     displayWarning(warningMessage);
 
     expect(chalk.yellowBright).toHaveBeenCalledWith(warningMessage);
+  });
+});
+
+describe('displayError function', () => {
+  const errorMessage = 'oh no!';
+
+  beforeAll(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should call console.error', () => {
+    displayError(errorMessage);
+
+    // eslint-disable-next-line no-console
+    expect(console.error).toHaveBeenCalledTimes(1);
+  });
+
+  it('should display the package name in cyan', () => {
+    displayError(errorMessage);
+
+    expect(chalk.cyanBright).toHaveBeenCalledWith(
+      'graphql-codegen-react-query',
+    );
+  });
+
+  it('should display the error message in red', () => {
+    displayError(errorMessage);
+
+    expect(chalk.redBright).toHaveBeenCalledWith(errorMessage);
   });
 });

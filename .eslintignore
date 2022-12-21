@@ -2,3 +2,5 @@
 **/node_modules
 **/coverage
 jest.config.js
+src/output-code
+src/api

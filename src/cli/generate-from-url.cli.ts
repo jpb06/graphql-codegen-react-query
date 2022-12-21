@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import {
-  displayError,
+  displayException,
   displaySuccess,
 } from '../logic/cli/console/console.messages';
 import { generateFromUrl } from '../workflows/generate-from-url';
@@ -18,7 +18,7 @@ import { validateArguments } from './args/validate-url-arguments';
     displaySuccess(args.outputPath, generationResult);
     process.exit(0);
   } catch (err) {
-    displayError(err);
+    displayException(err);
     process.exit(1);
   }
 })();

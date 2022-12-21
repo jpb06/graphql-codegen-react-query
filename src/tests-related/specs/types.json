@@ -1,2469 +1,3231 @@
-[
-  {
-    "kind": "OBJECT",
-    "name": "GqlAddress",
-    "description": null,
-    "fields": [
-      {
-        "name": "id",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "ID", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
+{
+  "data": {
+    "__schema": {
+      "queryType": {
+        "name": "Query"
       },
-      {
-        "name": "street",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
+      "mutationType": {
+        "name": "Mutation"
       },
-      {
-        "name": "zipCode",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "city",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "country",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "inputFields": null,
-    "interfaces": [],
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "SCALAR",
-    "name": "ID",
-    "description": "The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `\"4\"`) or integer (such as `4`) input value will be accepted as an ID.",
-    "fields": null,
-    "inputFields": null,
-    "interfaces": null,
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "SCALAR",
-    "name": "String",
-    "description": "The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.",
-    "fields": null,
-    "inputFields": null,
-    "interfaces": null,
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "OBJECT",
-    "name": "GqlNewAddressOutput",
-    "description": null,
-    "fields": [
-      {
-        "name": "id",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "ID", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "street",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "zipCode",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "city",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "country",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "inputFields": null,
-    "interfaces": [],
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "OBJECT",
-    "name": "GqlAuthOutput",
-    "description": null,
-    "fields": [
-      {
-        "name": "id",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "ID", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "email",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "lastName",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "firstName",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "joinDate",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "DateTime", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "role",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "token",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "inputFields": null,
-    "interfaces": [],
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "SCALAR",
-    "name": "DateTime",
-    "description": "A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.",
-    "fields": null,
-    "inputFields": null,
-    "interfaces": null,
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "OBJECT",
-    "name": "GqlLoggedUser",
-    "description": null,
-    "fields": [
-      {
-        "name": "id",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "ID", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "email",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "lastName",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "firstName",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "joinDate",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "DateTime", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "role",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "token",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "inputFields": null,
-    "interfaces": [],
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "OBJECT",
-    "name": "GqlProduct",
-    "description": null,
-    "fields": [
-      {
-        "name": "id",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "ID", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "idCategory",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "ID", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "name",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "description",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "image",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "price",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "Float", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "stock",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "Int", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "category",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "OBJECT", "name": "GqlCategory", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "inputFields": null,
-    "interfaces": [],
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "SCALAR",
-    "name": "Float",
-    "description": "The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).",
-    "fields": null,
-    "inputFields": null,
-    "interfaces": null,
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "SCALAR",
-    "name": "Int",
-    "description": "The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.",
-    "fields": null,
-    "inputFields": null,
-    "interfaces": null,
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "OBJECT",
-    "name": "GqlCategory",
-    "description": null,
-    "fields": [
-      {
-        "name": "id",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "ID", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "name",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "products",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": {
-            "kind": "LIST",
-            "name": null,
-            "ofType": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "GqlProduct",
-                "ofType": null
-              }
-            }
-          }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "inputFields": null,
-    "interfaces": [],
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "OBJECT",
-    "name": "GqlPaginatedProductsOutput",
-    "description": null,
-    "fields": [
-      {
-        "name": "id",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "Int", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "data",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": {
-            "kind": "LIST",
-            "name": null,
-            "ofType": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "GqlProduct",
-                "ofType": null
-              }
-            }
-          }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "hasMoreData",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "Boolean", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "inputFields": null,
-    "interfaces": [],
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "SCALAR",
-    "name": "Boolean",
-    "description": "The `Boolean` scalar type represents `true` or `false`.",
-    "fields": null,
-    "inputFields": null,
-    "interfaces": null,
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "OBJECT",
-    "name": "GqlOrderedItem",
-    "description": null,
-    "fields": [
-      {
-        "name": "id",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "ID", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "quantity",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "Int", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "name",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "image",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "price",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "Float", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "inputFields": null,
-    "interfaces": [],
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "OBJECT",
-    "name": "GqlOrder",
-    "description": null,
-    "fields": [
-      {
-        "name": "id",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "ID", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "idUser",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "ID", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "idCreditCard",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "ID", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "createdAt",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "DateTime", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "creditCardNumber",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "items",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": {
-            "kind": "LIST",
-            "name": null,
-            "ofType": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "GqlOrderedItem",
-                "ofType": null
-              }
-            }
-          }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "inputFields": null,
-    "interfaces": [],
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "OBJECT",
-    "name": "GqlPlaceOrderOutput",
-    "description": null,
-    "fields": [
-      {
-        "name": "orderId",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "Int", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "inputFields": null,
-    "interfaces": [],
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "OBJECT",
-    "name": "GqlPartialCreditCard",
-    "description": null,
-    "fields": [
-      {
-        "name": "number",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "expires",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "inputFields": null,
-    "interfaces": [],
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "OBJECT",
-    "name": "GqlPartialOrderedItem",
-    "description": null,
-    "fields": [
-      {
-        "name": "id",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "ID", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "quantity",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "Int", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "name",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "price",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "Float", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "inputFields": null,
-    "interfaces": [],
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "OBJECT",
-    "name": "GqlUserOrder",
-    "description": null,
-    "fields": [
-      {
-        "name": "createdAt",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "DateTime", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "creditCard",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": {
-            "kind": "OBJECT",
-            "name": "GqlPartialCreditCard",
-            "ofType": null
-          }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "items",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": {
-            "kind": "LIST",
-            "name": null,
-            "ofType": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "GqlPartialOrderedItem",
-                "ofType": null
-              }
-            }
-          }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "inputFields": null,
-    "interfaces": [],
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "OBJECT",
-    "name": "Query",
-    "description": null,
-    "fields": [
-      {
-        "name": "products",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": {
-            "kind": "LIST",
-            "name": null,
-            "ofType": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "GqlProduct",
-                "ofType": null
-              }
-            }
-          }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "productsByPage",
-        "description": null,
-        "args": [
-          {
-            "name": "pagination",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "GqlPaginationArgs",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "filters",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "GqlPaginatedProductsFiltersInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "sort",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "GqlPaginatedProductsSortingInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          }
-        ],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": {
-            "kind": "OBJECT",
-            "name": "GqlPaginatedProductsOutput",
-            "ofType": null
-          }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "productsWithIds",
-        "description": null,
-        "args": [
-          {
-            "name": "ids",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
+      "subscriptionType": null,
+      "types": [
+        {
+          "kind": "OBJECT",
+          "name": "GqlAddress",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
                 "name": null,
                 "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": { "kind": "SCALAR", "name": "Int", "ofType": null }
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
                 }
-              }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             },
-            "defaultValue": null
-          }
-        ],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": {
-            "kind": "LIST",
-            "name": null,
-            "ofType": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "GqlProduct",
-                "ofType": null
-              }
+            {
+              "name": "street",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "zipCode",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "city",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "country",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             }
-          }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
         },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "product",
-        "description": null,
-        "args": [
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": { "kind": "SCALAR", "name": "Int", "ofType": null }
+        {
+          "kind": "SCALAR",
+          "name": "ID",
+          "description": "The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `\"4\"`) or integer (such as `4`) input value will be accepted as an ID.",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "SCALAR",
+          "name": "String",
+          "description": "The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "GqlNewAddressOutput",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             },
-            "defaultValue": null
-          }
-        ],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "OBJECT", "name": "GqlProduct", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "categories",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": {
-            "kind": "LIST",
-            "name": null,
-            "ofType": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "GqlCategory",
-                "ofType": null
-              }
+            {
+              "name": "street",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "zipCode",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "city",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "country",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             }
-          }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
         },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "category",
-        "description": null,
-        "args": [
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": { "kind": "SCALAR", "name": "Int", "ofType": null }
+        {
+          "kind": "OBJECT",
+          "name": "GqlAuthOutput",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             },
-            "defaultValue": null
-          }
-        ],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "OBJECT", "name": "GqlCategory", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "me",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": {
-            "kind": "OBJECT",
-            "name": "GqlLoggedUser",
-            "ofType": null
-          }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "getOrder",
-        "description": null,
-        "args": [
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": { "kind": "SCALAR", "name": "Int", "ofType": null }
+            {
+              "name": "email",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             },
-            "defaultValue": null
-          }
-        ],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "OBJECT", "name": "GqlUserOrder", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "myOrders",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": {
-            "kind": "LIST",
-            "name": null,
-            "ofType": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": { "kind": "OBJECT", "name": "GqlOrder", "ofType": null }
+            {
+              "name": "lastName",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "firstName",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "joinDate",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "role",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "token",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             }
-          }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
         },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "myAddresses",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": {
-            "kind": "LIST",
-            "name": null,
-            "ofType": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "GqlAddress",
-                "ofType": null
-              }
+        {
+          "kind": "SCALAR",
+          "name": "DateTime",
+          "description": "A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "GqlLoggedUser",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "email",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "lastName",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "firstName",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "joinDate",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "role",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "token",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             }
-          }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
         },
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "inputFields": null,
-    "interfaces": [],
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "INPUT_OBJECT",
-    "name": "GqlPaginationArgs",
-    "description": null,
-    "fields": null,
-    "inputFields": [
-      {
-        "name": "offset",
-        "description": null,
-        "type": { "kind": "SCALAR", "name": "Int", "ofType": null },
-        "defaultValue": "0"
-      },
-      {
-        "name": "limit",
-        "description": null,
-        "type": { "kind": "SCALAR", "name": "Int", "ofType": null },
-        "defaultValue": "25"
-      }
-    ],
-    "interfaces": null,
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "INPUT_OBJECT",
-    "name": "GqlPaginatedProductsFiltersInput",
-    "description": null,
-    "fields": null,
-    "inputFields": [
-      {
-        "name": "categoriesIds",
-        "description": null,
-        "type": {
-          "kind": "LIST",
-          "name": null,
-          "ofType": {
-            "kind": "NON_NULL",
-            "name": null,
-            "ofType": { "kind": "SCALAR", "name": "Int", "ofType": null }
-          }
+        {
+          "kind": "OBJECT",
+          "name": "GqlCategory",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "name",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
         },
-        "defaultValue": null
-      },
-      {
-        "name": "text",
-        "description": null,
-        "type": { "kind": "SCALAR", "name": "String", "ofType": null },
-        "defaultValue": null
-      },
-      {
-        "name": "price",
-        "description": null,
-        "type": { "kind": "SCALAR", "name": "Int", "ofType": null },
-        "defaultValue": null
-      },
-      {
-        "name": "priceCondition",
-        "description": null,
-        "type": { "kind": "ENUM", "name": "NumberCondition", "ofType": null },
-        "defaultValue": null
-      },
-      {
-        "name": "availableStock",
-        "description": null,
-        "type": { "kind": "SCALAR", "name": "Boolean", "ofType": null },
-        "defaultValue": null
-      }
-    ],
-    "interfaces": null,
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "ENUM",
-    "name": "NumberCondition",
-    "description": null,
-    "fields": null,
-    "inputFields": null,
-    "interfaces": null,
-    "enumValues": [
-      {
-        "name": "gte",
-        "description": null,
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "lte",
-        "description": null,
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "possibleTypes": null
-  },
-  {
-    "kind": "INPUT_OBJECT",
-    "name": "GqlPaginatedProductsSortingInput",
-    "description": null,
-    "fields": null,
-    "inputFields": [
-      {
-        "name": "field",
-        "description": null,
-        "type": { "kind": "ENUM", "name": "SortField", "ofType": null },
-        "defaultValue": null
-      },
-      {
-        "name": "direction",
-        "description": null,
-        "type": { "kind": "ENUM", "name": "SortDirection", "ofType": null },
-        "defaultValue": null
-      }
-    ],
-    "interfaces": null,
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "ENUM",
-    "name": "SortField",
-    "description": null,
-    "fields": null,
-    "inputFields": null,
-    "interfaces": null,
-    "enumValues": [
-      {
-        "name": "price",
-        "description": null,
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "name",
-        "description": null,
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "possibleTypes": null
-  },
-  {
-    "kind": "ENUM",
-    "name": "SortDirection",
-    "description": null,
-    "fields": null,
-    "inputFields": null,
-    "interfaces": null,
-    "enumValues": [
-      {
-        "name": "asc",
-        "description": null,
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "desc",
-        "description": null,
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "possibleTypes": null
-  },
-  {
-    "kind": "OBJECT",
-    "name": "Mutation",
-    "description": null,
-    "fields": [
-      {
-        "name": "signup",
-        "description": null,
-        "args": [
-          {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
+        {
+          "kind": "OBJECT",
+          "name": "GqlProduct",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             },
-            "defaultValue": null
-          },
-          {
-            "name": "lastName",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
+            {
+              "name": "idCategory",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             },
-            "defaultValue": null
-          },
-          {
-            "name": "firstName",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
+            {
+              "name": "name",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             },
-            "defaultValue": null
-          },
-          {
-            "name": "password",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
+            {
+              "name": "description",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             },
-            "defaultValue": null
-          }
-        ],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": {
-            "kind": "OBJECT",
-            "name": "GqlAuthOutput",
-            "ofType": null
-          }
+            {
+              "name": "image",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "price",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Float",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "stock",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
         },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "login",
-        "description": null,
-        "args": [
-          {
-            "name": "username",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "password",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-            },
-            "defaultValue": null
-          }
-        ],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": {
-            "kind": "OBJECT",
-            "name": "GqlAuthOutput",
-            "ofType": null
-          }
+        {
+          "kind": "SCALAR",
+          "name": "Float",
+          "description": "The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
         },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "placeOrder",
-        "description": null,
-        "args": [
-          {
-            "name": "creditCard",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "GqlPlaceOrderInput",
+        {
+          "kind": "SCALAR",
+          "name": "Int",
+          "description": "The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "GqlProductWithCategory",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "idCategory",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "name",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "description",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "image",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "price",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Float",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "stock",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "category",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "GqlCategory",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "GqlPaginatedProductsOutput",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "data",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "GqlProductWithCategory",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "hasMoreData",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "SCALAR",
+          "name": "Boolean",
+          "description": "The `Boolean` scalar type represents `true` or `false`.",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "GqlCategoryWithProducts",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "name",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "products",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "GqlProduct",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "GqlOrderedItem",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "quantity",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "name",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "image",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "price",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Float",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "GqlOrder",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "idUser",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "idCreditCard",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createdAt",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "creditCardNumber",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "items",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "GqlOrderedItem",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "GqlPlaceOrderOutput",
+          "description": null,
+          "fields": [
+            {
+              "name": "orderId",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "GqlPartialCreditCard",
+          "description": null,
+          "fields": [
+            {
+              "name": "number",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "expires",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "GqlPartialOrderedItem",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "quantity",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "name",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "price",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Float",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "GqlUserOrder",
+          "description": null,
+          "fields": [
+            {
+              "name": "createdAt",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "creditCard",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "GqlPartialCreditCard",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "items",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "GqlPartialOrderedItem",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "Query",
+          "description": null,
+          "fields": [
+            {
+              "name": "products",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "GqlProductWithCategory",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "productsByPage",
+              "description": null,
+              "args": [
+                {
+                  "name": "pagination",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "GqlPaginationArgs",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "filters",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "GqlPaginatedProductsFiltersInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "sort",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "GqlPaginatedProductsSortingInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "GqlPaginatedProductsOutput",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "productsWithIds",
+              "description": null,
+              "args": [
+                {
+                  "name": "ids",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": null,
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": null,
+                        "ofType": {
+                          "kind": "SCALAR",
+                          "name": "Int",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "GqlProductWithCategory",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "product",
+              "description": null,
+              "args": [
+                {
+                  "name": "id",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Int",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "GqlProductWithCategory",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "categories",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "GqlCategoryWithProducts",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "category",
+              "description": null,
+              "args": [
+                {
+                  "name": "id",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Int",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "GqlCategoryWithProducts",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "me",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "GqlLoggedUser",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "getOrder",
+              "description": null,
+              "args": [
+                {
+                  "name": "id",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Int",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "GqlUserOrder",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "myOrders",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "GqlOrder",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "myAddresses",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "GqlAddress",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "GqlPaginationArgs",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "offset",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
                 "ofType": null
-              }
+              },
+              "defaultValue": "0"
             },
-            "defaultValue": null
-          },
-          {
-            "name": "orderedItems",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
+            {
+              "name": "limit",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              },
+              "defaultValue": "25"
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "GqlPaginatedProductsFiltersInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "categoriesIds",
+              "description": null,
+              "type": {
                 "kind": "LIST",
                 "name": null,
                 "ofType": {
                   "kind": "NON_NULL",
                   "name": null,
                   "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "GqlNewOrderedItem",
+                    "kind": "SCALAR",
+                    "name": "Int",
                     "ofType": null
                   }
                 }
-              }
+              },
+              "defaultValue": null
             },
-            "defaultValue": null
-          }
-        ],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": {
-            "kind": "OBJECT",
-            "name": "GqlPlaceOrderOutput",
-            "ofType": null
-          }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "createAddress",
-        "description": null,
-        "args": [
-          {
-            "name": "street",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
+            {
+              "name": "text",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
             },
-            "defaultValue": null
-          },
-          {
-            "name": "zipCode",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "city",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "country",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-            },
-            "defaultValue": null
-          }
-        ],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": {
-            "kind": "OBJECT",
-            "name": "GqlNewAddressOutput",
-            "ofType": null
-          }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "inputFields": null,
-    "interfaces": [],
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "INPUT_OBJECT",
-    "name": "GqlPlaceOrderInput",
-    "description": null,
-    "fields": null,
-    "inputFields": [
-      {
-        "name": "number",
-        "description": null,
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "defaultValue": null
-      },
-      {
-        "name": "name",
-        "description": null,
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "defaultValue": null
-      },
-      {
-        "name": "expires",
-        "description": null,
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "defaultValue": null
-      },
-      {
-        "name": "cvc",
-        "description": null,
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "defaultValue": null
-      }
-    ],
-    "interfaces": null,
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "INPUT_OBJECT",
-    "name": "GqlNewOrderedItem",
-    "description": null,
-    "fields": null,
-    "inputFields": [
-      {
-        "name": "idProduct",
-        "description": null,
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "Int", "ofType": null }
-        },
-        "defaultValue": null
-      },
-      {
-        "name": "quantity",
-        "description": null,
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "Int", "ofType": null }
-        },
-        "defaultValue": null
-      }
-    ],
-    "interfaces": null,
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "OBJECT",
-    "name": "__Schema",
-    "description": "A GraphQL Schema defines the capabilities of a GraphQL server. It exposes all available types and directives on the server, as well as the entry points for query, mutation, and subscription operations.",
-    "fields": [
-      {
-        "name": "description",
-        "description": null,
-        "args": [],
-        "type": { "kind": "SCALAR", "name": "String", "ofType": null },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "types",
-        "description": "A list of all types supported by this server.",
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": {
-            "kind": "LIST",
-            "name": null,
-            "ofType": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": { "kind": "OBJECT", "name": "__Type", "ofType": null }
-            }
-          }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "queryType",
-        "description": "The type that query operations will be rooted at.",
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "OBJECT", "name": "__Type", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "mutationType",
-        "description": "If this server supports mutation, the type that mutation operations will be rooted at.",
-        "args": [],
-        "type": { "kind": "OBJECT", "name": "__Type", "ofType": null },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "subscriptionType",
-        "description": "If this server support subscription, the type that subscription operations will be rooted at.",
-        "args": [],
-        "type": { "kind": "OBJECT", "name": "__Type", "ofType": null },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "directives",
-        "description": "A list of all directives supported by this server.",
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": {
-            "kind": "LIST",
-            "name": null,
-            "ofType": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "__Directive",
+            {
+              "name": "price",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
                 "ofType": null
-              }
-            }
-          }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "inputFields": null,
-    "interfaces": [],
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "OBJECT",
-    "name": "__Type",
-    "description": "The fundamental unit of any GraphQL Schema is the type. There are many kinds of types in GraphQL as represented by the `__TypeKind` enum.\n\nDepending on the kind of a type, certain fields describe information about that type. Scalar types provide no information beyond a name, description and optional `specifiedByURL`, while Enum types provide their values. Object and Interface types provide the fields they describe. Abstract types, Union and Interface, provide the Object types possible at runtime. List and NonNull types compose other types.",
-    "fields": [
-      {
-        "name": "kind",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "ENUM", "name": "__TypeKind", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "name",
-        "description": null,
-        "args": [],
-        "type": { "kind": "SCALAR", "name": "String", "ofType": null },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "description",
-        "description": null,
-        "args": [],
-        "type": { "kind": "SCALAR", "name": "String", "ofType": null },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "specifiedByURL",
-        "description": null,
-        "args": [],
-        "type": { "kind": "SCALAR", "name": "String", "ofType": null },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "fields",
-        "description": null,
-        "args": [
-          {
-            "name": "includeDeprecated",
-            "description": null,
-            "type": { "kind": "SCALAR", "name": "Boolean", "ofType": null },
-            "defaultValue": "false"
-          }
-        ],
-        "type": {
-          "kind": "LIST",
-          "name": null,
-          "ofType": {
-            "kind": "NON_NULL",
-            "name": null,
-            "ofType": { "kind": "OBJECT", "name": "__Field", "ofType": null }
-          }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "interfaces",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "LIST",
-          "name": null,
-          "ofType": {
-            "kind": "NON_NULL",
-            "name": null,
-            "ofType": { "kind": "OBJECT", "name": "__Type", "ofType": null }
-          }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "possibleTypes",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "LIST",
-          "name": null,
-          "ofType": {
-            "kind": "NON_NULL",
-            "name": null,
-            "ofType": { "kind": "OBJECT", "name": "__Type", "ofType": null }
-          }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "enumValues",
-        "description": null,
-        "args": [
-          {
-            "name": "includeDeprecated",
-            "description": null,
-            "type": { "kind": "SCALAR", "name": "Boolean", "ofType": null },
-            "defaultValue": "false"
-          }
-        ],
-        "type": {
-          "kind": "LIST",
-          "name": null,
-          "ofType": {
-            "kind": "NON_NULL",
-            "name": null,
-            "ofType": {
-              "kind": "OBJECT",
-              "name": "__EnumValue",
-              "ofType": null
-            }
-          }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "inputFields",
-        "description": null,
-        "args": [
-          {
-            "name": "includeDeprecated",
-            "description": null,
-            "type": { "kind": "SCALAR", "name": "Boolean", "ofType": null },
-            "defaultValue": "false"
-          }
-        ],
-        "type": {
-          "kind": "LIST",
-          "name": null,
-          "ofType": {
-            "kind": "NON_NULL",
-            "name": null,
-            "ofType": {
-              "kind": "OBJECT",
-              "name": "__InputValue",
-              "ofType": null
-            }
-          }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "ofType",
-        "description": null,
-        "args": [],
-        "type": { "kind": "OBJECT", "name": "__Type", "ofType": null },
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "inputFields": null,
-    "interfaces": [],
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "ENUM",
-    "name": "__TypeKind",
-    "description": "An enum describing what kind of type a given `__Type` is.",
-    "fields": null,
-    "inputFields": null,
-    "interfaces": null,
-    "enumValues": [
-      {
-        "name": "SCALAR",
-        "description": "Indicates this type is a scalar.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "OBJECT",
-        "description": "Indicates this type is an object. `fields` and `interfaces` are valid fields.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "INTERFACE",
-        "description": "Indicates this type is an interface. `fields`, `interfaces`, and `possibleTypes` are valid fields.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "UNION",
-        "description": "Indicates this type is a union. `possibleTypes` is a valid field.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "ENUM",
-        "description": "Indicates this type is an enum. `enumValues` is a valid field.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "INPUT_OBJECT",
-        "description": "Indicates this type is an input object. `inputFields` is a valid field.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "LIST",
-        "description": "Indicates this type is a list. `ofType` is a valid field.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "NON_NULL",
-        "description": "Indicates this type is a non-null. `ofType` is a valid field.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "possibleTypes": null
-  },
-  {
-    "kind": "OBJECT",
-    "name": "__Field",
-    "description": "Object and Interface types are described by a list of Fields, each of which has a name, potentially a list of arguments, and a return type.",
-    "fields": [
-      {
-        "name": "name",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "description",
-        "description": null,
-        "args": [],
-        "type": { "kind": "SCALAR", "name": "String", "ofType": null },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "args",
-        "description": null,
-        "args": [
-          {
-            "name": "includeDeprecated",
-            "description": null,
-            "type": { "kind": "SCALAR", "name": "Boolean", "ofType": null },
-            "defaultValue": "false"
-          }
-        ],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": {
-            "kind": "LIST",
-            "name": null,
-            "ofType": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "__InputValue",
-                "ofType": null
-              }
-            }
-          }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "type",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "OBJECT", "name": "__Type", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "isDeprecated",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "Boolean", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "deprecationReason",
-        "description": null,
-        "args": [],
-        "type": { "kind": "SCALAR", "name": "String", "ofType": null },
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "inputFields": null,
-    "interfaces": [],
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "OBJECT",
-    "name": "__InputValue",
-    "description": "Arguments provided to Fields or Directives and the input fields of an InputObject are represented as Input Values which describe their type and optionally a default value.",
-    "fields": [
-      {
-        "name": "name",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "description",
-        "description": null,
-        "args": [],
-        "type": { "kind": "SCALAR", "name": "String", "ofType": null },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "type",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "OBJECT", "name": "__Type", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "defaultValue",
-        "description": "A GraphQL-formatted string representing the default value for this input value.",
-        "args": [],
-        "type": { "kind": "SCALAR", "name": "String", "ofType": null },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "isDeprecated",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "Boolean", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "deprecationReason",
-        "description": null,
-        "args": [],
-        "type": { "kind": "SCALAR", "name": "String", "ofType": null },
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "inputFields": null,
-    "interfaces": [],
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "OBJECT",
-    "name": "__EnumValue",
-    "description": "One possible value for a given Enum. Enum values are unique values, not a placeholder for a string or numeric value. However an Enum value is returned in a JSON response as a string.",
-    "fields": [
-      {
-        "name": "name",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "description",
-        "description": null,
-        "args": [],
-        "type": { "kind": "SCALAR", "name": "String", "ofType": null },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "isDeprecated",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "Boolean", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "deprecationReason",
-        "description": null,
-        "args": [],
-        "type": { "kind": "SCALAR", "name": "String", "ofType": null },
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "inputFields": null,
-    "interfaces": [],
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "OBJECT",
-    "name": "__Directive",
-    "description": "A Directive provides a way to describe alternate runtime execution and type validation behavior in a GraphQL document.\n\nIn some cases, you need to provide options to alter GraphQL's execution behavior in ways field arguments will not suffice, such as conditionally including or skipping a field. Directives provide this by describing additional information to the executor.",
-    "fields": [
-      {
-        "name": "name",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "description",
-        "description": null,
-        "args": [],
-        "type": { "kind": "SCALAR", "name": "String", "ofType": null },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "isRepeatable",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": { "kind": "SCALAR", "name": "Boolean", "ofType": null }
-        },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "locations",
-        "description": null,
-        "args": [],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": {
-            "kind": "LIST",
-            "name": null,
-            "ofType": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "priceCondition",
+              "description": null,
+              "type": {
                 "kind": "ENUM",
-                "name": "__DirectiveLocation",
+                "name": "NumberCondition",
                 "ofType": null
-              }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "availableStock",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              },
+              "defaultValue": null
             }
-          }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
         },
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "args",
-        "description": null,
-        "args": [
-          {
-            "name": "includeDeprecated",
-            "description": null,
-            "type": { "kind": "SCALAR", "name": "Boolean", "ofType": null },
-            "defaultValue": "false"
-          }
-        ],
-        "type": {
-          "kind": "NON_NULL",
-          "name": null,
-          "ofType": {
-            "kind": "LIST",
-            "name": null,
-            "ofType": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
+        {
+          "kind": "ENUM",
+          "name": "NumberCondition",
+          "description": null,
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": [
+            {
+              "name": "gte",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "lte",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "GqlPaginatedProductsSortingInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "field",
+              "description": null,
+              "type": {
+                "kind": "ENUM",
+                "name": "SortField",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "direction",
+              "description": null,
+              "type": {
+                "kind": "ENUM",
+                "name": "SortDirection",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "ENUM",
+          "name": "SortField",
+          "description": null,
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": [
+            {
+              "name": "price",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "name",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "possibleTypes": null
+        },
+        {
+          "kind": "ENUM",
+          "name": "SortDirection",
+          "description": null,
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": [
+            {
+              "name": "asc",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "desc",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "Mutation",
+          "description": null,
+          "fields": [
+            {
+              "name": "signup",
+              "description": null,
+              "args": [
+                {
+                  "name": "email",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "lastName",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "firstName",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "password",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "GqlAuthOutput",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "login",
+              "description": null,
+              "args": [
+                {
+                  "name": "username",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "password",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "GqlAuthOutput",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "placeOrder",
+              "description": null,
+              "args": [
+                {
+                  "name": "creditCard",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "GqlPlaceOrderInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "orderedItems",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": null,
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": null,
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "GqlNewOrderedItem",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "GqlPlaceOrderOutput",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createAddress",
+              "description": null,
+              "args": [
+                {
+                  "name": "street",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "zipCode",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "city",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "country",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "GqlNewAddressOutput",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "GqlPlaceOrderInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "number",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "name",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "expires",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "cvc",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "GqlNewOrderedItem",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "idProduct",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "quantity",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "__Schema",
+          "description": "A GraphQL Schema defines the capabilities of a GraphQL server. It exposes all available types and directives on the server, as well as the entry points for query, mutation, and subscription operations.",
+          "fields": [
+            {
+              "name": "description",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "types",
+              "description": "A list of all types supported by this server.",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "__Type",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "queryType",
+              "description": "The type that query operations will be rooted at.",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "__Type",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "mutationType",
+              "description": "If this server supports mutation, the type that mutation operations will be rooted at.",
+              "args": [],
+              "type": {
                 "kind": "OBJECT",
-                "name": "__InputValue",
+                "name": "__Type",
                 "ofType": null
-              }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "subscriptionType",
+              "description": "If this server support subscription, the type that subscription operations will be rooted at.",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "__Type",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "directives",
+              "description": "A list of all directives supported by this server.",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "__Directive",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             }
-          }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
         },
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "inputFields": null,
-    "interfaces": [],
-    "enumValues": null,
-    "possibleTypes": null
-  },
-  {
-    "kind": "ENUM",
-    "name": "__DirectiveLocation",
-    "description": "A Directive can be adjacent to many parts of the GraphQL language, a __DirectiveLocation describes one such possible adjacencies.",
-    "fields": null,
-    "inputFields": null,
-    "interfaces": null,
-    "enumValues": [
-      {
-        "name": "QUERY",
-        "description": "Location adjacent to a query operation.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "MUTATION",
-        "description": "Location adjacent to a mutation operation.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "SUBSCRIPTION",
-        "description": "Location adjacent to a subscription operation.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "FIELD",
-        "description": "Location adjacent to a field.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "FRAGMENT_DEFINITION",
-        "description": "Location adjacent to a fragment definition.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "FRAGMENT_SPREAD",
-        "description": "Location adjacent to a fragment spread.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "INLINE_FRAGMENT",
-        "description": "Location adjacent to an inline fragment.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "VARIABLE_DEFINITION",
-        "description": "Location adjacent to a variable definition.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "SCHEMA",
-        "description": "Location adjacent to a schema definition.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "SCALAR",
-        "description": "Location adjacent to a scalar definition.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "OBJECT",
-        "description": "Location adjacent to an object type definition.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "FIELD_DEFINITION",
-        "description": "Location adjacent to a field definition.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "ARGUMENT_DEFINITION",
-        "description": "Location adjacent to an argument definition.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "INTERFACE",
-        "description": "Location adjacent to an interface definition.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "UNION",
-        "description": "Location adjacent to a union definition.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "ENUM",
-        "description": "Location adjacent to an enum definition.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "ENUM_VALUE",
-        "description": "Location adjacent to an enum value definition.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "INPUT_OBJECT",
-        "description": "Location adjacent to an input object type definition.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      },
-      {
-        "name": "INPUT_FIELD_DEFINITION",
-        "description": "Location adjacent to an input object field definition.",
-        "isDeprecated": false,
-        "deprecationReason": null
-      }
-    ],
-    "possibleTypes": null
+        {
+          "kind": "OBJECT",
+          "name": "__Type",
+          "description": "The fundamental unit of any GraphQL Schema is the type. There are many kinds of types in GraphQL as represented by the `__TypeKind` enum.\n\nDepending on the kind of a type, certain fields describe information about that type. Scalar types provide no information beyond a name, description and optional `specifiedByURL`, while Enum types provide their values. Object and Interface types provide the fields they describe. Abstract types, Union and Interface, provide the Object types possible at runtime. List and NonNull types compose other types.",
+          "fields": [
+            {
+              "name": "kind",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "__TypeKind",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "name",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "description",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "specifiedByURL",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "fields",
+              "description": null,
+              "args": [
+                {
+                  "name": "includeDeprecated",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Boolean",
+                    "ofType": null
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "__Field",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "interfaces",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "__Type",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "possibleTypes",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "__Type",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "enumValues",
+              "description": null,
+              "args": [
+                {
+                  "name": "includeDeprecated",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Boolean",
+                    "ofType": null
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "__EnumValue",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "inputFields",
+              "description": null,
+              "args": [
+                {
+                  "name": "includeDeprecated",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Boolean",
+                    "ofType": null
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "__InputValue",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "ofType",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "__Type",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "ENUM",
+          "name": "__TypeKind",
+          "description": "An enum describing what kind of type a given `__Type` is.",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": [
+            {
+              "name": "SCALAR",
+              "description": "Indicates this type is a scalar.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "OBJECT",
+              "description": "Indicates this type is an object. `fields` and `interfaces` are valid fields.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "INTERFACE",
+              "description": "Indicates this type is an interface. `fields`, `interfaces`, and `possibleTypes` are valid fields.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "UNION",
+              "description": "Indicates this type is a union. `possibleTypes` is a valid field.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "ENUM",
+              "description": "Indicates this type is an enum. `enumValues` is a valid field.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "INPUT_OBJECT",
+              "description": "Indicates this type is an input object. `inputFields` is a valid field.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "LIST",
+              "description": "Indicates this type is a list. `ofType` is a valid field.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "NON_NULL",
+              "description": "Indicates this type is a non-null. `ofType` is a valid field.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "__Field",
+          "description": "Object and Interface types are described by a list of Fields, each of which has a name, potentially a list of arguments, and a return type.",
+          "fields": [
+            {
+              "name": "name",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "description",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "args",
+              "description": null,
+              "args": [
+                {
+                  "name": "includeDeprecated",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Boolean",
+                    "ofType": null
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "__InputValue",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "type",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "__Type",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "isDeprecated",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deprecationReason",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "__InputValue",
+          "description": "Arguments provided to Fields or Directives and the input fields of an InputObject are represented as Input Values which describe their type and optionally a default value.",
+          "fields": [
+            {
+              "name": "name",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "description",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "type",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "__Type",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "defaultValue",
+              "description": "A GraphQL-formatted string representing the default value for this input value.",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "isDeprecated",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deprecationReason",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "__EnumValue",
+          "description": "One possible value for a given Enum. Enum values are unique values, not a placeholder for a string or numeric value. However an Enum value is returned in a JSON response as a string.",
+          "fields": [
+            {
+              "name": "name",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "description",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "isDeprecated",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deprecationReason",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "__Directive",
+          "description": "A Directive provides a way to describe alternate runtime execution and type validation behavior in a GraphQL document.\n\nIn some cases, you need to provide options to alter GraphQL's execution behavior in ways field arguments will not suffice, such as conditionally including or skipping a field. Directives provide this by describing additional information to the executor.",
+          "fields": [
+            {
+              "name": "name",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "description",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "isRepeatable",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "locations",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "__DirectiveLocation",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "args",
+              "description": null,
+              "args": [
+                {
+                  "name": "includeDeprecated",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Boolean",
+                    "ofType": null
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "__InputValue",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "ENUM",
+          "name": "__DirectiveLocation",
+          "description": "A Directive can be adjacent to many parts of the GraphQL language, a __DirectiveLocation describes one such possible adjacencies.",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": [
+            {
+              "name": "QUERY",
+              "description": "Location adjacent to a query operation.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "MUTATION",
+              "description": "Location adjacent to a mutation operation.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "SUBSCRIPTION",
+              "description": "Location adjacent to a subscription operation.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "FIELD",
+              "description": "Location adjacent to a field.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "FRAGMENT_DEFINITION",
+              "description": "Location adjacent to a fragment definition.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "FRAGMENT_SPREAD",
+              "description": "Location adjacent to a fragment spread.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "INLINE_FRAGMENT",
+              "description": "Location adjacent to an inline fragment.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "VARIABLE_DEFINITION",
+              "description": "Location adjacent to a variable definition.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "SCHEMA",
+              "description": "Location adjacent to a schema definition.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "SCALAR",
+              "description": "Location adjacent to a scalar definition.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "OBJECT",
+              "description": "Location adjacent to an object type definition.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "FIELD_DEFINITION",
+              "description": "Location adjacent to a field definition.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "ARGUMENT_DEFINITION",
+              "description": "Location adjacent to an argument definition.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "INTERFACE",
+              "description": "Location adjacent to an interface definition.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "UNION",
+              "description": "Location adjacent to a union definition.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "ENUM",
+              "description": "Location adjacent to an enum definition.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "ENUM_VALUE",
+              "description": "Location adjacent to an enum value definition.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "INPUT_OBJECT",
+              "description": "Location adjacent to an input object type definition.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "INPUT_FIELD_DEFINITION",
+              "description": "Location adjacent to an input object field definition.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "possibleTypes": null
+        }
+      ],
+      "directives": [
+        {
+          "name": "include",
+          "description": "Directs the executor to include this field or fragment only when the `if` argument is true.",
+          "locations": ["FIELD", "FRAGMENT_SPREAD", "INLINE_FRAGMENT"],
+          "args": [
+            {
+              "name": "if",
+              "description": "Included when true.",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }
+          ]
+        },
+        {
+          "name": "skip",
+          "description": "Directs the executor to skip this field or fragment when the `if` argument is true.",
+          "locations": ["FIELD", "FRAGMENT_SPREAD", "INLINE_FRAGMENT"],
+          "args": [
+            {
+              "name": "if",
+              "description": "Skipped when true.",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }
+          ]
+        },
+        {
+          "name": "deprecated",
+          "description": "Marks an element of a GraphQL schema as no longer supported.",
+          "locations": [
+            "FIELD_DEFINITION",
+            "ARGUMENT_DEFINITION",
+            "INPUT_FIELD_DEFINITION",
+            "ENUM_VALUE"
+          ],
+          "args": [
+            {
+              "name": "reason",
+              "description": "Explains why this element was deprecated, usually also including a suggestion for how to access supported similar data. Formatted using the Markdown syntax, as specified by [CommonMark](https://commonmark.org/).",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": "\"No longer supported\""
+            }
+          ]
+        },
+        {
+          "name": "specifiedBy",
+          "description": "Exposes a URL that specifies the behavior of this scalar.",
+          "locations": ["SCALAR"],
+          "args": [
+            {
+              "name": "url",
+              "description": "The URL that specifies the behavior of this scalar.",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }
+          ]
+        }
+      ]
+    }
   }
-]
+}

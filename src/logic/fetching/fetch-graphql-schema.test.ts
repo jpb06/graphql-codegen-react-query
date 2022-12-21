@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import types from './../../tests-related/specs/types.json';
+import schema from './../../tests-related/specs/types.json';
 import { fetchGraphqlSchema } from './fetch-graphql-schema';
 
 jest.mock('axios');
@@ -8,17 +8,11 @@ jest.mock('axios');
 describe('fetchGraphqlSchema function', () => {
   it('should return schema types', async () => {
     jest.mocked(axios.post).mockResolvedValueOnce({
-      data: {
-        data: {
-          __schema: {
-            types,
-          },
-        },
-      },
+      data: schema,
     });
 
     const result = await fetchGraphqlSchema('https://yolo.cool');
 
-    expect(result).toHaveLength(37);
+    expect(result).toHaveLength(39);
   });
 });
