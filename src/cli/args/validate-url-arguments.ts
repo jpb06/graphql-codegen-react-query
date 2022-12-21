@@ -8,7 +8,7 @@ type Argv = { s: string; o: string; f: string };
 
 export const validateArguments = (): GenerateFromUrlArguments => {
   const argv = yargs(hideBin(process.argv))
-    .scriptName('generate-from-url')
+    .scriptName('gqlCodegen')
     .usage(
       chalk.blueBright(
         '$0 -s [schemaUrl] -f [fetcherHookPath] -o [outputPath]',
