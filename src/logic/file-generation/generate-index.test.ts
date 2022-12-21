@@ -31,6 +31,7 @@ export * from './queries/useMeQuery';
 export * from './queries/useGetOrderQuery';
 export * from './queries/useMyOrdersQuery';
 export * from './queries/useMyAddressesQuery';
+export * from './queries/useGqlQuery';
 
 export * from './mutations/useWithScalarResultMutation';
 export * from './mutations/useWithoutArgsMutation';

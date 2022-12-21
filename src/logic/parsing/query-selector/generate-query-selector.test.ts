@@ -65,7 +65,7 @@ describe('generateQuerySelector function', () => {
 
     expect(result).toContain(
       `export type QuerySelectorResult = {
-categories: { idCategory: string; product: { idProduct: string; category: { idCategory: string; product: { idProduct: string; category: { idCategory: string; product: { idProduct: string; category: { idCategory: string; product: { idProduct: string; category: { idCategory: string; product: { category: unknown }; }; }; }; }; }; }; }; }; }
+categories: { idCategory: string; product: { idProduct: string; category: { idCategory: string; product: { idProduct: string; category: { idCategory: string; product: { idProduct: string; category: { idCategory: string; product: { idProduct: string; category: { idCategory: string; product: { category: unknown }; }; }; }; }; }; }; }; }; }[]
 }`,
     );
   });
