@@ -27,15 +27,20 @@ Generating types and react-query hooks from a graphql schema.
 
 ## ⚡ Purpose
 
-Graphql codegen is a great tool; zeus-graphql is a neat lib. But they don't exactly fit what I want 😿. I want something like zeus (being able to dynamically perform selection on result), I want to get clean types from schema, I want clean generated code, I want imports that make sense 😼.
+Graphql codegen is a great tool; zeus-graphql is a neat lib. But they don't exactly fit what I want 😿
 
-So here we go, I just figured I'd do something for giggles.
+- I want to pick what I want as result
+- I want to get clean types from schema
+- I want clean generated code
+- I want imports that make sense
+
+So here we go, I just figured I'd do something for giggles 😼.
 
 ## ⚡ What is generated exactly ?
 
 ![codegen step](./assets/gql-codegen.png)
 
-See the [How does it work](./README.md#-so-how-does-it-work) section for more details.
+See the [How does it work](./README.md#-so-how-does-it-work-) section for more details.
 
 ## ⚡ Get started
 
@@ -85,11 +90,11 @@ export const useFetchData = <TData>(
 };
 ```
 
-#### 🗯️ Why asking me to define a custom fetcher?
+#### 🗯️ But why asking to define a custom fetcher?
 
-You might need to inject config in the fetching logic, like setting an `Authorization` header for example.
+You might need to inject config in the fetching logic, like setting an `Authorization` header for example. It's easier done if we externalize the fetching logic.
 
-### 🔶 CLI - Fetching from a graphql schema url
+### 🔶 Using CLI to get data from a graphql schema url
 
 Generating types from a graphql schema is easy enough using cli. Usage is as follows:
 
@@ -111,7 +116,7 @@ With that in mind, we can add a script to our `package.json`:
 {
   [...],
   "scripts:" {
-    "api-types": "generate-from-url -s http://localhost:3333/graphql -f ./../useFetchData#useFetchData -o ./src/api/specs",
+    "codegen": "generate-from-url -s http://localhost:3333/graphql -f ./../useFetchData#useFetchData -o ./src/api/specs",
     [...]
   }
 }
