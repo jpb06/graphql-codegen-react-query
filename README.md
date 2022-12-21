@@ -31,6 +31,12 @@ Graphql codegen is a great tool; zeus-graphql is a neat lib. But they don't exac
 
 So here we go, I just figured I'd do something for giggles.
 
+## ⚡ What is generated exactly ?
+
+![codegen step](./assets/gql-codegen.png)
+
+See the [How does it work](./README.md#-so-how-does-it-work) section for more details.
+
 ## ⚡ Get started
 
 To install, use either pnpm, yarn or npm:
@@ -221,3 +227,5 @@ I would be nice if I had strong typings for arguments and results 🤔
 It would be awesome if I could still easily tweak react query hooks 🤔
 
 ![dynamic selection](./assets/query-args-options.gif)
+
+## ⚡ So how does it work ?
