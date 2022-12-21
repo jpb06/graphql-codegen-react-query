@@ -1,7 +1,7 @@
 import { QueryKey, useQuery, UseQueryResult } from '@tanstack/react-query';
 
 //fetcher-hook-import
-import { selectorToDocument } from '../logic/selector-to-document';
+import { dynamicQuerySelectorToDocument } from '../logic/dynamic-query-selector-to-document';
 import { DeepReplace } from '../types/deep-replace.type';
 import { QuerySelector } from '../types/query-selector';
 import { QuerySelectorResult } from '../types/query-selector-result';
@@ -13,7 +13,7 @@ export const useGqlQuery = <Selector extends QuerySelector>(
   selector: Selector,
   variables?: unknown,
 ): UseQueryResult<GqlQueryResultType<Selector>> => {
-  const document = selectorToDocument(selector, variables);
+  const document = dynamicQuerySelectorToDocument(selector, variables);
 
   return useQuery<
     GqlQueryResultType<Selector>,

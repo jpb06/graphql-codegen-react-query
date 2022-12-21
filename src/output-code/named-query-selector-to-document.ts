@@ -2,7 +2,7 @@ import { queryReplacer } from './query-replacer';
 
 const variablesRegex = /"(.*)"(:?)( {|)|( true,?)(\n)/g;
 
-export const querySelectorToDocument = (
+export const namedQuerySelectorToDocument = (
   queryName: string,
   selector: unknown,
   variables?: unknown,

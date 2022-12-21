@@ -15,7 +15,7 @@ const getAllCaptureGroups = (target: string, regex: RegExp): Array<string> => {
   return captured;
 };
 
-export const selectorToDocument = <TVariables = unknown>(
+export const dynamicQuerySelectorToDocument = <TVariables = unknown>(
   selector: QuerySelector,
   variables?: TVariables,
 ): string => {

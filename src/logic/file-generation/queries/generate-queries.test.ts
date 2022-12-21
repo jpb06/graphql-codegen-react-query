@@ -96,7 +96,7 @@ describe('generateQueries function', () => {
       `selector: Selector, variables: ProductsByPageQueryArgs,`,
     );
     expect(content).toContain(
-      `const document = querySelectorToDocument('productsByPage', selector, variables);`,
+      `const document = namedQuerySelectorToDocument('productsByPage', selector, variables);`,
     );
     expect(content).toContain(
       `queryFn: useFetchData<ProductsByPageResult<Selector>>(document).bind(null, variables),`,
@@ -112,7 +112,7 @@ describe('generateQueries function', () => {
 
     expect(content).toContain(`selector: Selector, \n`);
     expect(content).toContain(
-      `const document = querySelectorToDocument('products', selector);`,
+      `const document = namedQuerySelectorToDocument('products', selector);`,
     );
     expect(content).toContain(
       `queryFn: useFetchData<ProductsResult<Selector>>(document),`,

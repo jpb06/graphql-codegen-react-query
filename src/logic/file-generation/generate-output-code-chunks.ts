@@ -8,12 +8,12 @@ export const generateOutputCodeChunks = async (
     `${outputPath}/logic/stringify-object.ts`,
   );
   await copyFile(
-    './src/output-code/selector-to-document.ts',
-    `${outputPath}/logic/selector-to-document.ts`,
+    './src/output-code/dynamic-query-selector-to-document.ts',
+    `${outputPath}/logic/dynamic-query-selector-to-document.ts`,
   );
   await copyFile(
-    './src/output-code/query-selector-to-document.ts',
-    `${outputPath}/logic/query-selector-to-document.ts`,
+    './src/output-code/named-query-selector-to-document.ts',
+    `${outputPath}/logic/named-query-selector-to-document.ts`,
   );
 
   await copyFile(

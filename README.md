@@ -40,8 +40,6 @@ So here we go, I just figured I'd do something for giggles 😼.
 
 ![codegen step](./assets/gql-codegen.png)
 
-See the [How does it work](./README.md#-so-how-does-it-work-) section for more details.
-
 ## ⚡ Get started
 
 To install, use either pnpm, yarn or npm:
@@ -59,6 +57,8 @@ First of, we need to define a hook that will have the following signature:
 ```typescript
 function useFetcher<TData>(query: string) => (variables?: unknown) => Promise<TData>
 ```
+
+> 🚨 Make sure you make a named export
 
 Here is an implementation example relying on the `fetch` api:
 
@@ -90,11 +90,13 @@ export const useFetchData = <TData>(
 };
 ```
 
-#### 🗯️ But why asking to define a custom fetcher?
-
-You might need to inject config in the fetching logic, like setting an `Authorization` header for example. It's easier done if we externalize the fetching logic.
+> 🗯️ But why asking to define a custom fetcher?
+>
+> You might need to inject config in the fetching logic, like setting an `Authorization` header for example. It's easier done if we externalize > the fetching logic.
 
 ### 🔶 Using CLI to get data from a graphql schema url
+
+> 🚨 Make sure introspection is enabled on the backend you target
 
 Generating types from a graphql schema is easy enough using cli. Usage is as follows:
 
@@ -232,5 +234,3 @@ I would be nice if I had strong typings for arguments and results 🤔
 It would be awesome if I could still easily tweak react query hooks 🤔
 
 ![dynamic selection](./assets/query-args-options.gif)
-
-## ⚡ So how does it work ?

@@ -11,7 +11,7 @@ export const generateIndexFile = async (
   const content = `export * from './types/api-types';
 \n${queryObject.fields
     ?.map((el) => `export * from './queries/use${capitalize(el.name)}Query';`)
-    .join('\n')}
+    .join('\n')}\nexport * from './queries/useGqlQuery';
 \n${mutationObject.fields
     ?.map(
       (el) => `export * from './mutations/use${capitalize(el.name)}Mutation';`,

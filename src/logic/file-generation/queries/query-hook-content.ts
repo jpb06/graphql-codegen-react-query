@@ -1,7 +1,7 @@
 export const queryHookContent = `import { useQuery, UseQueryResult, UseQueryOptions } from '@tanstack/react-query';
 
 #fetcher-hook-import#
-import { querySelectorToDocument } from '../logic/query-selector-to-document';
+import { namedQuerySelectorToDocument } from '../logic/named-query-selector-to-document';
 import { DeepReplace } from '../types/deep-replace.type';
 import { QuerySelector } from '../types/query-selector';
 import { QuerySelectorResult } from '../types/query-selector-result';
@@ -22,7 +22,7 @@ export const use#type#Query = <Selector extends Pick<QuerySelector, '#name#'>['#
   'queryFn' | 'queryKey'
 >
 ): UseQueryResult<#type#Result<Selector>> => {
-  const document = querySelectorToDocument('#name#', selector#variables#);
+  const document = namedQuerySelectorToDocument('#name#', selector#variables#);
 
   return useQuery<#type#Result<Selector>, unknown, #type#Result<Selector>>({
     queryKey: #name#QueryKey,
