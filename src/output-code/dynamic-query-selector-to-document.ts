@@ -1,8 +1,8 @@
 export const dynamicQuerySelectorToDocumentContent = `import { QuerySelector } from './../types/query-selector';
 import { queryReplacer } from './query-replacer';
 
-const variablesRegex = /"(.*)"(:?)( {|)|( true,?)(\n)/g;
-const queriesNameRegex = /^ {2}(\b.*) {$/gm;
+const variablesRegex = /"(.*)"(:?)( {|)|( true,?)(\\n)/g;
+const queriesNameRegex = /^ {2}(\\b.*) {$/gm;
 
 const getAllCaptureGroups = (target: string, regex: RegExp): Array<string> => {
   const matches = target.matchAll(regex);

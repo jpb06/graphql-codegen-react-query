@@ -1,4 +1,4 @@
-import { copyFile } from 'fs-extra';
+import { writeFile } from 'fs-extra';
 
 import { generateOutputCodeChunks } from './generate-output-code-chunks';
 
@@ -10,6 +10,6 @@ describe('generateOutputCodeChunks function', () => {
   it('should write four files', async () => {
     await generateOutputCodeChunks(outputPath);
 
-    expect(copyFile).toHaveBeenCalledTimes(4);
+    expect(writeFile).toHaveBeenCalledTimes(4);
   });
 });
