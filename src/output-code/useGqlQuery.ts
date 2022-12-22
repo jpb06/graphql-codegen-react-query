@@ -1,4 +1,4 @@
-import { QueryKey, useQuery, UseQueryResult } from '@tanstack/react-query';
+export const useGqlQueryContent = `import { QueryKey, useQuery, UseQueryResult } from '@tanstack/react-query';
 
 //fetcher-hook-import
 import { dynamicQuerySelectorToDocument } from '../logic/dynamic-query-selector-to-document';
@@ -27,3 +27,4 @@ export const useGqlQuery = <Selector extends QuerySelector>(
     ),
   });
 };
+`;

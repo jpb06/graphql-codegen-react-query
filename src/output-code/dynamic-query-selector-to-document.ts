@@ -1,4 +1,4 @@
-import { QuerySelector } from './../types/query-selector';
+export const dynamicQuerySelectorToDocumentContent = `import { QuerySelector } from './../types/query-selector';
 import { queryReplacer } from './query-replacer';
 
 const variablesRegex = /"(.*)"(:?)( {|)|( true,?)(\n)/g;
@@ -33,5 +33,6 @@ export const dynamicQuerySelectorToDocument = <TVariables = unknown>(
     }
   });
 
-  return `query ${queryContent}`;
+  return \`query \${queryContent}\`;
 };
+`;

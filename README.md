@@ -101,15 +101,17 @@ export const useFetchData = <TData>(
 Generating types from a graphql schema is easy enough using cli. Usage is as follows:
 
 ```text
-generate-from-url -s [schemaUrl] -f [fetcherHookPath] -o [outputPath]
+gqlCodegen -s [schemaUrl] -f [fetcherHookPath] -o [outputPath]
 
 Options:
+      --help     Show help                                             [boolean]
+      --version  Show version number                                   [boolean]
   -s             Graphql schema url                                   [required]
   -o             Generated code output path                           [required]
   -f             Fetcher hook path and name (<path>#<hookName>)       [required]
 
 Examples:
-  generate-from-url -s http://localhost:3333/graphql -o ./src/api -f ./useFetcher#useFetcher
+  gqlCodegen -s http://localhost:3333/graphql -o ./src/api -f ./useFetcher#useFetcher
 ```
 
 With that in mind, we can add a script to our `package.json`:
@@ -118,7 +120,7 @@ With that in mind, we can add a script to our `package.json`:
 {
   [...],
   "scripts:" {
-    "codegen": "generate-from-url -s http://localhost:3333/graphql -f ./../useFetchData#useFetchData -o ./src/api/specs",
+    "codegen": "gqlCodegen -s http://localhost:3333/graphql -f ./../useFetchData#useFetchData -o ./src/api/specs",
     [...]
   }
 }

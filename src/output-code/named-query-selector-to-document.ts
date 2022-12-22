@@ -1,4 +1,4 @@
-import { queryReplacer } from './query-replacer';
+export const namedQuerySelectorToDcumentContent = `import { queryReplacer } from './query-replacer';
 
 const variablesRegex = /"(.*)"(:?)( {|)|( true,?)(\n)/g;
 
@@ -14,9 +14,10 @@ export const namedQuerySelectorToDocument = (
 
   const replaceArgs = queryReplacer[queryName](variables);
 
-  const rawQuery = `query {\n ${
+  const rawQuery = \`query {\n \${
     replaceArgs ? replaceArgs[1].slice(0, -1) : queryName
-  } ${queryContent} \n}`;
+  } \${queryContent} \n}\`;
 
   return rawQuery;
 };
+`;

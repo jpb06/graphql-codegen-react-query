@@ -27,8 +27,7 @@ module.exports = {
     "!<rootDir>/src/tests-related/**",
     "!<rootDir>/src/logic/graphql/**",
     "!<rootDir>/src/specs/**",
-    "!<rootDir>/src/api/**",
-    "!<rootDir>/src/output-code/**"
+    "!<rootDir>/src/api/**"
   ],
   modulePathIgnorePatterns: ['<rootDir>/dist']
 };
