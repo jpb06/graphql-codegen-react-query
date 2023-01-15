@@ -11,7 +11,7 @@ import { generateFromUrl } from '../workflows/generate-from-url';
     const args = await validateArguments();
     const generationResult = await generateFromUrl(args);
 
-    displaySuccess('', generationResult);
+    displaySuccess(args.outputPath, generationResult);
     process.exit(0);
   } catch (err) {
     displayException(err);
