@@ -20,7 +20,11 @@ export const parseUnderlyingType = (
       isFunction,
       isNull,
     );
-  } else if (type.kind === 'OBJECT' || type.kind === 'INPUT_OBJECT') {
+  } else if (
+    type.kind === 'OBJECT' ||
+    type.kind === 'INPUT_OBJECT' ||
+    type.kind === 'ENUM'
+  ) {
     return {
       output: formatField(fieldName, type.name, isFunction, isNull),
       type: type.name as string,
@@ -34,11 +38,6 @@ export const parseUnderlyingType = (
         isNull,
       ),
       type: translateGraphqlTypeToTypescript(type.name),
-    };
-  } else if (type.kind === 'ENUM') {
-    return {
-      output: formatField(fieldName, type.name, isFunction, isNull),
-      type: type.name as string,
     };
   }
 

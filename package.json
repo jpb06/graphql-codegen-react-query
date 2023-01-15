@@ -57,7 +57,7 @@
     "lint": "eslint ./src",
     "type-check": "tsc -p tsconfig.prod.json --noEmit",
     "precli": "pnpm build",
-    "cli": "rm -rf src/api && node ./dist/cli/generate-from-url.cli.js",
+    "cli": "rm -rf src/api && node ./dist/cli/generate-from-url.cli.js -c ./src/temp/react-query.codeden.yml",
     "sync-icons": "pnpm generateReadmeIcons -h 50"
   }
 }
