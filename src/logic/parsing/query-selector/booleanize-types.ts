@@ -1,4 +1,4 @@
-import { displayWarning } from '../../cli/console/console.messages';
+import { displayWarning } from '../../../cli/console/console.messages';
 
 const objectPropertiesRegex = (
   name: string,

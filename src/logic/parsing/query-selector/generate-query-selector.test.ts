@@ -1,3 +1,5 @@
+import { generateQuerySelector } from './generate-query-selector';
+import { displayWarning } from '../../../cli/console/console.messages';
 import { graphqlQueryObjectMockedData } from '../../../tests-related/mocked-data/graphql-schema';
 import {
   circularTypesMockedData,
@@ -5,10 +7,8 @@ import {
 } from '../../../tests-related/mocked-data/graphql-schema/graphql-query-object-with-circular-dep.mock-data';
 import { generatedTypesMockedData } from '../../../tests-related/mocked-data/types/generated-types-mock-data';
 import { rootObjectsNameMockData } from '../../../tests-related/mocked-data/types/root-objects-name.mock-data';
-import { displayWarning } from '../../cli/console/console.messages';
-import { generateQuerySelector } from './generate-query-selector';
 
-jest.mock('../../cli/console/console.messages');
+jest.mock('../../../cli/console/console.messages');
 
 describe('generateQuerySelector function', () => {
   it('should generate selectors for objects containing scalars', () => {
