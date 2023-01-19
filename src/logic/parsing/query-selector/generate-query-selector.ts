@@ -1,5 +1,5 @@
-import { GqlType } from '../../../types/introspection-query-response.type';
 import { booleanizeTypes } from './booleanize-types';
+import { GqlType } from '../../../types/introspection-query-response.type';
 
 export const generateQuerySelector = (
   queryObject: GqlType,

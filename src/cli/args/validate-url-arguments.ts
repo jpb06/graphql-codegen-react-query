@@ -1,45 +1,51 @@
 import chalk from 'chalk';
+import { pathExists, readFile } from 'fs-extra';
+import yaml from 'yaml';
 import { hideBin } from 'yargs/helpers';
 import yargs from 'yargs/yargs';
 
-import { GenerateFromUrlArguments } from '../../workflows/generate-from-url';
+import {
+  validateFetcherOption,
+  validateInfiniteQueries,
+  validateOutputPath,
+  validateSchemaUrl,
+} from './options-validation';
+import { ConfigFileOptions } from './types/args.type';
 
-type Argv = { s: string; o: string; f: string };
+type CliArguments = { c: string };
 
-export const validateArguments = (): GenerateFromUrlArguments => {
+export const validateArguments = async (): Promise<ConfigFileOptions> => {
+  const defaultConfigFilePath = './react-query.codeden.yml';
+
   const argv = yargs(hideBin(process.argv))
     .scriptName('gqlCodegen')
-    .usage(
-      chalk.blueBright(
-        '$0 -s [schemaUrl] -f [fetcherHookPath] -o [outputPath]',
-      ),
-    )
+    .usage(chalk.blueBright('$0 -c [configFilePath]'))
     .epilogue('Generates types and react-query hooks from a graphql schema')
-    .example(
-      '$0 -s http://localhost:3333/graphql -o ./src/api -f ./useFetcher#useFetcher',
-      '',
-    )
-    .describe('s', chalk.cyanBright('Graphql schema url'))
-    .describe('o', chalk.cyanBright('Generated code output path'))
-    .describe(
-      'f',
-      chalk.cyanBright('Fetcher hook path and name (<path>#<hookName>)'),
-    )
-    .check((args) => {
-      const urlRegex = /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/;
-      if (!urlRegex.test(args.s as string)) {
-        throw new Error(
-          chalk.bold.redBright('Errors:\n-s\t\tExpecting an url\n'),
-        );
-      }
+    .example('$0 -c ./libs/graphql/react-query.codeden.yml', '')
+    .describe('c', chalk.cyanBright('Codegen config file path'))
+    .default('c', defaultConfigFilePath)
+    .demandOption(['c']).argv as CliArguments;
 
-      return true;
-    })
-    .demandOption(['s', 'o', 'f']).argv as Argv;
+  const configFileExists = await pathExists(argv.c);
+  if (!configFileExists) {
+    throw new Error(
+      chalk.bold.redBright(
+        `Errors:\n-c\t\tConfig file ${argv.c} doesn't exist\n`,
+      ),
+    );
+  }
+
+  const configData = await readFile(argv.c, 'UTF8');
+  const config = yaml.parse(configData) as Partial<ConfigFileOptions>;
+  const fetcher = await validateFetcherOption(config);
+  const outputPath = validateOutputPath(config);
+  const schemaUrl = validateSchemaUrl(config);
+  const infiniteQueries = validateInfiniteQueries(config);
 
   return {
-    schemaUrl: argv.s,
-    outputPath: argv.o,
-    fetcherPath: argv.f,
+    fetcher,
+    outputPath,
+    schemaUrl,
+    infiniteQueries,
   };
 };

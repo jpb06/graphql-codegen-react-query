@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-import { introspectionQuery } from '../graphql/introspection.gql';
+import { introspectionQuery } from './graphql/introspection.gql';
 import {
   GqlType,
   IntrospectQuery,
-} from './../../types/introspection-query-response.type';
+} from '../../types/introspection-query-response.type';
 
 export const fetchGraphqlSchema = async (
   schemaUrl: string,

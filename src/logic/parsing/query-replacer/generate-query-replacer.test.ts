@@ -1,6 +1,6 @@
+import { generateQueryReplacer } from './generate-query-replacer';
 import { graphqlQueryObjectMockedData } from '../../../tests-related/mocked-data/graphql-schema';
 import { GqlType } from '../../../types/introspection-query-response.type';
-import { generateQueryReplacer } from './generate-query-replacer';
 
 describe('generateQueryReplacer function', () => {
   it('should import nothing from api types if there is no queries with args', () => {
@@ -33,19 +33,19 @@ describe('generateQueryReplacer function', () => {
     const result = generateQueryReplacer(graphqlQueryObjectMockedData);
 
     expect(result).toContain(
-      `productsByPage: ({pagination, filters, sort}: ProductsByPageQueryArgs) => [new RegExp('^ {2}productsByPage {$', 'gm'), \`  productsByPage(pagination: \${stringify(pagination)}, filters: \${stringify(filters)}, sort: \${stringify(sort)}) {\`]`,
+      `productsByPage: ({pagination, filters, sort}: ProductsByPageQueryArgs) => [new RegExp('^ {2}productsByPage {$', 'gm'), \`  productsByPage(pagination: \${stringify(pagination, "GqlPaginationArgs")}, filters: \${stringify(filters, "GqlPaginatedProductsFiltersInput")}, sort: \${stringify(sort, "GqlPaginatedProductsSortingInput")}) {\`],`,
     );
     expect(result).toContain(
-      `productsWithIds: ({ids}: ProductsWithIdsQueryArgs) => [new RegExp('^ {2}productsWithIds {$', 'gm'), \`  productsWithIds(ids: \${stringify(ids)}) {\`]`,
+      "productsWithIds: ({ids}: ProductsWithIdsQueryArgs) => [new RegExp('^ {2}productsWithIds {$', 'gm'), `  productsWithIds(ids: ${stringify(ids, \"number\")}) {`],",
     );
     expect(result).toContain(
-      `product: ({id}: ProductQueryArgs) => [new RegExp('^ {2}product {$', 'gm'), \`  product(id: \${stringify(id)}) {\`]`,
+      `product: ({id}: ProductQueryArgs) => [new RegExp('^ {2}product {$', 'gm'), \`  product(id: \${stringify(id, "number")}) {\`]`,
     );
     expect(result).toContain(
-      `category: ({id}: CategoryQueryArgs) => [new RegExp('^ {2}category {$', 'gm'), \`  category(id: \${stringify(id)}) {\`]`,
+      `category: ({id}: CategoryQueryArgs) => [new RegExp('^ {2}category {$', 'gm'), \`  category(id: \${stringify(id, "number")}) {\`]`,
     );
     expect(result).toContain(
-      `getOrder: ({id}: GetOrderQueryArgs) => [new RegExp('^ {2}getOrder {$', 'gm'), \`  getOrder(id: \${stringify(id)}) {\`],`,
+      `getOrder: ({id}: GetOrderQueryArgs) => [new RegExp('^ {2}getOrder {$', 'gm'), \`  getOrder(id: \${stringify(id, "number")}) {\`],`,
     );
   });
 });
