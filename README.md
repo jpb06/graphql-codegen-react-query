@@ -29,12 +29,19 @@ Generating types and react-query hooks from a graphql schema.
 
 Graphql codegen is a great tool; zeus-graphql is a neat lib. But they don't exactly fit what I want 😿
 
-- I want to pick what I want as result
-- I want to get clean types from schema
-- I want clean generated code
-- I want imports that make sense
+> ### 🤔 I want to get clean typescript artifacts from my graphql schema
+>
+>### 🤔 I want type enforcing for args, params and results while using `useQuery` and `useMutation` hooks
+>
+>### 🤔 I want to easily import what I need from generated code
+>
+>### 🤔 When using a query, I want to pick what I want as result when I only need a subset of the query result
+>
+>### 🤔 But I also want to be able to easily pick everything if that's what I need
+>
+>### 🤔 I want to define which queries should be translated into infinite queries
 
-So here we go, I just figured I'd do something for giggles 😼.
+So here we go, I just figured I'd do something for giggles 🤷.
 
 ## ⚡ What is generated exactly ?
 
@@ -98,20 +105,31 @@ export const useFetchData = <TData>(
 
 > 🚨 Make sure introspection is enabled on the backend you target
 
-Generating types from a graphql schema is easy enough using cli. Usage is as follows:
+First step is to create a config file:
+
+```yaml
+outputPath: './src/api/codegen'
+schemaUrl: 'http://localhost:3333/graphql'
+fetcher:
+  path: './../useFetchData'
+  functionName: 'useFetchData'
+infiniteQueries:
+  - productsByPage
+```
+
+Then generating types from a graphql schema is easy enough using cli. Usage is as follows:
 
 ```text
-gqlCodegen -s [schemaUrl] -f [fetcherHookPath] -o [outputPath]
+gqlCodegen -c [configFilePath]
 
 Options:
       --help     Show help                                             [boolean]
       --version  Show version number                                   [boolean]
-  -s             Graphql schema url                                   [required]
-  -o             Generated code output path                           [required]
-  -f             Fetcher hook path and name (<path>#<hookName>)       [required]
+  -c             Codegen config file path
+                               [required] [default: "./react-query.codeden.yml"]
 
 Examples:
-  gqlCodegen -s http://localhost:3333/graphql -o ./src/api -f ./useFetcher#useFetcher
+  gqlCodegen -c ./libs/graphql/react-query.codeden.yml
 ```
 
 With that in mind, we can add a script to our `package.json`:
@@ -120,7 +138,7 @@ With that in mind, we can add a script to our `package.json`:
 {
   [...],
   "scripts:" {
-    "codegen": "gqlCodegen -s http://localhost:3333/graphql -f ./../useFetchData#useFetchData -o ./src/api/specs",
+    "codegen": "gqlCodegen -c ./libs/graphql/react-query.codeden.yml",
     [...]
   }
 }
@@ -130,7 +148,8 @@ In this example:
 
 - we will extract information from a graphql schema exposed on `http://localhost:3333`.
 - we will be using a hook named `useFetchData` exported from `./src/api/useFetchData.ts`.
-- Generated code will be saved in `./src/api/specs`.
+- Generated code will be saved in `./src/api/codegen`.
+- We will generate an infinite query for the `productsByPage` query.
 
 ## ⚡ Features
 
@@ -188,7 +207,7 @@ export interface GqlOrder {
 
 ### 🔶 Dynamic selection and result type inference
 
-It would be great if I could use named query hooks (one react hook by graphql query) but still be able to select what I want in the result 🤔
+> It would be great if I could use named query hooks (one react hook by graphql query) but still be able to select what I want in the result 🤔
 
 For example, for a schema like this, I should have a named query hook `useCategoriesQuery` with type inference:
 
@@ -216,6 +235,10 @@ type Query {
 ```
 
 ![dynamic selection](./assets/dynamic-selection.gif)
+
+If i want the entire query result, I can use `useCategoriesQuery` instead of `useCategoriesPartialQuery`:
+
+![dynamic selection](./assets/full-query.gif)
 
 ### 🔶 Dynamic queries
 
