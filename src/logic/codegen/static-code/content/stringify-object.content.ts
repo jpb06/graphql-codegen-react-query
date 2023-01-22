@@ -1,8 +1,6 @@
 export const stringifyObjectContent = `/* eslint-disable @typescript-eslint/no-explicit-any */
 import { typesWithEnumsObject } from './types-with-enums-object';
-
-const isObject = (input: any): boolean =>
-  input !== null && typeof input === 'object';
+import { isObject } from './is-object';
 
 const repeatTabs = (count: number): string =>
   count === 0 ? '' : '  '.repeat(count - 1);

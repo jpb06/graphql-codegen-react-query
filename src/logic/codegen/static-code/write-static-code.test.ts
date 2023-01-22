@@ -10,6 +10,6 @@ describe('writeStaticCode function', () => {
   it('should write four files', async () => {
     await writeStaticCode(outputPath);
 
-    expect(writeFile).toHaveBeenCalledTimes(4);
+    expect(writeFile).toHaveBeenCalledTimes(6);
   });
 });
