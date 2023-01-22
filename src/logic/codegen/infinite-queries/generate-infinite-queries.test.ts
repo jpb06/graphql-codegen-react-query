@@ -61,7 +61,8 @@ describe('generareInfiniteQueries function', () => {
     'queryFn' | 'queryKey'
   >,
 ): UseInfiniteQueryResult<ProductsInfiniteResult<Selector>> => {`);
-    expect(data).toContain(`const document = namedQuerySelectorToDocument(
+    expect(data)
+      .toContain(`const initialDocument = namedQuerySelectorToDocument(
     'products',
     selector,
     variables,
@@ -70,14 +71,23 @@ describe('generareInfiniteQueries function', () => {
       `const queryKey = ['productsInfiniteQuery', ...Object.values(variables)];`,
     );
     expect(data).toContain(`const fetchFn =
-    useFetchData<ProductsInfiniteResult<Selector>>(document);`);
+    useFetchData<ProductsInfiniteResult<Selector>>(initialDocument);`);
     expect(data).toContain(`return useInfiniteQuery<
     ProductsInfiniteResult<Selector>,
     unknown,
     ProductsInfiniteResult<Selector>
   >(
     queryKey,
-    (metaData) => fetchFn({ ...variables, ...(metaData.pageParam ?? {}) }),
+    (metaData) => {
+      const updatedVariables = deepMerge(variables, metaData.pageParam ?? {});
+      const document = namedQuerySelectorToDocument(
+        'productsByPage',
+        selector,
+        updatedVariables
+      );
+
+      return fetchFn(updatedVariables, document);
+    },
     options,
   );`);
 
@@ -123,7 +133,8 @@ describe('generareInfiniteQueries function', () => {
     'queryFn' | 'queryKey'
   >,
 ): UseInfiniteQueryResult<ProductsByPageInfiniteResult<Selector>> => {`);
-    expect(data).toContain(`const document = namedQuerySelectorToDocument(
+    expect(data)
+      .toContain(`const initialDocument = namedQuerySelectorToDocument(
     'productsByPage',
     selector,
     variables,
@@ -132,14 +143,23 @@ describe('generareInfiniteQueries function', () => {
       `const queryKey = ['productsByPageInfiniteQuery', ...Object.values(variables)];`,
     );
     expect(data).toContain(`const fetchFn =
-    useFetchData<ProductsByPageInfiniteResult<Selector>>(document);`);
+    useFetchData<ProductsByPageInfiniteResult<Selector>>(initialDocument);`);
     expect(data).toContain(`return useInfiniteQuery<
     ProductsByPageInfiniteResult<Selector>,
     unknown,
     ProductsByPageInfiniteResult<Selector>
   >(
     queryKey,
-    (metaData) => fetchFn({ ...variables, ...(metaData.pageParam ?? {}) }),
+    (metaData) => {
+      const updatedVariables = deepMerge(variables, metaData.pageParam ?? {});
+      const document = namedQuerySelectorToDocument(
+        'productsByPage',
+        selector,
+        updatedVariables
+      );
+
+      return fetchFn(updatedVariables, document);
+    },
     options,
   );`);
 
