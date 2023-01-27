@@ -1,7 +1,7 @@
 export const infiniteQueryHookContent = `import {
   useInfiniteQuery,
-  UseInfiniteQueryOptions,
   UseInfiniteQueryResult,
+  UseInfiniteQueryOptions,
 } from '@tanstack/react-query';
 
 import { namedQuerySelectorToDocument } from '../logic/named-query-selector-to-document';
