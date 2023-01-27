@@ -62,7 +62,9 @@ yarn add -D graphql-codegen-react-query
 First of, we need to define a hook that will have the following signature:
 
 ```typescript
-function useFetcher<TData>(query: string) => (variables?: unknown) => Promise<TData>
+function useFetcher<TData>(initialQuery: string) => 
+  (variables?: unknown, query?: string) => 
+    Promise<TData>
 ```
 
 > 🚨 Make sure you make a named export
@@ -73,16 +75,21 @@ Here is an implementation example relying on the `fetch` api:
 import { endpointUrl } from './fetch-config';
 
 export const useFetchData = <TData>(
-  query: string
-): ((variables?: unknown) => Promise<TData>) => {
-  return async (variables?: unknown) => {
+  initialQuery: string
+): ((variables?: unknown, query?: string) => Promise<TData>) => {
+  const [auth] = useAtom(authStateAtom);
+
+  return async (variables?: unknown, query?: string) => {
     const result = await fetch(endpointUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        // Additional headers ...
+        // <- injecting custom headers ...
       },
-      body: JSON.stringify({ query, variables }),
+      body: JSON.stringify({
+        query: query ? query : initialQuery,
+        variables,
+      }),
     });
 
     const json = await result.json();
