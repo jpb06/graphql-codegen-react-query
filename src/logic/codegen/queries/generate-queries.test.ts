@@ -73,7 +73,7 @@ describe('generateQueries function', () => {
       `const document = namedQuerySelectorToDocument('productsByPage', selector, variables);`,
     );
     expect(content).toContain(
-      `queryFn: useFetchData<ProductsByPageResult<Selector>>(document).bind(null, variables),`,
+      `queryFn: useFetchData<ProductsByPageResult<Selector>>(document).bind(null, variables, undefined),`,
     );
   });
 

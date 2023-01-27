@@ -41,7 +41,7 @@ export const generateQueries = async (
       queryKeyVariables = ', ...Object.values(variables)';
       variablesArgument = `variables: ${argstypeName},`;
       argsTypeImport = `import { ${argstypeName} } from '../types/api-types';\n`;
-      variablesBinding = `.bind(null, variables)`;
+      variablesBinding = `.bind(null, variables, undefined)`;
     }
 
     const data = queryHookContent
