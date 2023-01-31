@@ -1,7 +1,7 @@
 import { writeFile } from 'fs-extra';
 
 import { infiniteQueryHookContent } from './content/infinite-query-hook-content';
-import { FetcherConfig } from '../../../cli/args/options-validation';
+import { FetcherConfig } from '../../../cli/generate-from-url/args-validation/options-validation';
 import { GqlField } from '../../../types/introspection-query-response.type';
 import { capitalize } from '../../util/capitalize';
 

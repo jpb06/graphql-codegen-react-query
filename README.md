@@ -21,7 +21,7 @@ Generating types and react-query hooks from a graphql schema.
 
 <!-- readme-package-icons start -->
 
-<p align="left"><a href="https://docs.github.com/en/actions" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/GithubActions-Dark.svg" /></a>&nbsp;<a href="https://www.typescriptlang.org/docs/" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/TypeScript.svg" /></a>&nbsp;<a href="https://nodejs.org/en/docs/" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/NodeJS-Dark.svg" /></a>&nbsp;<a href="https://pnpm.io/motivation" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/Pnpm-Dark.svg" /></a>&nbsp;<a href="https://axios-http.com/fr/docs/intro" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/Axios-Dark.svg" /></a>&nbsp;<a href="https://github.com/conventional-changelog" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/CommitLint.Dark.svg" /></a>&nbsp;<a href="https://eslint.org/docs/latest/" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/Eslint-Dark.svg" /></a>&nbsp;<a href="https://jestjs.io/docs/getting-started" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/Jest.svg" /></a>&nbsp;<a href="https://prettier.io/docs/en/index.html" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/Prettier-Dark.svg" /></a>&nbsp;<a href="https://reactjs.org/docs/getting-started.html" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/React-Dark.svg" /></a>&nbsp;<a href="https://tanstack.com/query/v4/docs/overview" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/ReactQuery-Dark.svg" /></a>&nbsp;<a href="https://swc.rs/docs/getting-started" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/Swc-Dark.svg" /></a></p>
+<p align="left"><a href="https://docs.github.com/en/actions" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/GithubActions-Dark.svg" /></a>&nbsp;<a href="https://www.typescriptlang.org/docs/" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/TypeScript.svg" /></a>&nbsp;<a href="https://nodejs.org/en/docs/" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/NodeJS-Dark.svg" /></a>&nbsp;<a href="https://pnpm.io/motivation" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/Pnpm-Dark.svg" /></a>&nbsp;<a href="https://axios-http.com/fr/docs/intro" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/Axios-Dark.svg" /></a>&nbsp;<a href="https://github.com/conventional-changelog" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/CommitLint.Dark.svg" /></a>&nbsp;<a href="https://github.com/motdotla/dotenv#readme" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/Dotenv-Dark.svg" /></a>&nbsp;<a href="https://eslint.org/docs/latest/" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/Eslint-Dark.svg" /></a>&nbsp;<a href="https://jestjs.io/docs/getting-started" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/Jest.svg" /></a>&nbsp;<a href="https://prettier.io/docs/en/index.html" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/Prettier-Dark.svg" /></a>&nbsp;<a href="https://reactjs.org/docs/getting-started.html" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/React-Dark.svg" /></a>&nbsp;<a href="https://tanstack.com/query/v4/docs/overview" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/ReactQuery-Dark.svg" /></a>&nbsp;<a href="https://swc.rs/docs/getting-started" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/Swc-Dark.svg" /></a></p>
 
 <!-- readme-package-icons end -->
 
@@ -49,82 +49,65 @@ So here we go, I just figured I'd do something for giggles 🤷.
 
 ## ⚡ Get started
 
+### 🔶 Install
+
 To install, use either pnpm, yarn or npm:
 
 ```bash
 yarn add -D graphql-codegen-react-query
 ```
 
-## ⚡ Usage
+### 🔶 Setup
 
-### 🔶 Defining a fetcher hook
+Let's setup our codegen tooling by running the `codegen-init` command:
 
-First of, we need to define a hook that will have the following signature:
-
-```typescript
-function useFetcher<TData>(initialQuery: string) => 
-  (variables?: unknown, query?: string) => 
-    Promise<TData>
+```bash
+yarn codegen-init
 ```
 
-> 🚨 Make sure you make a named export
+This command takes three optional parameters:
 
-Here is an implementation example relying on the `fetch` api:
+| Parameter                          | Description                               | Default value                             |
+| ------------------------------------ | ---------------------------------------- | ----------------------------------- |
+| c                  | Where to write the codegen config file              | . (current folder) |
+| o            | Where generated code should be written                 | ./api    |
+| u | Graphql api url. If it doesn't start with `http`, the variable will be treated as an environment variable name                 | <http://localhost:3333/graphql>    |
 
-```typescript
-import { endpointUrl } from './fetch-config';
+So if I need to use custom params, I'd do:
 
-export const useFetchData = <TData>(
-  initialQuery: string
-): ((variables?: unknown, query?: string) => Promise<TData>) => {
-  const [auth] = useAtom(authStateAtom);
-
-  return async (variables?: unknown, query?: string) => {
-    const result = await fetch(endpointUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        // <- injecting custom headers ...
-      },
-      body: JSON.stringify({
-        query: query ? query : initialQuery,
-        variables,
-      }),
-    });
-
-    const json = await result.json();
-
-    if (json.errors) {
-      const { message } = json.errors[0] || {};
-      throw new Error(message || 'Error…');
-    }
-
-    return json.data;
-  };
-};
+```bash
+yarn gqlCodegen-init -c ./libs/graphql/codegen/src -o libs/graphql/artifacts/src/api -u NEXT_PUBLIC_GQL_API_URL
 ```
 
-> 🗯️ But why asking to define a custom fetcher?
+> 🗯️ This command generates two files:
 >
-> You might need to inject config in the fetching logic, like setting an `Authorization` header for example. It's easier done if we externalize > the fetching logic.
+> - The `react-query.codegen.yml` config file.
+> - The fetcher hook. You might need to inject config in the fetching logic, like setting an `Authorization` header for example; that is why the fetching logic is externalized in this hook.
 
-### 🔶 Using CLI to get data from a graphql schema url
+The config file typically looks like this:
+
+```yaml
+# Where generate code should be written
+outputPath: 'libs/graphql/artifacts/src/api/codegen'
+# The environment variable name containing the url to the graphql schema (or directly said url)
+schemaUrl: NEXT_PUBLIC_GQL_API_URL
+# Fetcher hook config
+fetcher:
+  # Path to the fetcher, relative to the generated queries/mutations
+  path: './../../useFetchData'
+  # fetcher hook name (expecting a named export)
+  functionName: 'useFetchData'
+# Queries that should be generated as infinite queries with react-query
+infiniteQueries:
+  - useProductsByPage
+
+```
+
+### 🔶 Codegen
 
 > 🚨 Make sure introspection is enabled on the backend you target
 
-First step is to create a config file:
-
-```yaml
-outputPath: './src/api/codegen'
-schemaUrl: 'http://localhost:3333/graphql'
-fetcher:
-  path: './../useFetchData'
-  functionName: 'useFetchData'
-infiniteQueries:
-  - productsByPage
-```
-
-Then generating types from a graphql schema is easy enough using cli. Usage is as follows:
+Generating types from a graphql schema is easy enough using cli. Usage is as follows:
 
 ```text
 gqlCodegen -c [configFilePath]
@@ -133,10 +116,10 @@ Options:
       --help     Show help                                             [boolean]
       --version  Show version number                                   [boolean]
   -c             Codegen config file path
-                               [required] [default: "./react-query.codeden.yml"]
+                               [required] [default: "./react-query.codegen.yml"]
 
 Examples:
-  gqlCodegen -c ./libs/graphql/react-query.codeden.yml
+  gqlCodegen -c ./libs/graphql/react-query.codegen.yml
 ```
 
 With that in mind, we can add a script to our `package.json`:
@@ -145,18 +128,11 @@ With that in mind, we can add a script to our `package.json`:
 {
   [...],
   "scripts:" {
-    "codegen": "gqlCodegen -c ./libs/graphql/react-query.codeden.yml",
+    "codegen": "gqlCodegen -c ./libs/graphql/react-query.codegen.yml",
     [...]
   }
 }
 ```
-
-In this example:
-
-- we will extract information from a graphql schema exposed on `http://localhost:3333`.
-- we will be using a hook named `useFetchData` exported from `./src/api/useFetchData.ts`.
-- Generated code will be saved in `./src/api/codegen`.
-- We will generate an infinite query for the `productsByPage` query.
 
 ## ⚡ Features
 

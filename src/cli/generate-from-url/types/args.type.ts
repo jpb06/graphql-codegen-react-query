@@ -1,4 +1,4 @@
-import { FetcherConfig } from '../options-validation';
+import { FetcherConfig } from '../args-validation/options-validation';
 
 export interface ConfigFileOptions {
   outputPath: string;

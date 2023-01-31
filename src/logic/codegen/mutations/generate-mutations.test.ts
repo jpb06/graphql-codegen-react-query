@@ -1,7 +1,7 @@
 import { writeFile } from 'fs-extra';
 
 import { generateMutations } from './generate-mutations';
-import { FetcherConfig } from '../../../cli/args/options-validation';
+import { FetcherConfig } from '../../../cli/generate-from-url/args-validation/options-validation';
 import { graphqlMutationObjectMockedData } from '../../../tests-related/mocked-data/graphql-schema/graphql-mutation-object.mock-data';
 import { generatedTypesMockedData } from '../../../tests-related/mocked-data/types/generated-types-mock-data';
 import { GqlField } from '../../../types/introspection-query-response.type';

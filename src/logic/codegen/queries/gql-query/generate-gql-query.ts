@@ -1,6 +1,6 @@
 import { writeFile } from 'fs-extra';
 
-import { FetcherConfig } from '../../../../cli/args/options-validation';
+import { FetcherConfig } from '../../../../cli/generate-from-url/args-validation/options-validation';
 import { useGqlQueryContent } from '../content/useGqlQuery-content';
 
 export const generateGqlQuery = async (

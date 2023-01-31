@@ -4,24 +4,24 @@ import yaml from 'yaml';
 import { hideBin } from 'yargs/helpers';
 import yargs from 'yargs/yargs';
 
+import { ConfigFileOptions } from './../types/args.type';
 import {
   validateFetcherOption,
   validateInfiniteQueries,
   validateOutputPath,
   validateSchemaUrl,
 } from './options-validation';
-import { ConfigFileOptions } from './types/args.type';
 
 type CliArguments = { c: string };
 
 export const validateArguments = async (): Promise<ConfigFileOptions> => {
-  const defaultConfigFilePath = './react-query.codeden.yml';
+  const defaultConfigFilePath = './react-query.codegen.yml';
 
   const argv = yargs(hideBin(process.argv))
     .scriptName('gqlCodegen')
     .usage(chalk.blueBright('$0 -c [configFilePath]'))
     .epilogue('Generates types and react-query hooks from a graphql schema')
-    .example('$0 -c ./libs/graphql/react-query.codeden.yml', '')
+    .example('$0 -c ./libs/graphql/react-query.codegen.yml', '')
     .describe('c', chalk.cyanBright('Codegen config file path'))
     .default('c', defaultConfigFilePath)
     .demandOption(['c']).argv as CliArguments;

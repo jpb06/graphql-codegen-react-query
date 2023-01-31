@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import { validateArguments } from './args/validate-url-arguments';
-import { displayException, displaySuccess } from './console/console.messages';
-import { generateFromUrl } from '../workflows/generate-from-url';
+import { validateArguments } from './args-validation/validate-url-arguments';
+import { generateFromUrl } from '../../workflows/generate-from-url';
+import { displayException, displaySuccess } from '../console/console.messages';
 
 /* istanbul ignore file */
 

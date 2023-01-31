@@ -24,6 +24,7 @@ export const useGqlQuery = <Selector extends QuerySelector>(
     queryFn: #fetcher#<GqlQueryResultType<Selector>>(document).bind(
       null,
       variables,
+      undefined
     ),
   });
 };

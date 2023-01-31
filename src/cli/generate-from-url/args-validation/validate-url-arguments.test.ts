@@ -1,18 +1,18 @@
 import chalk from 'chalk';
 import { pathExists, readFile } from 'fs-extra';
 
-import { configFileWithBadUrlTypeMockData } from '../../tests-related/mocked-data/config-file/config-file-with-bad-url-type.mock-data';
-import { configFileWithInvalidUrlMockData } from '../../tests-related/mocked-data/config-file/config-file-with-invalid-url.mock-data';
-import { configFileWithoutFetcherFunctionNameMockData } from '../../tests-related/mocked-data/config-file/config-file-without-fetcher-function-name.mock-data';
-import { configFileWithoutFetcherPathMockData } from '../../tests-related/mocked-data/config-file/config-file-without-fetcher-path.mock-data';
-import { configFileWithoutFetcherMockData } from '../../tests-related/mocked-data/config-file/config-file-without-fetcher.mock-data';
-import { configFileMockData } from '../../tests-related/mocked-data/config-file/config-file.mock-data';
-import { runCommand } from '../../tests-related/run-command';
+import { configFileWithBadUrlTypeMockData } from '../../../tests-related/mocked-data/config-file/config-file-with-bad-url-type.mock-data';
+import { configFileWithoutFetcherFunctionNameMockData } from '../../../tests-related/mocked-data/config-file/config-file-without-fetcher-function-name.mock-data';
+import { configFileWithoutFetcherPathMockData } from '../../../tests-related/mocked-data/config-file/config-file-without-fetcher-path.mock-data';
+import { configFileWithoutFetcherMockData } from '../../../tests-related/mocked-data/config-file/config-file-without-fetcher.mock-data';
+import { configFileMockData } from '../../../tests-related/mocked-data/config-file/config-file.mock-data';
+import { runCommand } from '../../../tests-related/run-command';
 
 jest.mock('fs-extra');
 
 describe('validateUrlArguments function', () => {
-  const validateArgumentsPath = './../cli/args/validate-url-arguments';
+  const validateArgumentsPath =
+    './../cli/generate-from-url/args-validation/validate-url-arguments';
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -23,7 +23,7 @@ describe('validateUrlArguments function', () => {
 
     await expect(runCommand(validateArgumentsPath)).rejects.toThrow(
       chalk.bold.redBright(
-        `Errors:\n-c\t\tConfig file ./react-query.codeden.yml doesn't exist\n`,
+        `Errors:\n-c\t\tConfig file ./react-query.codegen.yml doesn't exist\n`,
       ),
     );
   });
@@ -67,19 +67,6 @@ describe('validateUrlArguments function', () => {
     );
   });
 
-  it('should display an error when url is invalid', async () => {
-    jest.mocked(pathExists).mockResolvedValueOnce(true as never);
-    jest
-      .mocked(readFile)
-      .mockResolvedValueOnce(configFileWithInvalidUrlMockData as never);
-
-    await expect(runCommand(validateArgumentsPath)).rejects.toThrow(
-      chalk.bold.redBright(
-        `Invalid type for 'schemaUrl' option: expecting an url.\n`,
-      ),
-    );
-  });
-
   it('should display an error when url has invalid type', async () => {
     jest.mocked(pathExists).mockResolvedValueOnce(true as never);
     jest
@@ -88,7 +75,7 @@ describe('validateUrlArguments function', () => {
 
     await expect(runCommand(validateArgumentsPath)).rejects.toThrow(
       chalk.bold.redBright(
-        `Invalid type for 'schemaUrl' option: expecting an url.\n`,
+        `Invalid type for 'schemaUrl' option: expecting a string.\n`,
       ),
     );
   });
@@ -99,7 +86,7 @@ describe('validateUrlArguments function', () => {
 
     await runCommand(validateArgumentsPath);
 
-    expect(pathExists).toHaveBeenCalledWith('./react-query.codeden.yml');
+    expect(pathExists).toHaveBeenCalledWith('./react-query.codegen.yml');
   });
 
   it('should use the provided path for config file', async () => {

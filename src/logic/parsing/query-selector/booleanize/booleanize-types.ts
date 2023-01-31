@@ -1,16 +1,10 @@
-import { displayWarning } from '../../../cli/console/console.messages';
-
-const objectPropertiesRegex = (
-  name: string,
-  output: string,
-): string | undefined =>
-  new RegExp(`${name} ({[\\s\\S]*?})`, 'gm')
-    .exec(output)?.[1]
-    .replace(/\s/g, '')
-    .slice(1, -1);
-
-const propertyTypeRegex = /:.*/g;
-const stripArrayRegex = /Array<(.*)>/;
+import {
+  getMaybeArrayAnnotation,
+  getRawType,
+  getTypeProperties,
+  format,
+} from './logic';
+import { displayWarning } from '../../../../cli/console/console.messages';
 
 export const booleanizeTypes = (
   name: string,
@@ -19,25 +13,22 @@ export const booleanizeTypes = (
   booleanize: boolean,
   depth = 0,
 ): string => {
-  const properties = objectPropertiesRegex(name, types)
-    ?.split(';')
-    .filter((el) => el.length > 0);
-
+  const properties = getTypeProperties(name, types);
   if (!properties) {
     return '';
   }
 
   const output = properties.reduce((acc, property) => {
     const [name, type] = property.split(':');
-    const array = !booleanize && type.startsWith('Array<') ? '[]' : '';
-    const rawType = stripArrayRegex.exec(type)?.[1] ?? type;
+    const maybeArrayAnnotation = getMaybeArrayAnnotation(booleanize, type);
+    const rawType = getRawType(type);
     if (objectsName.includes(rawType)) {
       if (depth < 9) {
         return (
           acc +
           (`${name}${booleanize && !name.endsWith('?') ? '?' : ''}: ` +
             booleanizeTypes(rawType, types, objectsName, booleanize, ++depth) +
-            array +
+            maybeArrayAnnotation +
             ';')
         );
       }
@@ -47,13 +38,7 @@ export const booleanizeTypes = (
       return `${name}: unknown`;
     }
 
-    return (
-      acc +
-      property.replace(
-        propertyTypeRegex,
-        booleanize ? '?: boolean; ' : `: ${type}${array}; `,
-      )
-    );
+    return format(acc, property, booleanize, type, maybeArrayAnnotation);
   }, '');
 
   return `{ ${output} }`;
