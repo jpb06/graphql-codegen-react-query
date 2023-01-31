@@ -17,6 +17,14 @@ export const displaySuccess = (
   );
 };
 
+export const displayCodegenInitialized = (): void => {
+  console.log(
+    `${chalk.cyanBright(
+      'graphql-codegen-react-query',
+    )} ✅ - ${chalk.greenBright('Codegen initialized!')}`,
+  );
+};
+
 export const displayError = (message: string): void => {
   console.error(
     `${chalk.cyanBright('graphql-codegen-react-query')} ❌ - ${chalk.redBright(

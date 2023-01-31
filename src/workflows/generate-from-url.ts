@@ -1,6 +1,6 @@
 import { ensureDir, writeFile } from 'fs-extra';
 
-import { ConfigFileOptions } from '../cli/args/types/args.type';
+import { ConfigFileOptions } from '../cli/generate-from-url/types/args.type';
 import { generateEntryPoint } from '../logic/codegen/entry-point/generate-entry-point';
 import { generareInfiniteQueries } from '../logic/codegen/infinite-queries/generate-infinite-queries';
 import { generateMutations } from '../logic/codegen/mutations/generate-mutations';

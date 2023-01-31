@@ -1,7 +1,7 @@
 import { writeFile } from 'fs-extra';
 
 import { generareInfiniteQueries } from './generate-infinite-queries';
-import { FetcherConfig } from '../../../cli/args/options-validation';
+import { FetcherConfig } from '../../../cli/generate-from-url/args-validation/options-validation';
 import { graphqlQueryObjectMockedData } from '../../../tests-related/mocked-data/graphql-schema';
 
 jest.mock('fs-extra');

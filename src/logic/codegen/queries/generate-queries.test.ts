@@ -1,7 +1,7 @@
 import { writeFile } from 'fs-extra';
 
 import { generateQueries } from './generate-queries';
-import { FetcherConfig } from '../../../cli/args/options-validation';
+import { FetcherConfig } from '../../../cli/generate-from-url/args-validation/options-validation';
 import { querySelectorResultMockData } from '../../../tests-related/mocked-data/generated-code/query-selector-result.mock-data';
 import { querySelectorMockData } from '../../../tests-related/mocked-data/generated-code/query-selector.mock-data';
 import { graphqlQueryObjectMockedData } from '../../../tests-related/mocked-data/graphql-schema';

@@ -2,7 +2,7 @@ import { writeFile } from 'fs-extra';
 
 import { queryHookContent } from './content/query-hook-content';
 import { generateGqlQuery } from './gql-query/generate-gql-query';
-import { FetcherConfig } from '../../../cli/args/options-validation';
+import { FetcherConfig } from '../../../cli/generate-from-url/args-validation/options-validation';
 import { GqlField } from '../../../types/introspection-query-response.type';
 import { capitalize } from '../../util/capitalize';
 import { SelectorsGenerationResult } from '../selectors/generate-selectors';

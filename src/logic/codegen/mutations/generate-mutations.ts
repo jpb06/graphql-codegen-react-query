@@ -3,7 +3,7 @@ import { writeFile } from 'fs-extra';
 import { mutationHookContent } from './content/mutation-hook-content';
 import { generateDocument } from './document/generate-document';
 import { getMutationResultTypes } from './result-type/get-mutation-result-types';
-import { FetcherConfig } from '../../../cli/args/options-validation';
+import { FetcherConfig } from '../../../cli/generate-from-url/args-validation/options-validation';
 import { GqlField } from '../../../types/introspection-query-response.type';
 import { capitalize } from '../../util/capitalize';
 

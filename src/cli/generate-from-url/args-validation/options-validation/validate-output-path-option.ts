@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 
-import { ConfigFileOptions } from '../types/args.type';
+import { ConfigFileOptions } from '../../types/args.type';
 
 export const validateOutputPath = (
   config: Partial<ConfigFileOptions>,
