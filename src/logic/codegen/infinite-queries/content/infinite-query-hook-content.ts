@@ -21,7 +21,7 @@ export type #type#InfiniteResult<Selector> = {
   #name#: DeepReplace<Selector, #type#SelectorResult>;
 };
 
-export const use#type#InfiniteQuery = <
+export const use#type#InfinitePartialQuery = <
   Selector extends Pick<QuerySelector, '#name#'>['#name#'],
 >(
   selector: Selector,
@@ -64,4 +64,26 @@ export const use#type#InfiniteQuery = <
     options,
   );
 };
+
+type #type#Selector = {
+  #full-selector-type#
+};
+
+export const use#type#InfiniteQuery = (
+  #variables-argument#
+  options?: Omit<
+    UseInfiniteQueryOptions<
+      #type#InfiniteResult<#type#Selector>,
+      unknown,
+      #type#InfiniteResult<#type#Selector>
+    >,
+    'queryFn' | 'queryKey'
+  >
+): UseInfiniteQueryResult<#type#InfiniteResult<#type#Selector>> =>
+  use#type#InfinitePartialQuery(
+    {
+      #full-selector#
+    }#variables#
+    ,options
+  );
 `;
