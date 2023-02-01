@@ -58,6 +58,7 @@ export const generateFromUrl = async ({
     infiniteQueries,
     fetcher,
     outputPath,
+    selectors,
   );
 
   await ensureDir(`${outputPath}/mutations`);
