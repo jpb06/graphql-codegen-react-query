@@ -40,12 +40,14 @@ jobs:
 
       - name: Bump package version
         id: bumping-version
-        uses: jpb06/bump-package@v2.5.8
+        uses: jpb06/bump-package@v2.5.10
         with:
           major-keywords: BREAKING CHANGE
           minor-keywords: feat,minor
           patch-keywords: fix,chore
           should-default-to-patch: true
+          commit-user: jpb06
+          commit-user-email: jpb.06@outlook.com
 
       - name: Building package
         run: pnpm build
