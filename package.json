@@ -1,7 +1,7 @@
 {
   "name": "graphql-codegen-react-query",
   "description": "Generating types and react-query hooks from a graphql schema",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "main": "index.js",
   "repository": "https://github.com/jpb06/graphql-codegen-react-query.git",
   "author": "jpb06 <jp.bois.06@outlook.fr>",
