@@ -16,8 +16,10 @@ export const generateQuerySelector = (
   const { output, imports } =
     queryObject.fields?.reduce((acc, { name, type }) => {
       let target = '';
+      let maybeArray = '';
       if (type.ofType?.kind === 'LIST') {
         target = type.ofType.ofType?.ofType?.name as string;
+        maybeArray = '[]';
       } else if (type.ofType?.kind === 'OBJECT') {
         target = type.ofType.name as string;
       }
@@ -33,7 +35,7 @@ export const generateQuerySelector = (
 
       return {
         output: `${acc.output}${name}${booleanize ? '?' : ''}: ${queryOutput}${
-          booleanize ? '' : '[]'
+          booleanize ? '' : maybeArray
         }\n`,
         imports: [...acc.imports, ...queryImports],
       };
