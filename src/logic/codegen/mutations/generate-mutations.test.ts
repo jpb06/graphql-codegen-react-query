@@ -111,7 +111,7 @@ token
   withoutArgs: GqlAddress;
 };`);
     expect(content).toContain(
-      `UseMutationOptions<WithoutArgsResult, unknown, never>`,
+      `UseMutationOptions<WithoutArgsResult, unknown, unknown>`,
     );
     expect(content).toContain(`export const useWithoutArgsMutation`);
 

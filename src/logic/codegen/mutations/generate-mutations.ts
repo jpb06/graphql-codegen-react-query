@@ -21,7 +21,9 @@ export const generateMutations = async (
   for (const { type, name, args } of fields) {
     const mutationType = capitalize(name);
     const mutationArgsType =
-      args?.length && args.length > 0 ? `${mutationType}MutationArgs` : 'never';
+      args?.length && args.length > 0
+        ? `${mutationType}MutationArgs`
+        : 'unknown';
 
     const { documentResultFields, resultType } = getMutationResultTypes(
       type,
@@ -36,11 +38,13 @@ export const generateMutations = async (
       )
       .replace(
         '#mutation-types-import#',
-        `import {${
-          mutationArgsType !== 'never' ? ` ${mutationArgsType} ` : ''
-        } ${
-          rootObjectsName.includes(resultType) ? `, ${resultType}` : ''
-        } } from '../types/api-types';`,
+        mutationArgsType === 'unknown' && !rootObjectsName.includes(resultType)
+          ? ''
+          : `import {${
+              mutationArgsType !== 'unknown' ? ` ${mutationArgsType} ` : ''
+            } ${
+              rootObjectsName.includes(resultType) ? `, ${resultType}` : ''
+            } } from '../types/api-types';`,
       )
       .replace('#name#', name)
       .replace(/#mutation-result-type#/g, resultType)
