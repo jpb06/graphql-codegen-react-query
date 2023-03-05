@@ -63,7 +63,13 @@ export const generateFromUrl = async ({
   );
 
   await ensureDir(`${outputPath}/mutations`);
-  await generateMutations(types, mutationObject.fields, fetcher, outputPath);
+  await generateMutations(
+    types,
+    rootObjectsName,
+    mutationObject.fields,
+    fetcher,
+    outputPath,
+  );
 
   await writeStaticCode(outputPath);
 
