@@ -36,6 +36,7 @@ export const generateFromUrl = async ({
     queryObject,
     types,
     rootObjectsName,
+    enums,
     outputPath,
   );
 

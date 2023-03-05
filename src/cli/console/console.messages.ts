@@ -46,6 +46,6 @@ export const displayWarning = (text: string, id?: string): void => {
   console.info(
     `${chalk.cyanBright(
       'graphql-codegen-react-query',
-    )} 🚨 -${optionalId} ${chalk.yellowBright(text)}`,
+    )} 🚨 -${optionalId} ${chalk.hex('#FFA500')(text)}`,
   );
 };
