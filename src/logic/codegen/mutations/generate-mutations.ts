@@ -9,6 +9,7 @@ import { capitalize } from '../../util/capitalize';
 
 export const generateMutations = async (
   types: string,
+  rootObjectsName: Array<string>,
   fields: GqlField[] | null,
   fetcher: FetcherConfig,
   outputPath: string,
@@ -36,8 +37,10 @@ export const generateMutations = async (
       .replace(
         '#mutation-types-import#',
         `import {${
-          mutationArgsType !== 'never' ? ` ${mutationArgsType}, ` : ''
-        } ${resultType} } from '../types/api-types';`,
+          mutationArgsType !== 'never' ? ` ${mutationArgsType} ` : ''
+        } ${
+          rootObjectsName.includes(resultType) ? `, ${resultType}` : ''
+        } } from '../types/api-types';`,
       )
       .replace('#name#', name)
       .replace(/#mutation-result-type#/g, resultType)

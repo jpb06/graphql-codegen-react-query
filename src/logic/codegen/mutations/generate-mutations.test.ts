@@ -4,6 +4,7 @@ import { generateMutations } from './generate-mutations';
 import { FetcherConfig } from '../../../cli/generate-from-url/args-validation/options-validation';
 import { graphqlMutationObjectMockedData } from '../../../tests-related/mocked-data/graphql-schema/graphql-mutation-object.mock-data';
 import { generatedTypesMockedData } from '../../../tests-related/mocked-data/types/generated-types-mock-data';
+import { rootObjectsNameMockData } from '../../../tests-related/mocked-data/types/root-objects-name.mock-data';
 import { GqlField } from '../../../types/introspection-query-response.type';
 
 jest.mock('fs-extra');
@@ -22,6 +23,7 @@ describe('generateMutations function', () => {
   it('should do nothing when there is no fields', async () => {
     await generateMutations(
       generatedTypesMockedData,
+      rootObjectsNameMockData,
       null,
       fetcher,
       outputPath,
@@ -33,6 +35,7 @@ describe('generateMutations function', () => {
   it('should create files in a mutations folder and import the fetcher', async () => {
     await generateMutations(
       generatedTypesMockedData,
+      rootObjectsNameMockData,
       graphqlMutationObjectMockedData.fields,
       fetcher,
       outputPath,
@@ -55,6 +58,7 @@ describe('generateMutations function', () => {
 
     await generateMutations(
       generatedTypesMockedData,
+      rootObjectsNameMockData,
       [mutation],
       fetcher,
       outputPath,
@@ -63,7 +67,7 @@ describe('generateMutations function', () => {
     const [, content] = jest.mocked(writeFile).mock.calls[0];
 
     expect(content).toContain(
-      `import { SignupMutationArgs,  GqlAuthOutput } from '../types/api-types';`,
+      `import { SignupMutationArgs  , GqlAuthOutput } from '../types/api-types';`,
     );
     expect(content).toContain(`export type SignupResult = {
   signup: GqlAuthOutput;
@@ -92,6 +96,7 @@ token
 
     await generateMutations(
       generatedTypesMockedData,
+      rootObjectsNameMockData,
       [mutation],
       fetcher,
       outputPath,
@@ -100,7 +105,7 @@ token
     const [, content] = jest.mocked(writeFile).mock.calls[0];
 
     expect(content).toContain(
-      `import { GqlAddress } from '../types/api-types';`,
+      `import { , GqlAddress } from '../types/api-types';`,
     );
     expect(content).toContain(`export type WithoutArgsResult = {
   withoutArgs: GqlAddress;
