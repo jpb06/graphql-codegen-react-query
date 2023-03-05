@@ -11,13 +11,15 @@ export type SelectorsGenerationResult = {
 export const generateSelectors = async (
   queryObject: GqlType,
   types: string,
-  rootObjectsName: string[],
+  rootObjectsName: Array<string>,
+  enums: Array<string>,
   outputPath: string,
 ): Promise<SelectorsGenerationResult> => {
   const querySelector = generateQuerySelector(
     queryObject,
     types,
     rootObjectsName,
+    enums,
   );
   await writeFile(`${outputPath}/types/query-selector.ts`, querySelector);
 
@@ -25,6 +27,7 @@ export const generateSelectors = async (
     queryObject,
     types,
     rootObjectsName,
+    enums,
     false,
   );
   await writeFile(

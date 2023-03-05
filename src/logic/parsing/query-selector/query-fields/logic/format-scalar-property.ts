@@ -1,6 +1,8 @@
+import { setOptional } from './set-optional';
+
 const propertyTypeRegex = /:.*/g;
 
-export const format = (
+export const formatScalar = (
   acc: string,
   property: string,
   booleanize: boolean,
@@ -10,5 +12,7 @@ export const format = (
   acc +
   property.replace(
     propertyTypeRegex,
-    booleanize ? '?: boolean; ' : `: ${type}${maybeArrayAnnotation}; `,
+    booleanize
+      ? `${setOptional(property.includes('?:'))}: boolean; `
+      : `: ${type}${maybeArrayAnnotation}; `,
   );

@@ -5,6 +5,7 @@ import {
   circularTypesMockedData,
   graphqlQueryObjectWithCircularDependencyMockedData,
 } from '../../../tests-related/mocked-data/graphql-schema/graphql-query-object-with-circular-dep.mock-data';
+import { enumsMockData } from '../../../tests-related/mocked-data/types/enums.mock-data';
 import { generatedTypesMockedData } from '../../../tests-related/mocked-data/types/generated-types-mock-data';
 import { rootObjectsNameMockData } from '../../../tests-related/mocked-data/types/root-objects-name.mock-data';
 
@@ -16,6 +17,7 @@ describe('generateQuerySelector function', () => {
       graphqlQueryObjectMockedData,
       generatedTypesMockedData,
       rootObjectsNameMockData,
+      enumsMockData,
       true,
     );
 
@@ -29,6 +31,7 @@ describe('generateQuerySelector function', () => {
       graphqlQueryObjectMockedData,
       generatedTypesMockedData,
       rootObjectsNameMockData,
+      enumsMockData,
       false,
     );
 
@@ -42,6 +45,7 @@ describe('generateQuerySelector function', () => {
       graphqlQueryObjectMockedData,
       generatedTypesMockedData,
       rootObjectsNameMockData,
+      enumsMockData,
       true,
     );
 
@@ -50,22 +54,20 @@ describe('generateQuerySelector function', () => {
     );
   });
 
-  it('should stop to 9 levels deeps when there is a circular dependencies in result sets', () => {
+  it('should ignore properties already parsed (circular referency)', () => {
     const result = generateQuerySelector(
       graphqlQueryObjectWithCircularDependencyMockedData,
       circularTypesMockedData,
       ['GqlCategory', 'GqlProduct'],
-      false,
+      enumsMockData,
+      true,
     );
 
     expect(displayWarning).toHaveBeenCalledTimes(1);
-    expect(displayWarning).toHaveBeenCalledWith(
-      'Deeply nested type detected. Depth is limited to 9; falling back to type unknown',
-    );
 
     expect(result).toContain(
-      `export type QuerySelectorResult = {
-categories: { idCategory: string; product: { idProduct: string; category: { idCategory: string; product: { idProduct: string; category: { idCategory: string; product: { idProduct: string; category: { idCategory: string; product: { idProduct: string; category: { idCategory: string; product: { category: unknown }; }; }; }; }; }; }; }; }; }[]
+      `export type QuerySelector = {
+categories?: { idCategory?: boolean; product?: { idProduct?: boolean; category?: { idCategory?: boolean;  }; }; }
 }`,
     );
   });

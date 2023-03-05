@@ -13,6 +13,7 @@ jest.mock('chalk', () => ({
   redBright: jest.fn(),
   whiteBright: jest.fn(),
   yellowBright: jest.fn(),
+  hex: jest.fn().mockReturnValue((text: string) => text),
   underline: {
     cyanBright: jest.fn(),
   },
@@ -91,6 +92,8 @@ describe('displayException function', () => {
 describe('displayWarning function', () => {
   const warningMessage = 'oh no!';
 
+  beforeEach(() => jest.clearAllMocks());
+
   beforeAll(() => {
     jest.clearAllMocks();
   });
@@ -113,7 +116,7 @@ describe('displayWarning function', () => {
   it('should display the error message in red', () => {
     displayWarning(warningMessage);
 
-    expect(chalk.yellowBright).toHaveBeenCalledWith(warningMessage);
+    expect(chalk.hex).toHaveBeenCalledWith('#FFA500');
   });
 });
 
