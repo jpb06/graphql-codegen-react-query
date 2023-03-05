@@ -1,5 +1,4 @@
 import { getQueryFields } from './query-fields/get-query-fields';
-import { setOptional } from './query-fields/logic';
 import { GqlType } from '../../../types/introspection-query-response.type';
 
 export const generateQuerySelector = (
