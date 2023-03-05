@@ -82,7 +82,7 @@ export const getQueryFields = (
 
       const member =
         `${propertyName}${
-          booleanize ? setOptional(name.endsWith('?')) : ''
+          booleanize ? setOptional(propertyName.endsWith('?')) : ''
         }: ` +
         deep.queryOutput +
         maybeArrayAnnotation +

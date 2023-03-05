@@ -1,2 +1,2 @@
-export const setOptional = (condition: boolean): string =>
-  condition ? '' : '?';
+export const setOptional = (hasQuestionMark: boolean): string =>
+  hasQuestionMark ? '' : '?';
