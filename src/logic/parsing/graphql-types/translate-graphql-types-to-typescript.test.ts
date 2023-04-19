@@ -7,29 +7,16 @@ import {
 } from '../../../tests-related/mocked-data/graphql-schema';
 
 describe('translateGraphqlTypesToTypescript function', () => {
-  it('should add eslint/tslint ignore at the beginning of the output', () => {
-    const result = translateGraphqlTypesToTypescript([]);
-
-    expect(result).toStrictEqual({
-      types: `/* eslint-disable */\n/* tslint:disable */\n\n\n`,
-      typesObject: {},
-      count: 0,
-      rootObjectsName: [],
-      enums: [],
-    });
-  });
-
   it('should return nothing if all types begin with "__"', () => {
     const result = translateGraphqlTypesToTypescript([
       graphqlMetadataTypeMockedData,
     ]);
 
     expect(result).toStrictEqual({
-      types: '/* eslint-disable */\n/* tslint:disable */\n\n\n',
+      types: [],
       typesObject: {},
+      args: [],
       count: 0,
-      rootObjectsName: [],
-      enums: [],
     });
   });
 
@@ -37,11 +24,16 @@ describe('translateGraphqlTypesToTypescript function', () => {
     const result = translateGraphqlTypesToTypescript([graphqlEnumMockedData]);
 
     expect(result).toStrictEqual({
-      types: `/* eslint-disable */\n/* tslint:disable */\n\nexport type NumberCondition = 'gte' | 'lte';\n\n`,
+      types: [
+        {
+          data: "export type NumberCondition = 'gte' | 'lte'",
+          name: 'NumberCondition',
+          type: 'enum',
+        },
+      ],
       typesObject: {},
       count: 1,
-      rootObjectsName: [],
-      enums: ['NumberCondition'],
+      args: [],
     });
   });
 
@@ -51,7 +43,13 @@ describe('translateGraphqlTypesToTypescript function', () => {
     ]);
 
     expect(result).toStrictEqual({
-      types: `/* eslint-disable */\n/* tslint:disable */\n\nexport interface GqlAddress { id: string; street: string; zipCode: string; city: string; country: string; }\n\n`,
+      types: [
+        {
+          data: 'export interface GqlAddress { id: string; street: string; zipCode: string; city: string; country: string; }\n',
+          name: 'GqlAddress',
+          type: 'type',
+        },
+      ],
       typesObject: {
         GqlAddress: {
           id: 'string',
@@ -62,8 +60,7 @@ describe('translateGraphqlTypesToTypescript function', () => {
         },
       },
       count: 1,
-      rootObjectsName: ['GqlAddress'],
-      enums: [],
+      args: [],
     });
   });
 
@@ -73,27 +70,137 @@ describe('translateGraphqlTypesToTypescript function', () => {
     ]);
 
     expect(result).toStrictEqual({
-      types: `/* eslint-disable */\n/* tslint:disable */\n\nexport interface Query { products: Array<GqlProduct>; productsByPage: (pagination: GqlPaginationArgs, filters: GqlPaginatedProductsFiltersInput, sort: GqlPaginatedProductsSortingInput) => GqlPaginatedProductsOutput; productsWithIds: (ids: Array<number>) => Array<GqlProduct>; product: (id: number) => GqlProduct; categories: Array<GqlCategory>; category: (id: number) => GqlCategory; me: GqlLoggedUser; getOrder: (id: number) => GqlUserOrder; myOrders: Array<GqlOrder>; myAddresses: Array<GqlAddress>; }
-
-export type ProductsByPageQueryArgs = { pagination: GqlPaginationArgs, filters: GqlPaginatedProductsFiltersInput, sort: GqlPaginatedProductsSortingInput };
-export type ProductsWithIdsQueryArgs = { ids: Array<number> };
-export type ProductQueryArgs = { id: number };
-export type CategoryQueryArgs = { id: number };
-export type GetOrderQueryArgs = { id: number };\n`,
-      typesObject: {
-        ProductsByPageQueryArgs: {
-          pagination: 'GqlPaginationArgs',
-          filters: 'GqlPaginatedProductsFiltersInput',
-          sort: 'GqlPaginatedProductsSortingInput',
+      types: [
+        {
+          name: 'Query',
+          data: 'export interface Query { catalog: GqlCatalogResult; me: GqlLoggedUser; userInformations: GqlBaseUser; users: Array<GqlBaseUser>; getRegistrationStatus: GqlInvitedUserStatus; companyInformations: GqlCompanyInformations; product: GqlProductResult; productsByPage: Array<GqlProductByPageResult>; countProductPages: GqlProductCount; productVariantSummaries: Array<GqlProductVariantSummary>; companyAddresses: Array<GqlCompanyAddress>; ordersDetails: GqlOrderDetails; orders: Array<GqlUserOrder>; opsOrders: Array<GqlOpsOrder>; assets: Array<GqlAsset>; }\n',
+          type: 'type',
         },
-        ProductsWithIdsQueryArgs: { ids: 'Array<number>' },
-        ProductQueryArgs: { id: 'number' },
-        CategoryQueryArgs: { id: 'number' },
-        GetOrderQueryArgs: { id: 'number' },
+      ],
+      args: [
+        {
+          type: 'queries',
+          name: 'catalog',
+          gqlParams: ['$slug: String'],
+          gqlArgs: ['slug: $slug'],
+          imports: [],
+          data: 'export type CatalogQueryArgs = { slug?: string };\n',
+        },
+        {
+          type: 'queries',
+          name: 'userInformations',
+          gqlParams: ['$idUser: String!'],
+          gqlArgs: ['idUser: $idUser'],
+          imports: [],
+          data: 'export type UserInformationsQueryArgs = { idUser: string };\n',
+        },
+        {
+          type: 'queries',
+          name: 'users',
+          gqlParams: ['$searchText: String'],
+          gqlArgs: ['searchText: $searchText'],
+          imports: [],
+          data: 'export type UsersQueryArgs = { searchText?: string };\n',
+        },
+        {
+          type: 'queries',
+          name: 'getRegistrationStatus',
+          gqlParams: ['$token: String!'],
+          gqlArgs: ['token: $token'],
+          imports: [],
+          data: 'export type GetRegistrationStatusQueryArgs = { token: string };\n',
+        },
+        {
+          type: 'queries',
+          name: 'product',
+          gqlParams: ['$idProduct: String!'],
+          gqlArgs: ['idProduct: $idProduct'],
+          imports: [],
+          data: 'export type ProductQueryArgs = { idProduct: string };\n',
+        },
+        {
+          type: 'queries',
+          name: 'productsByPage',
+          gqlParams: [
+            '$pagination: GqlPaginationArgs!',
+            '$filters: GqlPaginatedProductsFiltersInput!',
+          ],
+          gqlArgs: ['pagination: $pagination', 'filters: $filters'],
+          imports: [],
+          data: 'export type ProductsByPageQueryArgs = { pagination: GqlPaginationArgs, filters: GqlPaginatedProductsFiltersInput };\n',
+        },
+        {
+          type: 'queries',
+          name: 'countProductPages',
+          gqlParams: [
+            '$filters: GqlPaginatedProductsFiltersInput!',
+            '$pagination: GqlPaginationArgs',
+          ],
+          gqlArgs: ['filters: $filters', 'pagination: $pagination'],
+          imports: [],
+          data: 'export type CountProductPagesQueryArgs = { filters: GqlPaginatedProductsFiltersInput, pagination?: GqlPaginationArgs };\n',
+        },
+        {
+          type: 'queries',
+          name: 'productVariantSummaries',
+          gqlParams: ['$input: GqlProductVariantSummaryInput!'],
+          gqlArgs: ['input: $input'],
+          imports: [],
+          data: 'export type ProductVariantSummariesQueryArgs = { input: GqlProductVariantSummaryInput };\n',
+        },
+        {
+          type: 'queries',
+          name: 'companyAddresses',
+          gqlParams: ['$type: GqlAddressType!'],
+          gqlArgs: ['type: $type'],
+          imports: [],
+          data: 'export type CompanyAddressesQueryArgs = { type: GqlAddressType };\n',
+        },
+        {
+          type: 'queries',
+          name: 'ordersDetails',
+          gqlParams: ['$commandNb: Int!'],
+          gqlArgs: ['commandNb: $commandNb'],
+          imports: [],
+          data: 'export type OrdersDetailsQueryArgs = { commandNb: number };\n',
+        },
+        {
+          type: 'queries',
+          name: 'opsOrders',
+          gqlParams: ['$filters: GqlOpsOrderFiltersInput!'],
+          gqlArgs: ['filters: $filters'],
+          imports: [],
+          data: 'export type OpsOrdersQueryArgs = { filters: GqlOpsOrderFiltersInput };\n',
+        },
+        {
+          type: 'queries',
+          name: 'assets',
+          gqlParams: ['$statuses: [GqlAssetStatus!]!'],
+          gqlArgs: ['statuses: $statuses'],
+          imports: [],
+          data: 'export type AssetsQueryArgs = { statuses: Array<GqlAssetStatus> };\n',
+        },
+      ],
+      typesObject: {
+        Query: {
+          catalog: 'GqlCatalogResult',
+          me: 'GqlLoggedUser',
+          userInformations: 'GqlBaseUser',
+          users: 'Array<GqlBaseUser>',
+          getRegistrationStatus: 'GqlInvitedUserStatus',
+          companyInformations: 'GqlCompanyInformations',
+          product: 'GqlProductResult',
+          productsByPage: 'Array<GqlProductByPageResult>',
+          countProductPages: 'GqlProductCount',
+          productVariantSummaries: 'Array<GqlProductVariantSummary>',
+          companyAddresses: 'Array<GqlCompanyAddress>',
+          ordersDetails: 'GqlOrderDetails',
+          orders: 'Array<GqlUserOrder>',
+          opsOrders: 'Array<GqlOpsOrder>',
+          assets: 'Array<GqlAsset>',
+        },
       },
-      count: 6,
-      rootObjectsName: ['Query'],
-      enums: [],
+      count: 1,
     });
   });
 
@@ -106,17 +213,127 @@ export type GetOrderQueryArgs = { id: number };\n`,
     ]);
 
     expect(result).toStrictEqual({
-      types: `/* eslint-disable */\n/* tslint:disable */
-
-export interface GqlAddress { id: string; street: string; zipCode: string; city: string; country: string; }
-export interface Query { products: Array<GqlProduct>; productsByPage: (pagination: GqlPaginationArgs, filters: GqlPaginatedProductsFiltersInput, sort: GqlPaginatedProductsSortingInput) => GqlPaginatedProductsOutput; productsWithIds: (ids: Array<number>) => Array<GqlProduct>; product: (id: number) => GqlProduct; categories: Array<GqlCategory>; category: (id: number) => GqlCategory; me: GqlLoggedUser; getOrder: (id: number) => GqlUserOrder; myOrders: Array<GqlOrder>; myAddresses: Array<GqlAddress>; }
-export type NumberCondition = 'gte' | 'lte';
-
-export type ProductsByPageQueryArgs = { pagination: GqlPaginationArgs, filters: GqlPaginatedProductsFiltersInput, sort: GqlPaginatedProductsSortingInput };
-export type ProductsWithIdsQueryArgs = { ids: Array<number> };
-export type ProductQueryArgs = { id: number };
-export type CategoryQueryArgs = { id: number };
-export type GetOrderQueryArgs = { id: number };\n`,
+      types: [
+        {
+          name: 'GqlAddress',
+          data: 'export interface GqlAddress { id: string; street: string; zipCode: string; city: string; country: string; }\n',
+          type: 'type',
+        },
+        {
+          name: 'Query',
+          data: 'export interface Query { catalog: GqlCatalogResult; me: GqlLoggedUser; userInformations: GqlBaseUser; users: Array<GqlBaseUser>; getRegistrationStatus: GqlInvitedUserStatus; companyInformations: GqlCompanyInformations; product: GqlProductResult; productsByPage: Array<GqlProductByPageResult>; countProductPages: GqlProductCount; productVariantSummaries: Array<GqlProductVariantSummary>; companyAddresses: Array<GqlCompanyAddress>; ordersDetails: GqlOrderDetails; orders: Array<GqlUserOrder>; opsOrders: Array<GqlOpsOrder>; assets: Array<GqlAsset>; }\n',
+          type: 'type',
+        },
+        {
+          name: 'NumberCondition',
+          type: 'enum',
+          data: "export type NumberCondition = 'gte' | 'lte'",
+        },
+      ],
+      args: [
+        {
+          type: 'queries',
+          name: 'catalog',
+          gqlParams: ['$slug: String'],
+          gqlArgs: ['slug: $slug'],
+          imports: [],
+          data: 'export type CatalogQueryArgs = { slug?: string };\n',
+        },
+        {
+          type: 'queries',
+          name: 'userInformations',
+          gqlParams: ['$idUser: String!'],
+          gqlArgs: ['idUser: $idUser'],
+          imports: [],
+          data: 'export type UserInformationsQueryArgs = { idUser: string };\n',
+        },
+        {
+          type: 'queries',
+          name: 'users',
+          gqlParams: ['$searchText: String'],
+          gqlArgs: ['searchText: $searchText'],
+          imports: [],
+          data: 'export type UsersQueryArgs = { searchText?: string };\n',
+        },
+        {
+          type: 'queries',
+          name: 'getRegistrationStatus',
+          gqlParams: ['$token: String!'],
+          gqlArgs: ['token: $token'],
+          imports: [],
+          data: 'export type GetRegistrationStatusQueryArgs = { token: string };\n',
+        },
+        {
+          type: 'queries',
+          name: 'product',
+          gqlParams: ['$idProduct: String!'],
+          gqlArgs: ['idProduct: $idProduct'],
+          imports: [],
+          data: 'export type ProductQueryArgs = { idProduct: string };\n',
+        },
+        {
+          type: 'queries',
+          name: 'productsByPage',
+          gqlParams: [
+            '$pagination: GqlPaginationArgs!',
+            '$filters: GqlPaginatedProductsFiltersInput!',
+          ],
+          gqlArgs: ['pagination: $pagination', 'filters: $filters'],
+          imports: [],
+          data: 'export type ProductsByPageQueryArgs = { pagination: GqlPaginationArgs, filters: GqlPaginatedProductsFiltersInput };\n',
+        },
+        {
+          type: 'queries',
+          name: 'countProductPages',
+          gqlParams: [
+            '$filters: GqlPaginatedProductsFiltersInput!',
+            '$pagination: GqlPaginationArgs',
+          ],
+          gqlArgs: ['filters: $filters', 'pagination: $pagination'],
+          imports: [],
+          data: 'export type CountProductPagesQueryArgs = { filters: GqlPaginatedProductsFiltersInput, pagination?: GqlPaginationArgs };\n',
+        },
+        {
+          type: 'queries',
+          name: 'productVariantSummaries',
+          gqlParams: ['$input: GqlProductVariantSummaryInput!'],
+          gqlArgs: ['input: $input'],
+          imports: [],
+          data: 'export type ProductVariantSummariesQueryArgs = { input: GqlProductVariantSummaryInput };\n',
+        },
+        {
+          type: 'queries',
+          name: 'companyAddresses',
+          gqlParams: ['$type: GqlAddressType!'],
+          gqlArgs: ['type: $type'],
+          imports: [],
+          data: 'export type CompanyAddressesQueryArgs = { type: GqlAddressType };\n',
+        },
+        {
+          type: 'queries',
+          name: 'ordersDetails',
+          gqlParams: ['$commandNb: Int!'],
+          gqlArgs: ['commandNb: $commandNb'],
+          imports: [],
+          data: 'export type OrdersDetailsQueryArgs = { commandNb: number };\n',
+        },
+        {
+          type: 'queries',
+          name: 'opsOrders',
+          gqlParams: ['$filters: GqlOpsOrderFiltersInput!'],
+          gqlArgs: ['filters: $filters'],
+          imports: [],
+          data: 'export type OpsOrdersQueryArgs = { filters: GqlOpsOrderFiltersInput };\n',
+        },
+        {
+          type: 'queries',
+          name: 'assets',
+          gqlParams: ['$statuses: [GqlAssetStatus!]!'],
+          gqlArgs: ['statuses: $statuses'],
+          imports: [],
+          data: 'export type AssetsQueryArgs = { statuses: Array<GqlAssetStatus> };\n',
+        },
+      ],
       typesObject: {
         GqlAddress: {
           id: 'string',
@@ -125,19 +342,25 @@ export type GetOrderQueryArgs = { id: number };\n`,
           city: 'string',
           country: 'string',
         },
-        ProductsByPageQueryArgs: {
-          pagination: 'GqlPaginationArgs',
-          filters: 'GqlPaginatedProductsFiltersInput',
-          sort: 'GqlPaginatedProductsSortingInput',
+        Query: {
+          catalog: 'GqlCatalogResult',
+          me: 'GqlLoggedUser',
+          userInformations: 'GqlBaseUser',
+          users: 'Array<GqlBaseUser>',
+          getRegistrationStatus: 'GqlInvitedUserStatus',
+          companyInformations: 'GqlCompanyInformations',
+          product: 'GqlProductResult',
+          productsByPage: 'Array<GqlProductByPageResult>',
+          countProductPages: 'GqlProductCount',
+          productVariantSummaries: 'Array<GqlProductVariantSummary>',
+          companyAddresses: 'Array<GqlCompanyAddress>',
+          ordersDetails: 'GqlOrderDetails',
+          orders: 'Array<GqlUserOrder>',
+          opsOrders: 'Array<GqlOpsOrder>',
+          assets: 'Array<GqlAsset>',
         },
-        ProductsWithIdsQueryArgs: { ids: 'Array<number>' },
-        ProductQueryArgs: { id: 'number' },
-        CategoryQueryArgs: { id: 'number' },
-        GetOrderQueryArgs: { id: 'number' },
       },
-      count: 8,
-      rootObjectsName: ['GqlAddress', 'Query'],
-      enums: ['NumberCondition'],
+      count: 3,
     });
   });
 });

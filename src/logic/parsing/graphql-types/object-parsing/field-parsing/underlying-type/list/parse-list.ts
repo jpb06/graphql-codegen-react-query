@@ -11,10 +11,14 @@ export const parseList = (
   isFunction: boolean,
   isNull: boolean,
 ): FieldResult => {
-  if (kind === 'OBJECT' || kind === 'INPUT_OBJECT') {
+  const maybeNull = isNull ? '' : '!';
+
+  if (kind === 'OBJECT' || kind === 'INPUT_OBJECT' || kind === 'ENUM') {
     return {
       output: formatField(name, `Array<${type}>`, isFunction, isNull),
       type: `Array<${type}>`,
+      gqlParams: `$${name}: [${type}${maybeNull}]${maybeNull}`,
+      gqlArgs: `${name}: $${name}`,
     };
   } else if (kind === 'SCALAR') {
     return {
@@ -25,11 +29,13 @@ export const parseList = (
         isNull,
       ),
       type: `Array<${translateGraphqlTypeToTypescript(type)}>`,
+      gqlParams: `$${name}: [${type}${maybeNull}]${maybeNull}`,
+      gqlArgs: `${name}: $${name}`,
     };
   }
 
   displayWarning(
     `List parsing: unhandled field 'name' for kind ${kind} and type ${type}`,
   );
-  return { output: '', type: '' };
+  return { output: '', type: '', gqlArgs: '', gqlParams: '' };
 };

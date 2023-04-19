@@ -1,4 +1,4 @@
-export const queryHookContent = `import { useQuery, UseQueryResult, UseQueryOptions } from '@tanstack/react-query';
+export const queryHookContent = `import { useQuery, UseQueryResult, UseQueryOptions, QueryKey } from '@tanstack/react-query';
 
 #fetcher-hook-import#
 import { namedQuerySelectorToDocument } from '../logic/named-query-selector-to-document';
@@ -6,9 +6,12 @@ import { DeepReplace } from '../types/deep-replace.type';
 import { QuerySelector } from '../types/query-selector';
 import { QuerySelectorResult } from '../types/query-selector-result';
 #args-type-import#
+#result-type-import#
 type #type#SelectorResult = Pick<QuerySelectorResult, '#name#'>['#name#'];
 
-export type #type#Result<Selector> = {
+#args-type#
+
+export type #type#QueryResultSelect<Selector> = {
   #name#: DeepReplace<Selector, #type#SelectorResult>;
 };
 
@@ -16,41 +19,41 @@ export const use#type#PartialQuery = <Selector extends Pick<QuerySelector, '#nam
   selector: Selector, #variables-argument#
   options?: Omit<
   UseQueryOptions<
-    #type#Result<Selector>,
+    #type#QueryResultSelect<Selector>,
     unknown,
-    #type#Result<Selector>
+    #type#QueryResultSelect<Selector>
   >,
   'queryFn' | 'queryKey'
 >
-): UseQueryResult<#type#Result<Selector>> => {
-  const document = namedQuerySelectorToDocument('#name#', selector#variables#);
+): UseQueryResult<#type#QueryResultSelect<Selector>> => {
+  const document = namedQuerySelectorToDocument('#name#', selector#params-args#);
 
-  return useQuery<#type#Result<Selector>, unknown, #type#Result<Selector>>({
+  return useQuery<#type#QueryResultSelect<Selector>, unknown, #type#QueryResultSelect<Selector>>({
     queryKey: ['#name#'#query-key-variables#],
-    queryFn: #fetcherFn#<#type#Result<Selector>>(document)#variables-binding#,
+    queryFn: #fetcherFn#<#type#QueryResultSelect<Selector>>(document)#variables-binding#,
     ...options
   });
 };
 
-type #type#Selector = {
-  #full-selector-type#
-};
+export type #type#QueryResultType = { #name#?: #outputType# };
 
 export const use#type#Query = (
   #variables-argument#
   options?: Omit<
     UseQueryOptions<
-      #type#Result<#type#Selector>,
+      #type#QueryResultType,
       unknown,
-      #type#Result<#type#Selector>
+      #type#QueryResultType
     >,
     'queryFn' | 'queryKey'
   >
-): UseQueryResult<#type#Result<#type#Selector>> =>
+): UseQueryResult<#type#QueryResultType> =>
   use#type#PartialQuery(
     {
       #full-selector#
     }#variables#
-    ,options
+    ,options as never
   );
+
+use#type#Query.getKey = #queryKey#
 `;

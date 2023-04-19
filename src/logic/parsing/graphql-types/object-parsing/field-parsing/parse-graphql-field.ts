@@ -15,6 +15,8 @@ export const parseGraphqlField = (
     return {
       output: formatField(field.name, field.defaultValue, isFunction, false),
       type: '',
+      gqlParams: '',
+      gqlArgs: '',
     };
   }
 
@@ -22,7 +24,7 @@ export const parseGraphqlField = (
     displayWarning(
       `getField: missing 'name' for field ${JSON.stringify(field, null, 2)}`,
     );
-    return { output: '', type: '' };
+    return { output: '', type: '', gqlParams: '', gqlArgs: '' };
   }
 
   if (field.type.kind === 'NON_NULL') {

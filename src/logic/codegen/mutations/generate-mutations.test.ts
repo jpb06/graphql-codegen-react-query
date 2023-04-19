@@ -2,9 +2,9 @@ import { writeFile } from 'fs-extra';
 
 import { generateMutations } from './generate-mutations';
 import { FetcherConfig } from '../../../cli/generate-from-url/args-validation/options-validation';
+import { parsedTypesMockData } from '../../../tests-related/mocked-data/generated-code/parsed-types.mock-data';
+import { graphqlQueryObjectMockedData } from '../../../tests-related/mocked-data/graphql-schema';
 import { graphqlMutationObjectMockedData } from '../../../tests-related/mocked-data/graphql-schema/graphql-mutation-object.mock-data';
-import { generatedTypesMockedData } from '../../../tests-related/mocked-data/types/generated-types-mock-data';
-import { rootObjectsNameMockData } from '../../../tests-related/mocked-data/types/root-objects-name.mock-data';
 import { GqlField } from '../../../types/introspection-query-response.type';
 
 jest.mock('fs-extra');
@@ -21,27 +21,20 @@ describe('generateMutations function', () => {
   });
 
   it('should do nothing when there is no fields', async () => {
-    await generateMutations(
-      generatedTypesMockedData,
-      rootObjectsNameMockData,
-      null,
-      fetcher,
-      outputPath,
-    );
+    await generateMutations([], parsedTypesMockData, fetcher, outputPath);
 
     expect(writeFile).toHaveBeenCalledTimes(0);
   });
 
   it('should create files in a mutations folder and import the fetcher', async () => {
     await generateMutations(
-      generatedTypesMockedData,
-      rootObjectsNameMockData,
-      graphqlMutationObjectMockedData.fields,
+      graphqlQueryObjectMockedData.fields,
+      parsedTypesMockData,
       fetcher,
       outputPath,
     );
 
-    expect(writeFile).toHaveBeenCalledTimes(10);
+    expect(writeFile).toHaveBeenCalledTimes(15);
     for (let i = 0; i < 5; i++) {
       const [path, content] = jest.mocked(writeFile).mock.calls[i];
 
@@ -57,9 +50,8 @@ describe('generateMutations function', () => {
     const mutation = graphqlMutationObjectMockedData.fields?.at(2) as GqlField;
 
     await generateMutations(
-      generatedTypesMockedData,
-      rootObjectsNameMockData,
       [mutation],
+      parsedTypesMockData,
       fetcher,
       outputPath,
     );
@@ -67,27 +59,53 @@ describe('generateMutations function', () => {
     const [, content] = jest.mocked(writeFile).mock.calls[0];
 
     expect(content).toContain(
-      `import { SignupMutationArgs  , GqlAuthOutput } from '../types/api-types';`,
+      `import { SignupMutationArgs as Args } from './../types/mutations/signup/SignupMutationArgs.type';`,
     );
-    expect(content).toContain(`export type SignupResult = {
+    expect(content).toContain(`export type SignupMutationResult = {
   signup: GqlAuthOutput;
 };`);
     expect(content).toContain(
-      `UseMutationOptions<SignupResult, unknown, SignupMutationArgs>`,
+      `UseMutationOptions<SignupMutationResult, unknown, SignupMutationArgs>`,
     );
     expect(content).toContain(`export const useSignupMutation`);
 
     expect(content)
       .toContain(`const mutation = \`mutation Signup($email: String!, $lastName: String!, $firstName: String!, $password: String!) {
-    signup(email: $email, lastName: $lastName, firstName: $firstName, password: $password) {
-      id
-email
+    signup(email: $email, lastName: $lastName, firstName: $firstName, password: $password) { email
+personalEmail
+phone
 lastName
 firstName
-joinDate
-role
-token
-    }
+status
+address { id
+recipientFirstName
+recipientLastName
+recipientPhone
+address
+zip
+city
+country
+comment
+createdAt
+companyAddress { id
+name
+country
+address
+zip
+city
+recipientFirstName
+recipientLastName
+contactEmail
+recipientPhone
+isDefault } }
+permissions { idUser
+admin
+ops }
+companyGroup { id
+name
+description
+isDefault
+color } }
   }\`;`);
   });
 
@@ -95,9 +113,8 @@ token
     const mutation = graphqlMutationObjectMockedData.fields?.at(1) as GqlField;
 
     await generateMutations(
-      generatedTypesMockedData,
-      rootObjectsNameMockData,
       [mutation],
+      parsedTypesMockData,
       fetcher,
       outputPath,
     );
@@ -105,24 +122,38 @@ token
     const [, content] = jest.mocked(writeFile).mock.calls[0];
 
     expect(content).toContain(
-      `import { , GqlAddress } from '../types/api-types';`,
+      `import { GqlAddress } from './../types/api-types';`,
     );
-    expect(content).toContain(`export type WithoutArgsResult = {
+    expect(content).toContain(`export type WithoutArgsMutationResult = {
   withoutArgs: GqlAddress;
 };`);
     expect(content).toContain(
-      `UseMutationOptions<WithoutArgsResult, unknown, unknown>`,
+      `UseMutationOptions<WithoutArgsMutationResult, unknown, unknown>`,
     );
     expect(content).toContain(`export const useWithoutArgsMutation`);
 
     expect(content).toContain(`const mutation = \`mutation WithoutArgs() {
-    withoutArgs() {
-      id
-street
-zipCode
+    withoutArgs() { id
+recipientFirstName
+recipientLastName
+recipientPhone
+address
+zip
 city
 country
-    }
+comment
+createdAt
+companyAddress { id
+name
+country
+address
+zip
+city
+recipientFirstName
+recipientLastName
+contactEmail
+recipientPhone
+isDefault } }
   }\`;`);
   });
 });

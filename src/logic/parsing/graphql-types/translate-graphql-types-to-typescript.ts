@@ -1,69 +1,91 @@
+import { extractArgsTypes } from './args-types/extract-args-types';
 import { parseGraphqlObject } from './object-parsing/parse-graphql-object';
 import { GqlType } from '../../../types/introspection-query-response.type';
 import { SchemaTypesRoot } from '../../../types/schema-types-root.type';
 
-type ParseTypesResult = {
-  types: string;
-  typesObject: SchemaTypesRoot;
+export type ParsedType = {
+  name: string;
+  type: 'arg' | 'enum' | 'type';
+  data: string;
+};
+
+export type ParsedArg = {
+  type: string;
+  name: string;
+  imports: Array<string>;
+  gqlParams: Array<string>;
+  gqlArgs: Array<string>;
+  data: string;
+};
+
+export type ParseTypesResult = {
   count: number;
-  rootObjectsName: Array<string>;
-  enums: Array<string>;
+  types: Array<ParsedType>;
+  args: Array<ParsedArg>;
+  typesObject: SchemaTypesRoot;
 };
 
 export const translateGraphqlTypesToTypescript = (
   input: Array<GqlType>,
 ): ParseTypesResult => {
-  let count = 0;
-  const rootObjectsName: Array<string> = [];
-  const typesObject: SchemaTypesRoot = {};
-  let argsTypesObject: SchemaTypesRoot = {};
-  const enums: Array<string> = [];
-
-  let argsTypesOutput = '';
   const output = input.reduce(
-    (acc, { kind, name, fields, inputFields, enumValues }) => {
+    (result, { kind, name, fields, inputFields, enumValues }) => {
       if (name.startsWith('__')) {
-        return acc;
+        return result;
       }
 
-      if (kind === 'OBJECT' || kind === 'INPUT_OBJECT') {
-        rootObjectsName.push(name);
-        const target = kind === 'OBJECT' ? fields : inputFields;
-        const {
-          argsTypes,
-          output,
-          argsCount,
-          typesObject: t,
-          argsTypesObject: at,
-        } = parseGraphqlObject(name, target);
+      const isRoutesObject = name === 'Query' || name === 'Mutation';
+      if (isRoutesObject) {
+        const args = extractArgsTypes(name, fields);
+        result.args.push(...args);
+      }
 
-        if (name !== 'Query' && name !== 'Mutation') {
-          typesObject[name] = t;
-        }
-        acc += output;
-        argsTypesOutput += argsTypes;
-        argsTypesObject = { ...argsTypesObject, ...at };
-        count += argsCount + 1;
-      } else if (kind === 'ENUM') {
-        enums.push(name);
+      if (kind === 'ENUM') {
         const typeOutput = `export type ${name} = ${enumValues
           ?.map((v) => `'${v.name}'`)
           .join(' | ')}`;
 
-        acc += `${typeOutput};\n`;
-        count++;
+        result.types.push({
+          name,
+          type: 'enum',
+          data: typeOutput,
+        });
+        result.count++;
+
+        return result;
       }
 
-      return acc;
+      const isObject = kind === 'OBJECT' || kind === 'INPUT_OBJECT';
+      if (isObject) {
+        const target = kind === 'OBJECT' ? fields : inputFields;
+
+        const { output, typesObject: t } = parseGraphqlObject(name, target);
+
+        result.typesObject[name] = t;
+
+        result.types.push({ name, data: output, type: 'type' });
+        result.count += 1;
+      }
+
+      return result;
     },
-    '',
+    {
+      typesObject: {} as SchemaTypesRoot,
+      types: [] as Array<ParsedType>,
+      args: [] as Array<ParsedArg>,
+      count: 0,
+    },
   );
 
+  const args = output.args.map((arg) => ({
+    ...arg,
+    imports: arg.imports.filter((i) => output.types.some((t) => t.name === i)),
+  }));
+
   return {
-    types: `/* eslint-disable */\n/* tslint:disable */\n\n${output}\n${argsTypesOutput}`,
-    typesObject: { ...typesObject, ...argsTypesObject },
-    count,
-    rootObjectsName,
-    enums,
+    types: output.types,
+    args,
+    typesObject: { ...output.typesObject },
+    count: output.count,
   };
 };

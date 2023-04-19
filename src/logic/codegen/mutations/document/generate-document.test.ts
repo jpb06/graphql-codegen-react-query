@@ -8,13 +8,12 @@ describe('generateDocument function', () => {
       [],
       `id
       name`,
+      'object',
     );
 
     expect(result).toBe(`mutation Products() {
-    products() {
-      id
-      name
-    }
+    products() { id
+      name }
   }`);
   });
 
@@ -24,14 +23,13 @@ describe('generateDocument function', () => {
       functionFieldMockData.args,
       `id
       name`,
+      'object',
     );
 
     expect(result)
       .toBe(`mutation ProductsByPage($pagination: GqlPaginationArgs!, $nullable: GqlNullable, $array: [GqlProductWithCategory!]!, $filters: GqlPaginatedProductsFiltersInput!, $sort: GqlPaginatedProductsSortingInput!) {
-    productsByPage(pagination: $pagination, nullable: $nullable, array: $array, filters: $filters, sort: $sort) {
-      id
-      name
-    }
+    productsByPage(pagination: $pagination, nullable: $nullable, array: $array, filters: $filters, sort: $sort) { id
+      name }
   }`);
   });
 });

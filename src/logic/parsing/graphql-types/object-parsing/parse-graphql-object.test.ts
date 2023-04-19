@@ -18,9 +18,6 @@ describe('parseGraphqlObject function', () => {
     const result = parseGraphqlObject('', null);
 
     expect(result).toStrictEqual({
-      argsCount: 0,
-      argsTypes: '',
-      argsTypesObject: {},
       output: '',
       typesObject: {},
     });
@@ -31,19 +28,9 @@ describe('parseGraphqlObject function', () => {
 
     expect(result).toStrictEqual({
       output:
-        'export interface Query { productsByPage: (pagination: GqlPaginationArgs, nullable?: GqlNullable, array: Array<GqlProductWithCategory>, filters: GqlPaginatedProductsFiltersInput, sort: GqlPaginatedProductsSortingInput) => GqlPaginatedProductsOutput; }\n',
-      argsTypes:
-        'export type ProductsByPageQueryArgs = { pagination: GqlPaginationArgs, nullable?: GqlNullable, array: Array<GqlProductWithCategory>, filters: GqlPaginatedProductsFiltersInput, sort: GqlPaginatedProductsSortingInput };\n',
-      argsCount: 1,
-      typesObject: {},
-      argsTypesObject: {
-        ProductsByPageQueryArgs: {
-          pagination: 'GqlPaginationArgs',
-          nullable: 'GqlNullable',
-          array: 'Array<GqlProductWithCategory>',
-          filters: 'GqlPaginatedProductsFiltersInput',
-          sort: 'GqlPaginatedProductsSortingInput',
-        },
+        'export interface Query { productsByPage: GqlPaginatedProductsOutput; }\n',
+      typesObject: {
+        productsByPage: 'GqlPaginatedProductsOutput',
       },
     });
   });
@@ -53,10 +40,9 @@ describe('parseGraphqlObject function', () => {
 
     expect(result).toStrictEqual({
       output: 'export interface GqlProduct { products: Array<GqlProduct>; }\n',
-      argsTypes: '',
-      argsCount: 0,
-      typesObject: { products: 'Array<GqlProduct>' },
-      argsTypesObject: {},
+      typesObject: {
+        products: 'Array<GqlProduct>',
+      },
     });
   });
 
@@ -64,9 +50,6 @@ describe('parseGraphqlObject function', () => {
     const result = parseGraphqlObject('Products', [scalarListFieldMockData]);
 
     expect(result).toStrictEqual({
-      argsCount: 0,
-      argsTypes: '',
-      argsTypesObject: {},
       output: 'export interface Products { ids: Array<number>; }\n',
       typesObject: {
         ids: 'Array<number>',
@@ -78,9 +61,6 @@ describe('parseGraphqlObject function', () => {
     const result = parseGraphqlObject('Yolo', [invalidListFieldMockData]);
 
     expect(result).toStrictEqual({
-      argsCount: 0,
-      argsTypes: '',
-      argsTypesObject: {},
       output: 'export interface Yolo { }\n',
       typesObject: {
         products: '',
@@ -96,9 +76,6 @@ describe('parseGraphqlObject function', () => {
     ]);
 
     expect(result).toStrictEqual({
-      argsCount: 0,
-      argsTypes: '',
-      argsTypesObject: {},
       output: 'export interface PageResult { offset: 0; }\n',
       typesObject: {
         offset: '',
@@ -110,9 +87,6 @@ describe('parseGraphqlObject function', () => {
     const result = parseGraphqlObject('Object', [enumFieldMockData]);
 
     expect(result).toStrictEqual({
-      argsCount: 0,
-      argsTypes: '',
-      argsTypesObject: {},
       output: 'export interface Object { priceCondition?: NumberCondition; }\n',
       typesObject: {
         priceCondition: 'NumberCondition',
@@ -124,9 +98,6 @@ describe('parseGraphqlObject function', () => {
     const result = parseGraphqlObject('Categories', [listFieldMockData]);
 
     expect(result).toStrictEqual({
-      argsCount: 0,
-      argsTypes: '',
-      argsTypesObject: {},
       output:
         'export interface Categories { categoriesIds?: Array<number>; }\n',
       typesObject: {
@@ -139,9 +110,6 @@ describe('parseGraphqlObject function', () => {
     const result = parseGraphqlObject('MyType', [objectFieldMockData]);
 
     expect(result).toStrictEqual({
-      argsCount: 0,
-      argsTypes: '',
-      argsTypesObject: {},
       output: 'export interface MyType { role: string; }\n',
       typesObject: {
         role: 'string',
@@ -153,9 +121,6 @@ describe('parseGraphqlObject function', () => {
     const result = parseGraphqlObject('MyObject', [basicFieldMockData]);
 
     expect(result).toStrictEqual({
-      argsCount: 0,
-      argsTypes: '',
-      argsTypesObject: {},
       output: 'export interface MyObject { availableStock?: boolean; }\n',
       typesObject: {
         availableStock: 'boolean',

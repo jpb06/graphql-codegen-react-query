@@ -6,7 +6,7 @@ const typesMapping: Record<string, string> = {
   Int: 'number',
   Float: 'number',
   Boolean: 'boolean',
-  DateTime: 'Date',
+  DateTime: 'string',
 };
 
 export const translateGraphqlTypeToTypescript = (
