@@ -7,16 +7,18 @@ export const mutationHookContent = `import {
 #fetcher-hook-import#
 #mutation-types-import#
 
-export type #type#Result = {
+#args-type#
+
+export type #type#MutationResult = {
   #name#: #mutation-result-type#;
 };
 
 export const use#type#Mutation = (
-  options?: UseMutationOptions<#type#Result, unknown, #mutation-args-type#>
-): UseMutationResult<#type#Result, unknown, #mutation-args-type#> => {
+  options?: UseMutationOptions<#type#MutationResult, unknown, #mutation-args-type#>
+): UseMutationResult<#type#MutationResult, unknown, #mutation-args-type#> => {
   const mutation = \`#document#\`;
 
-  return useMutation<#type#Result, unknown, #mutation-args-type#>({
+  return useMutation<#type#MutationResult, unknown, #mutation-args-type#>({
     mutationFn: useFetchData(mutation),
     ...options,
   });

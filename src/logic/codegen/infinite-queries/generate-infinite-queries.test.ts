@@ -2,7 +2,6 @@ import { writeFile } from 'fs-extra';
 
 import { generareInfiniteQueries } from './generate-infinite-queries';
 import { FetcherConfig } from '../../../cli/generate-from-url/args-validation/options-validation';
-import { querySelectorResultMockData } from '../../../tests-related/mocked-data/generated-code/query-selector-result.mock-data';
 import { querySelectorMockData } from '../../../tests-related/mocked-data/generated-code/query-selector.mock-data';
 import { graphqlQueryObjectMockedData } from '../../../tests-related/mocked-data/graphql-schema';
 import { SelectorsGenerationResult } from '../selectors/generate-selectors';
@@ -17,7 +16,6 @@ describe('generareInfiniteQueries function', () => {
   };
   const querySelectorResult: SelectorsGenerationResult = {
     querySelector: querySelectorMockData,
-    querySelectorResult: querySelectorResultMockData,
   };
 
   beforeEach(() => {
@@ -39,7 +37,7 @@ describe('generareInfiniteQueries function', () => {
   it('should generate one infinite query', async () => {
     const result = await generareInfiniteQueries(
       graphqlQueryObjectMockedData.fields,
-      ['products'],
+      ['productsByPage'],
       fetcherConfig,
       outputPath,
       querySelectorResult,
@@ -47,44 +45,48 @@ describe('generareInfiniteQueries function', () => {
 
     expect(writeFile).toHaveBeenCalledTimes(1);
     const [path, data] = jest.mocked(writeFile).mock.calls[0];
-    expect(path).toBe('./output-path/queries/useProductsInfiniteQuery.ts');
+    expect(path).toBe(
+      './output-path/queries/useProductsByPageInfiniteQuery.ts',
+    );
     expect(data).toContain(`import { useFetcher } from './fetcher-path';`);
-    expect(data).toContain(`type ProductsSelectorResult = Pick<
+    expect(data).toContain(`type ProductsByPageSelectorResult = Pick<
   QuerySelectorResult,
-  'products'
->['products'];`);
-    expect(data).toContain(`export type ProductsInfiniteResult<Selector> = {
-  products: DeepReplace<Selector, ProductsSelectorResult>;
+  'productsByPage'
+>['productsByPage'];`);
+    expect(data)
+      .toContain(`export type ProductsByPageInfiniteResult<Selector> = {
+  productsByPage: DeepReplace<Selector, ProductsByPageSelectorResult>;
 };`);
-    expect(data).toContain(`export const useProductsInfinitePartialQuery = <
-  Selector extends Pick<QuerySelector, 'products'>['products'],
+    expect(data)
+      .toContain(`export const useProductsByPageInfinitePartialQuery = <
+  Selector extends Pick<QuerySelector, 'productsByPage'>['productsByPage'],
 >(
   selector: Selector,
-  variables: ProductsQueryArgs,
+  variables: ProductsByPageQueryArgs,
   options?: Omit<
     UseInfiniteQueryOptions<
-      ProductsInfiniteResult<Selector>,
+      ProductsByPageInfiniteResult<Selector>,
       unknown,
-      ProductsInfiniteResult<Selector>
+      ProductsByPageInfiniteResult<Selector>
     >,
     'queryFn' | 'queryKey'
   >,
-): UseInfiniteQueryResult<ProductsInfiniteResult<Selector>> => {`);
+): UseInfiniteQueryResult<ProductsByPageInfiniteResult<Selector>> => {`);
     expect(data)
       .toContain(`const initialDocument = namedQuerySelectorToDocument(
-    'products',
+    'productsByPage',
     selector,
     variables,
   );`);
     expect(data).toContain(
-      `const queryKey = ['productsInfiniteQuery', ...Object.values(variables)];`,
+      `const queryKey = ['productsByPageInfiniteQuery', ...Object.values(variables)];`,
     );
     expect(data).toContain(`const fetchFn =
-    useFetchData<ProductsInfiniteResult<Selector>>(initialDocument);`);
+    useFetchData<ProductsByPageInfiniteResult<Selector>>(initialDocument);`);
     expect(data).toContain(`return useInfiniteQuery<
-    ProductsInfiniteResult<Selector>,
+    ProductsByPageInfiniteResult<Selector>,
     unknown,
-    ProductsInfiniteResult<Selector>
+    ProductsByPageInfiniteResult<Selector>
   >(
     queryKey,
     (metaData) => {
@@ -100,7 +102,7 @@ describe('generareInfiniteQueries function', () => {
     options,
   );`);
 
-    expect(result).toStrictEqual(['useProductsInfiniteQuery']);
+    expect(result).toStrictEqual(['useProductsByPageInfiniteQuery']);
   });
 
   it('should generate an infinite query using variables', async () => {
@@ -183,11 +185,8 @@ describe('generareInfiniteQueries function', () => {
       querySelectorResult,
     );
 
-    expect(writeFile).toHaveBeenCalledTimes(2);
-    expect(result).toStrictEqual([
-      'useProductsInfiniteQuery',
-      'useProductsByPageInfiniteQuery',
-    ]);
+    expect(writeFile).toHaveBeenCalledTimes(1);
+    expect(result).toStrictEqual(['useProductsByPageInfiniteQuery']);
   });
 
   it('should generate a full query using the partial one', async () => {

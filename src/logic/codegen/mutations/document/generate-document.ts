@@ -16,22 +16,27 @@ export const generateDocument = (
   name: string,
   args: Array<GqlField> | null | undefined,
   resultType: string,
-): string => `mutation ${capitalize(name)}(${
-  args &&
-  args
-    .map((el) => {
-      let type = '';
-      if (el.type.kind === 'NON_NULL') {
-        type = getGqlType(el.type.ofType as GqlFieldType, '!');
-      } else {
-        type = getGqlType(el.type, '');
-      }
+  resultKind: 'scalar' | 'object',
+): string => {
+  const result = resultKind === 'object' ? `{ ${resultType} }` : '';
 
-      return `$${el.name}: ${type}`;
-    })
-    .join(', ')
-}) {
-    ${name}(${args && args.map((el) => `${el.name}: $${el.name}`).join(', ')}) {
-      ${resultType}
-    }
+  return `mutation ${capitalize(name)}(${
+    args &&
+    args
+      .map((el) => {
+        let type = '';
+        if (el.type.kind === 'NON_NULL') {
+          type = getGqlType(el.type.ofType as GqlFieldType, '!');
+        } else {
+          type = getGqlType(el.type, '');
+        }
+
+        return `$${el.name}: ${type}`;
+      })
+      .join(', ')
+  }) {
+    ${name}(${
+    args && args.map((el) => `${el.name}: $${el.name}`).join(', ')
+  }) ${result}
   }`;
+};

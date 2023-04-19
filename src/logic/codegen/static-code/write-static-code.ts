@@ -4,7 +4,7 @@ import { deepMergeContent } from './content/deep-merge.content';
 import { deepReplaceTypeContent } from './content/deep-replace-type.content';
 import { dynamicQuerySelectorToDocumentContent } from './content/dynamic-query-selector-to-document.content';
 import { isObjectContent } from './content/is-object.content';
-import { namedQuerySelectorToDcumentContent } from './content/named-query-selector-to-document.content';
+import { namedQuerySelectorToDocumentContent } from './content/named-query-selector-to-document.content';
 import { stringifyObjectContent } from './content/stringify-object.content';
 
 export const writeStaticCode = async (outputPath: string): Promise<void> => {
@@ -24,7 +24,7 @@ export const writeStaticCode = async (outputPath: string): Promise<void> => {
   );
   await writeFile(
     `${outputPath}/logic/named-query-selector-to-document.ts`,
-    namedQuerySelectorToDcumentContent,
+    namedQuerySelectorToDocumentContent,
     {
       encoding: 'UTF8',
     },

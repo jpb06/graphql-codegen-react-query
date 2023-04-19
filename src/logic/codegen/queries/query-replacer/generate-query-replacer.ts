@@ -1,22 +1,27 @@
 import { getReplacerFunctionParams } from './args/get-replacer-function-params';
 import { parseFunctionArg } from './args/parse-function-arg';
 import { stringifyArgs } from './args/stringify-args';
-import { GqlType } from '../../../types/introspection-query-response.type';
-import { capitalize } from '../../util/capitalize';
+import { GqlType } from '../../../../types/introspection-query-response.type';
+import { capitalize } from '../../../util/capitalize';
 
 const getArgsTypesImports = (queryObject: GqlType): Array<string> | undefined =>
   queryObject.fields
     ?.filter((el) => el.args && el.args.length > 0)
-    .map((el) => `${capitalize(el.name)}QueryArgs`);
+    .map((el) => {
+      const operation = capitalize(el.name);
+      const type = `${operation}QueryArgs`;
+
+      return `import { ${type} } from './../types/queries/${el.name}/${type}.type'`;
+    });
 
 export const generateQueryReplacer = (queryObject: GqlType): string => {
   const argsImports = getArgsTypesImports(queryObject);
 
   const declaration = `${
     argsImports && argsImports?.length > 0
-      ? `import { ${argsImports.join(
-          ', ',
-        )} } from './../types/api-types';\nimport { stringify } from './stringify-object'\n\n`
+      ? `${argsImports.join(
+          ';\n',
+        )};\nimport { stringify } from './stringify-object'\n\n`
       : ''
   }export const queryReplacer: Record<
 string,
@@ -30,8 +35,10 @@ string,
         return `${out}  ${name}: () => undefined,\n`;
       }
 
-      const tsArgs = args.map(parseFunctionArg);
-      const functionParams = getReplacerFunctionParams(name, tsArgs);
+      const tsArgs = args.map((el) =>
+        parseFunctionArg({ ...el, queryName: name }),
+      );
+      const functionParams = getReplacerFunctionParams(name);
       const stringifiedArgs = stringifyArgs(tsArgs);
 
       return `${out}  ${name}: ${functionParams} => [new RegExp('^ {2}${name} {$', 'gm'), \`  ${name}(${stringifiedArgs}) {\`],\n`;

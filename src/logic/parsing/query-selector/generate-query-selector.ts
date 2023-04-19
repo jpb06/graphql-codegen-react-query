@@ -1,11 +1,40 @@
+import chalk from 'chalk';
+
 import { getQueryFields } from './query-fields/get-query-fields';
-import { GqlType } from '../../../types/introspection-query-response.type';
+import { displayWarning } from '../../../cli/console/console.messages';
+import {
+  GqlFieldType,
+  GqlType,
+} from '../../../types/introspection-query-response.type';
+import { ParsedType } from '../graphql-types/translate-graphql-types-to-typescript';
+
+type FieldTypeResult = {
+  type: string;
+  maybeArray: string;
+};
+
+const getFieldType = (input: GqlFieldType): FieldTypeResult => {
+  if (input.ofType?.kind === 'LIST') {
+    return {
+      type: input.ofType.ofType?.ofType?.name as string,
+      maybeArray: '[]',
+    };
+  } else if (input.ofType?.kind === 'OBJECT') {
+    return {
+      type: input.ofType.name as string,
+      maybeArray: '',
+    };
+  }
+
+  return {
+    type: '',
+    maybeArray: '',
+  };
+};
 
 export const generateQuerySelector = (
   queryObject: GqlType,
-  types: string,
-  objectsName: Array<string>,
-  enums: Array<string>,
+  types: Array<ParsedType>,
   booleanize = true,
 ): string => {
   const empty = {
@@ -14,24 +43,19 @@ export const generateQuerySelector = (
   };
 
   const { output, imports } =
-    queryObject.fields?.reduce((acc, { name, type }) => {
-      let target = '';
-      let maybeArray = '';
-      if (type.ofType?.kind === 'LIST') {
-        target = type.ofType.ofType?.ofType?.name as string;
-        maybeArray = '[]';
-      } else if (type.ofType?.kind === 'OBJECT') {
-        target = type.ofType.name as string;
-      }
+    queryObject.fields?.reduce((acc, { name, type: fieldType }) => {
+      const { type, maybeArray } = getFieldType(fieldType);
 
-      const { queryOutput, queryImports } = getQueryFields(
-        name,
-        target,
-        types,
-        objectsName,
-        enums,
-        booleanize,
-      );
+      const { queryOutput, queryImports, circularDependencies } =
+        getQueryFields(name, type, types, booleanize);
+
+      if (circularDependencies.length > 0) {
+        displayWarning(
+          `Circular references detected in ${name} query:\n${chalk.gray(
+            circularDependencies.join('\n'),
+          )}\n`,
+        );
+      }
 
       return {
         output: `${acc.output}${name}${booleanize ? '?' : ''}: ${queryOutput}${

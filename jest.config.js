@@ -10,6 +10,7 @@ module.exports = {
     "jest-watch-typeahead/filename",
     "jest-watch-typeahead/testname",
   ],
+
   coverageReporters: [
     "json-summary",
     "text",
@@ -27,7 +28,7 @@ module.exports = {
     "!<rootDir>/src/logic/graphql/**",
     "!<rootDir>/src/specs/**",
     "!<rootDir>/src/api/**",
-    "!<rootDir>/src/temp/**"
+    "!<rootDir>/src/temp/**",
   ],
   modulePathIgnorePatterns: ['<rootDir>/dist']
 };

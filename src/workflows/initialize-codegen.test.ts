@@ -61,13 +61,15 @@ infiniteQueries:
       `const endpointUrl = 'http://localhost:3333/graphql';
 
 export const useFetchData = <TData>(
-  initialQuery: string
+  initialQuery: string,
+  options?: RequestInit['headers'],
 ): ((variables?: unknown, query?: string) => Promise<TData>) => {
   return async (variables?: unknown, query?: string) => {
     const result = await fetch(endpointUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        ...options,
         // <- Set your custom headers here
       },
       body: JSON.stringify({

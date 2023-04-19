@@ -1,5 +1,3 @@
-import chalk from 'chalk';
-
 import {
   getMaybeArrayAnnotation,
   getRawType,
@@ -7,57 +5,64 @@ import {
   formatScalar,
   setOptional,
 } from './logic';
-import { displayWarning } from '../../../../cli/console/console.messages';
+import { ParsedType } from '../../graphql-types/translate-graphql-types-to-typescript';
 
 type QueryFieldsResult = {
   queryOutput: string;
   queryImports: Array<string>;
+  circularDependencies: Array<string>;
+};
+
+const emptyResult = {
+  queryImports: [],
+  queryOutput: '',
+  circularDependencies: [],
 };
 
 export const getQueryFields = (
   queryName: string,
   name: string,
-  types: string,
-  objectsName: Array<string>,
-  enums: Array<string>,
+  types: Array<ParsedType>,
   booleanize: boolean,
   past: Array<{ propertyName: string; rawType: string }> = [],
 ): QueryFieldsResult => {
-  const properties = getTypeProperties(name, types);
+  const typeInfos = types.find((t) => t.name === name);
+  if (!typeInfos) {
+    return emptyResult;
+  }
+  const properties = getTypeProperties(name, typeInfos.data);
   if (!properties) {
-    return { queryImports: [], queryOutput: '' };
+    return emptyResult;
   }
 
-  const { imports, output } = properties.reduce(
+  const { imports, output, circularDependencies } = properties.reduce(
     (acc, property) => {
+      const circularDependencies: Array<string> = [];
       const [propertyName, type] = property.split(':');
 
       const maybeArrayAnnotation = getMaybeArrayAnnotation(booleanize, type);
       const rawType = getRawType(type);
 
-      if (
-        past.some(
-          (p) => p.propertyName === propertyName && p.rawType === rawType,
-        )
-      ) {
-        if (booleanize) {
-          displayWarning(
-            `Circular reference detected in ${chalk.whiteBright(
-              `${queryName} query`,
-            )}: ignoring property ${chalk.whiteBright(
-              propertyName,
-            )} of type ${chalk.whiteBright(rawType)}`,
-          );
-        }
-        return acc;
+      const hasCircularDependency = past.some(
+        (p) => p.propertyName === propertyName && p.rawType === rawType,
+      );
+      if (hasCircularDependency) {
+        return {
+          ...acc,
+          circularDependencies: [
+            `- property ${propertyName} in ${name} <-> ${rawType}`,
+          ],
+        };
       }
 
-      const isTypeScalar = !objectsName.includes(rawType);
-      if (isTypeScalar) {
+      const propertyTypeInfos = types.find((t) => t.name === rawType);
+
+      const isScalar = !propertyTypeInfos || propertyTypeInfos.type === 'enum';
+      if (isScalar) {
+        const isEnum = propertyTypeInfos?.type === 'enum';
+
         return {
-          imports: enums.includes(rawType)
-            ? [...acc.imports, rawType]
-            : acc.imports,
+          imports: isEnum ? [...acc.imports, type] : acc.imports,
           output: formatScalar(
             acc.output,
             property,
@@ -65,20 +70,16 @@ export const getQueryFields = (
             type,
             maybeArrayAnnotation,
           ),
+          circularDependencies: [
+            ...acc.circularDependencies,
+            ...circularDependencies,
+          ],
         };
       }
 
       past.push({ propertyName, rawType });
 
-      const deep = getQueryFields(
-        queryName,
-        rawType,
-        types,
-        objectsName,
-        enums,
-        booleanize,
-        past,
-      );
+      const deep = getQueryFields(queryName, rawType, types, booleanize, past);
 
       const member =
         `${propertyName}${
@@ -91,10 +92,22 @@ export const getQueryFields = (
       return {
         output: acc.output + member,
         imports: [...acc.imports, ...deep.queryImports],
+        circularDependencies: [
+          ...acc.circularDependencies,
+          ...deep.circularDependencies,
+        ],
       };
     },
-    { imports: [] as Array<string>, output: '' },
+    {
+      imports: [] as Array<string>,
+      output: '',
+      circularDependencies: [] as Array<string>,
+    },
   );
 
-  return { queryOutput: `{ ${output} }`, queryImports: imports };
+  return {
+    queryOutput: `{ ${output} }`,
+    queryImports: imports,
+    circularDependencies,
+  };
 };

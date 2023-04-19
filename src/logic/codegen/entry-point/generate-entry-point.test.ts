@@ -22,16 +22,21 @@ describe('generateEntryPoint function', () => {
       `${outputPath}/index.ts`,
       `export * from './types/api-types';
 
-export * from './queries/useProductsQuery';
-export * from './queries/useProductsByPageQuery';
-export * from './queries/useProductsWithIdsQuery';
-export * from './queries/useProductQuery';
-export * from './queries/useCategoriesQuery';
-export * from './queries/useCategoryQuery';
+export * from './queries/useCatalogQuery';
 export * from './queries/useMeQuery';
-export * from './queries/useGetOrderQuery';
-export * from './queries/useMyOrdersQuery';
-export * from './queries/useMyAddressesQuery';
+export * from './queries/useUserInformationsQuery';
+export * from './queries/useUsersQuery';
+export * from './queries/useGetRegistrationStatusQuery';
+export * from './queries/useCompanyInformationsQuery';
+export * from './queries/useProductQuery';
+export * from './queries/useProductsByPageQuery';
+export * from './queries/useCountProductPagesQuery';
+export * from './queries/useProductVariantSummariesQuery';
+export * from './queries/useCompanyAddressesQuery';
+export * from './queries/useOrdersDetailsQuery';
+export * from './queries/useOrdersQuery';
+export * from './queries/useOpsOrdersQuery';
+export * from './queries/useAssetsQuery';
 export * from './queries/useGqlQuery';
 
 export * from './mutations/useWithScalarResultMutation';

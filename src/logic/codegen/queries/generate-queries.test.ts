@@ -2,6 +2,7 @@ import { writeFile } from 'fs-extra';
 
 import { generateQueries } from './generate-queries';
 import { FetcherConfig } from '../../../cli/generate-from-url/args-validation/options-validation';
+import { parsedArgsMockData } from '../../../tests-related/mocked-data/generated-code/parsed-args.mock-data';
 import { querySelectorResultMockData } from '../../../tests-related/mocked-data/generated-code/query-selector-result.mock-data';
 import { querySelectorMockData } from '../../../tests-related/mocked-data/generated-code/query-selector.mock-data';
 import { graphqlQueryObjectMockedData } from '../../../tests-related/mocked-data/graphql-schema';
@@ -25,7 +26,13 @@ describe('generateQueries function', () => {
   });
 
   it('should only write the useGqlQuery hook if there is no queries', async () => {
-    await generateQueries(null, fetcher, outputPath, selectors);
+    await generateQueries(
+      [],
+      fetcher,
+      outputPath,
+      selectors,
+      parsedArgsMockData,
+    );
 
     expect(writeFile).toHaveBeenCalledTimes(1);
   });
@@ -36,6 +43,7 @@ describe('generateQueries function', () => {
       fetcher,
       outputPath,
       selectors,
+      parsedArgsMockData,
     );
 
     const gqlQueryWriteFile = jest.mocked(writeFile).mock.calls[0];
@@ -44,8 +52,8 @@ describe('generateQueries function', () => {
       `import { ${fetcher.functionName} } from '${fetcher.path}';`,
     );
 
-    expect(writeFile).toHaveBeenCalledTimes(11);
-    for (let i = 1; i < 11; i++) {
+    expect(writeFile).toHaveBeenCalledTimes(16);
+    for (let i = 1; i < 16; i++) {
       const [path, content] = jest.mocked(writeFile).mock.calls[i];
 
       expect(path).toMatch(/\.\/cool\/queries\/use.*Query\.ts/);
@@ -57,39 +65,53 @@ describe('generateQueries function', () => {
   });
 
   it('should handle queries with arguments', async () => {
-    const query = graphqlQueryObjectMockedData.fields?.at(1) as GqlField;
+    const query = graphqlQueryObjectMockedData.fields?.find(
+      (el) => el.name === 'productsByPage',
+    ) as GqlField;
 
-    await generateQueries([query], fetcher, outputPath, selectors);
+    await generateQueries(
+      [query],
+      fetcher,
+      outputPath,
+      selectors,
+      parsedArgsMockData,
+    );
 
     const [, content] = jest.mocked(writeFile).mock.calls[1];
 
     expect(content).toContain(
-      `import { ProductsByPageQueryArgs } from '../types/api-types';`,
+      `import { ProductsByPageQueryArgs as Args } from '../types/queries/productsByPage/ProductsByPageQueryArgs.type';`,
     );
     expect(content).toContain(
       `selector: Selector, variables: ProductsByPageQueryArgs,`,
     );
     expect(content).toContain(
-      `const document = namedQuerySelectorToDocument('productsByPage', selector, variables);`,
+      `const document = namedQuerySelectorToDocument('productsByPage', selector,'$pagination: GqlPaginationArgs!,$filters: GqlPaginatedProductsFiltersInput!','pagination: $pagination,filters: $filters');`,
     );
     expect(content).toContain(
-      `queryFn: useFetchData<ProductsByPageResult<Selector>>(document).bind(null, variables, undefined),`,
+      `queryFn: useFetchData<ProductsByPageQueryResultSelect<Selector>>(document).bind(null, variables, undefined),`,
     );
   });
 
   it('should handle queires with no arguments', async () => {
-    const query = graphqlQueryObjectMockedData.fields?.at(0) as GqlField;
+    const query = graphqlQueryObjectMockedData.fields?.at(1) as GqlField;
 
-    await generateQueries([query], fetcher, outputPath, selectors);
+    await generateQueries(
+      [query],
+      fetcher,
+      outputPath,
+      selectors,
+      parsedArgsMockData,
+    );
 
     const [, content] = jest.mocked(writeFile).mock.calls[1];
 
     expect(content).toContain(`selector: Selector, \n`);
     expect(content).toContain(
-      `const document = namedQuerySelectorToDocument('products', selector);`,
+      `const document = namedQuerySelectorToDocument('me', selector);`,
     );
     expect(content).toContain(
-      `queryFn: useFetchData<ProductsResult<Selector>>(document),`,
+      `queryFn: useFetchData<MeQueryResultSelect<Selector>>(document),`,
     );
   });
 });

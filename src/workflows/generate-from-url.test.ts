@@ -29,14 +29,9 @@ describe('generateFromUrl', () => {
       infiniteQueries,
     });
 
-    expect(ensureDir).toHaveBeenCalledTimes(4);
-    expect(ensureDir).toHaveBeenNthCalledWith(1, `${outputPath}/types`);
-    expect(ensureDir).toHaveBeenNthCalledWith(2, `${outputPath}/logic`);
-    expect(ensureDir).toHaveBeenNthCalledWith(3, `${outputPath}/queries`);
-    expect(ensureDir).toHaveBeenNthCalledWith(4, `${outputPath}/mutations`);
+    expect(ensureDir).toHaveBeenCalledTimes(23);
+    expect(writeFile).toHaveBeenCalledTimes(47);
 
-    expect(writeFile).toHaveBeenCalledTimes(28);
-
-    expect(result).toStrictEqual({ typesCount: 34 });
+    expect(result).toStrictEqual({ typesCount: 25 });
   });
 });

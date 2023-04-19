@@ -1,17 +1,21 @@
+import { ParsedType } from '../../../parsing/graphql-types/translate-graphql-types-to-typescript';
+
 export const getTypesImports = (
+  query: string,
   mutationArgsType: string,
-  rootObjectsName: Array<string>,
+  types: Array<ParsedType>,
   resultType: string,
 ): string => {
-  const argsTypeImport =
-    mutationArgsType !== 'unknown' ? ` ${mutationArgsType} ` : '';
-  const resultTypeImport = rootObjectsName.includes(resultType)
-    ? `, ${resultType}`
-    : '';
-  const typesImports =
-    mutationArgsType === 'unknown' && !rootObjectsName.includes(resultType)
-      ? ''
-      : `import {${argsTypeImport} ${resultTypeImport} } from '../types/api-types';`;
+  const isScalar = types.find((t) => t.name === resultType) === undefined;
 
-  return typesImports;
+  const argsTypeImport =
+    mutationArgsType === 'unknown'
+      ? ''
+      : `import { ${mutationArgsType} as Args } from './../types/mutations/${query}/${mutationArgsType}.type';`;
+
+  const resultTypeImport = isScalar
+    ? ''
+    : `import { ${resultType} } from './../types/api-types';`;
+
+  return `${argsTypeImport}\n${resultTypeImport}\n`;
 };

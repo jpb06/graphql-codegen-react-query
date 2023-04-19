@@ -1,22 +1,24 @@
-export const namedQuerySelectorToDcumentContent = `import { queryReplacer } from './query-replacer';
+export const namedQuerySelectorToDocumentContent = `const variablesRegex = /"(.*)"(:?)( {|)|( true,?)(\\n)/g;
 
-const variablesRegex = /"(.*)"(:?)( {|)|( true,?)(\\n)/g;
+const capitalize = (word: string): string =>
+  word.charAt(0).toUpperCase() + word.slice(1);
 
 export const namedQuerySelectorToDocument = (
   queryName: string,
   selector: unknown,
-  variables?: unknown,
+  queryParams?: string,
+  queryArgs?: string
 ): string => {
-  const queryContent = JSON.stringify(selector, null, 2).replace(
+  const queryBody = JSON.stringify(selector, null, 2).replace(
     variablesRegex,
     '$1$3$5',
   );
 
-  const replaceArgs = queryReplacer[queryName](variables);
+  const params = queryParams ? \`(\${queryParams})\` : '';
+  const args = queryArgs ? \`(\${queryArgs})\` : '';
 
-  const rawQuery = \`query {\\n \${
-    replaceArgs ? replaceArgs[1].slice(0, -1) : queryName
-  } \${queryContent} \\n}\`;
+  const rawQuery = \`query \${capitalize(queryName)}\${params} {
+  \${queryName}\${args} \${queryBody} \\n}\`
 
   return rawQuery;
 };

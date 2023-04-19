@@ -28,6 +28,8 @@ export const parseUnderlyingType = (
     return {
       output: formatField(fieldName, type.name, isFunction, isNull),
       type: type.name as string,
+      gqlParams: `$${fieldName}: ${type.name}${isNull ? '' : '!'}`,
+      gqlArgs: `${fieldName}: $${fieldName}`,
     };
   } else if (type.kind === 'SCALAR') {
     return {
@@ -38,9 +40,11 @@ export const parseUnderlyingType = (
         isNull,
       ),
       type: translateGraphqlTypeToTypescript(type.name),
+      gqlParams: `$${fieldName}: ${type.name}${isNull ? '' : '!'}`,
+      gqlArgs: `${fieldName}: $${fieldName}`,
     };
   }
 
   displayWarning(`Unhandled field ${fieldName} of type ${type}`);
-  return { output: '', type: '' };
+  return { output: '', type: '', gqlParams: '', gqlArgs: '' };
 };

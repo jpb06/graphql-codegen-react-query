@@ -6,12 +6,12 @@ import { getMutationResultTypes } from './result-type/get-mutation-result-types'
 import { getTypesImports } from './types-imports/get-types-imports';
 import { FetcherConfig } from '../../../cli/generate-from-url/args-validation/options-validation';
 import { GqlField } from '../../../types/introspection-query-response.type';
+import { ParsedType } from '../../parsing/graphql-types/translate-graphql-types-to-typescript';
 import { capitalize } from '../../util/capitalize';
 
 export const generateMutations = async (
-  types: string,
-  rootObjectsName: Array<string>,
   fields: GqlField[] | null,
+  types: Array<ParsedType>,
   fetcher: FetcherConfig,
   outputPath: string,
 ): Promise<void> => {
@@ -21,19 +21,27 @@ export const generateMutations = async (
 
   for (const { type, name, args } of fields) {
     const mutationType = capitalize(name);
-    const mutationArgsType =
-      args?.length && args.length > 0
-        ? `${mutationType}MutationArgs`
-        : 'unknown';
+    const hasArgs = args?.length && args.length > 0;
+    const mutationArgsType = hasArgs
+      ? `${mutationType}MutationArgs`
+      : 'unknown';
 
-    const { documentResultFields, resultType } = getMutationResultTypes(
-      type,
-      types,
+    const argType = hasArgs
+      ? `export type ${mutationType}MutationArgs = Args\n`
+      : ``;
+
+    const { documentResultFields, resultType, resultKind } =
+      getMutationResultTypes(name, type, types);
+    const document = generateDocument(
+      name,
+      args,
+      documentResultFields,
+      resultKind,
     );
-    const document = generateDocument(name, args, documentResultFields);
     const typesImports = getTypesImports(
+      name,
       mutationArgsType,
-      rootObjectsName,
+      types,
       resultType,
     );
 
@@ -44,6 +52,7 @@ export const generateMutations = async (
       )
       .replace('#mutation-types-import#', typesImports)
       .replace('#name#', name)
+      .replace('#args-type#', argType)
       .replace(/#mutation-result-type#/g, resultType)
       .replace(/#mutation-args-type#/g, mutationArgsType)
       .replace(/#type#/g, mutationType)
